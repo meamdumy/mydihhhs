@@ -69,6 +69,13 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
         applyPendingScroll();
     }
 
+    /** Drops the highlight once the reader moves on to another chapter. */
+    void onPageSelected(int page) {
+        if (highlightPage != RecyclerView.NO_POSITION && page != highlightPage) {
+            clearHighlight();
+        }
+    }
+
     /** Removes the highlight left by {@link #showVerse}. */
     void clearHighlight() {
         highlightPage = RecyclerView.NO_POSITION;
@@ -178,6 +185,9 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
             verses = new VerseAdapter(verseListener);
             list.setLayoutManager(layout);
             list.setAdapter(verses);
+            // Rows change all at once (text size, highlight); fading each is distracting.
+            list.setItemAnimator(null);
+            ReadingWidth.apply(list);
         }
 
         void showLoading() {

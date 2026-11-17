@@ -277,4 +277,96 @@ public class MainActivityTest {
             });
         }
     }
+
+    private static Bible.Book book(MainActivity activity, String name) {
+        try {
+            for (Bible.Book book : BibleProvider.get(activity).books()) {
+                if (book.name.equals(name)) {
+                    return book;
+                }
+            }
+        } catch (java.io.IOException e) {
+            throw new AssertionError(e);
+        }
+        throw new AssertionError("No book named " + name);
+    }
+
+    @Test
+    public void backReturnsToThePlaceLeftByAJump() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                currentPage(activity);
+                activity.goTo(book(activity, "John"), 3);
+                idle();
+                assertEquals("John 3", title(activity));
+                activity.goTo(book(activity, "Romans"), 8);
+                idle();
+                assertEquals("Romans 8", title(activity));
+
+                activity.getOnBackPressedDispatcher().onBackPressed();
+                idle();
+                assertEquals("John 3", title(activity));
+                assertFalse(activity.isFinishing());
+            });
+            // The trail survives the screen being rebuilt, as on rotation.
+            scenario.recreate();
+            scenario.onActivity(activity -> {
+                assertEquals("John 3", title(activity));
+                activity.getOnBackPressedDispatcher().onBackPressed();
+                idle();
+                assertEquals("Genesis 1", title(activity));
+                assertFalse(activity.isFinishing());
+                // Nowhere left to return to, so Back leaves the app.
+                activity.getOnBackPressedDispatcher().onBackPressed();
+                idle();
+                assertTrue(activity.isFinishing());
+            });
+        }
+    }
+
+    @Test
+    public void swipingLeavesNothingForBackToReturnTo() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                ViewPager2 pager = activity.findViewById(R.id.pager);
+                pager.setCurrentItem(1, true);
+                idle();
+                activity.getOnBackPressedDispatcher().onBackPressed();
+                idle();
+                assertTrue(activity.isFinishing());
+            });
+        }
+    }
+
+    @Test
+    public void highlightClearsOnceTheReaderMovesOn() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                idle();
+                MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
+                toolbar.getMenu().performIdentifierAction(R.id.action_search, 0);
+                idle();
+                Intent started = shadowOf(activity).getNextStartedActivityForResult().intent;
+                int john3 = book(activity, "John").firstChapter + 2;
+                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, new Intent()
+                        .putExtra(SearchActivity.EXTRA_CHAPTER_INDEX, john3)
+                        .putExtra(SearchActivity.EXTRA_VERSE, 16));
+                idle();
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                showAllRows(page.list);
+                TextView verse = (TextView) page.layout.findViewByPosition(16);
+                assertTrue(Color.alpha(((ColorDrawable) verse.getBackground()).getColor()) > 0);
+
+                ViewPager2 pager = activity.findViewById(R.id.pager);
+                pager.setCurrentItem(john3 + 1, false);
+                idle();
+                pager.setCurrentItem(john3, false);
+                idle();
+                page = currentPage(activity);
+                showAllRows(page.list);
+                verse = (TextView) page.layout.findViewByPosition(16);
+                assertEquals(0, Color.alpha(((ColorDrawable) verse.getBackground()).getColor()));
+            });
+        }
+    }
 }

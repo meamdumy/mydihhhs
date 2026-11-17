@@ -2,4 +2,6 @@
     <dimen name="page_margin">20dp</dimen>
     <dimen name="paragraph_gap">12dp</dimen>
     <dimen name="drawer_width">300dp</dimen>
+    <!-- Widest the text column gets; wider screens gain side margins instead. -->
+    <dimen name="reading_max_width">680dp</dimen>
 </resources>

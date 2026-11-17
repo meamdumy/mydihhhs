@@ -51,7 +51,10 @@ BLOCK_STARTS = ("paragraph start", "stanza start", "break")
 
 def clean(text):
     """Collapses runs of whitespace, including around in-verse line breaks."""
-    lines = [re.sub(r"[ \t ]+", " ", part).strip() for part in text.split("\n")]
+    lines = [re.sub(r"[ \t\u00a0]+", " ", part).strip() for part in text.split("\n")]
+    # A footnote marker removed by the source can leave a space before the
+    # punctuation that followed it.
+    lines = [re.sub(r"(?<=\w) (?=[,.;:!?])", "", line) for line in lines]
     return "\n".join(line for line in lines if line)
 
 

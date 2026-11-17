@@ -144,6 +144,108 @@ public final class Bible {
         }
     }
 
+    /**
+     * A parsed search. Normally every word must begin a word of the verse, so
+     * "love" finds "loved" but "the" does not find "other". Wrapping the query
+     * in double quotes finds that exact phrase instead. Case is ignored, and
+     * straight and curly quotation marks are treated alike.
+     */
+    public static final class Query {
+        private final List<String> terms;
+
+        private Query(List<String> terms) {
+            this.terms = terms;
+        }
+
+        public static Query parse(String text) {
+            String folded = fold(text).trim();
+            List<String> terms = new ArrayList<>();
+            if (folded.length() >= 2 && folded.startsWith("\"") && folded.endsWith("\"")) {
+                String phrase = folded.substring(1, folded.length() - 1)
+                        .trim().replaceAll("\\s+", " ");
+                if (!phrase.isEmpty()) {
+                    terms.add(phrase);
+                }
+            } else {
+                for (String word : folded.replace('"', ' ').split("\\s+")) {
+                    if (!word.isEmpty()) {
+                        terms.add(word);
+                    }
+                }
+            }
+            return new Query(terms);
+        }
+
+        public boolean isEmpty() {
+            return terms.isEmpty();
+        }
+
+        /** Whether the text contains every term. Line breaks should be spaces. */
+        public boolean matches(String text) {
+            for (String term : terms) {
+                if (indexOf(text, term, 0) < 0) {
+                    return false;
+                }
+            }
+            return !terms.isEmpty();
+        }
+
+        /** The {start, end} positions of every occurrence of every term. */
+        public List<int[]> ranges(String text) {
+            List<int[]> ranges = new ArrayList<>();
+            for (String term : terms) {
+                int at = indexOf(text, term, 0);
+                while (at >= 0) {
+                    ranges.add(new int[] {at, at + term.length()});
+                    at = indexOf(text, term, at + term.length());
+                }
+            }
+            return ranges;
+        }
+
+        /** Finds the term at the start of a word, at or after {@code from}. */
+        private static int indexOf(String text, String term, int from) {
+            int last = text.length() - term.length();
+            char first = term.charAt(0);
+            for (int i = from; i <= last; i++) {
+                if (fold(text.charAt(i)) != first
+                        || (i > 0 && Character.isLetterOrDigit(text.charAt(i - 1)))) {
+                    continue;
+                }
+                int k = 1;
+                while (k < term.length() && fold(text.charAt(i + k)) == term.charAt(k)) {
+                    k++;
+                }
+                if (k == term.length()) {
+                    return i;
+                }
+            }
+            return -1;
+        }
+
+        private static String fold(String text) {
+            StringBuilder out = new StringBuilder(text.length());
+            for (int i = 0; i < text.length(); i++) {
+                out.append(fold(text.charAt(i)));
+            }
+            return out.toString();
+        }
+
+        /** Lower-cases a character and straightens curly quotation marks. */
+        private static char fold(char c) {
+            switch (c) {
+                case '\u2018':
+                case '\u2019':
+                    return '\'';
+                case '\u201c':
+                case '\u201d':
+                    return '"';
+                default:
+                    return Character.toLowerCase(c);
+            }
+        }
+    }
+
     public static final class SearchResult {
         public final List<Hit> hits;
         /** True when more verses matched than were returned. */
@@ -158,9 +260,13 @@ public final class Bible {
     private static final String DIR = "bible/";
     private static final int CACHED_BOOKS = 4;
 
-    /** Book, then optional chapter, then optional verse: "1 John 2:3", "ps 23", "jude 5". */
+    /**
+     * Book, then optional chapter, then optional verse: "1 John 2:3", "ps 23",
+     * "jude 5". A range such as "John 3:16-18" is read as its first verse.
+     */
     private static final Pattern REFERENCE = Pattern.compile(
-            "^\\s*((?:[1-3]\\s*)?[a-z][a-z .]*?)\\.?\\s*(?:(\\d{1,3})(?:\\s*[:.,]\\s*(\\d{1,3}))?)?\\s*$");
+            "^\\s*((?:[1-3]\\s*)?[a-z][a-z .]*?)\\.?\\s*"
+                    + "(?:(\\d{1,3})(?:\\s*[:.,]\\s*(\\d{1,3}))?(?:\\s*[-\u2013]\\s*\\d{1,3})?)?\\s*$");
 
     /** Common abbreviations that are not simply the start of the book's name. */
     private static final Map<String, String> ALIASES = new HashMap<>();
@@ -339,20 +445,13 @@ public final class Bible {
     }
 
     /**
-     * Finds verses containing every word of the query, ignoring case, in
-     * Bible order. Stops early, returning what it has, once {@code cancelled}
-     * reports true.
+     * Finds the verses matching the query, in Bible order. Stops early,
+     * returning what it has, once {@code cancelled} reports true.
      */
-    public SearchResult search(String query, int limit, Cancellation cancelled)
+    public SearchResult search(Query query, int limit, Cancellation cancelled)
             throws IOException {
-        List<String> words = new ArrayList<>();
-        for (String word : query.toLowerCase(Locale.ROOT).trim().split("\\s+")) {
-            if (!word.isEmpty()) {
-                words.add(word);
-            }
-        }
         List<Hit> hits = new ArrayList<>();
-        if (words.isEmpty()) {
+        if (query.isEmpty()) {
             return new SearchResult(hits, false);
         }
         for (Book book : books) {
@@ -369,30 +468,22 @@ public final class Bible {
                     char tag = line.charAt(0);
                     if (tag == 'C') {
                         chapter++;
-                    } else if (tag == 'V' && containsAll(line.toLowerCase(Locale.ROOT), words)) {
-                        // The whole line passed a cheap test; now test the text alone.
-                        Item item = parseVerse(book, line);
-                        if (containsAll(item.text.toLowerCase(Locale.ROOT), words)) {
+                    } else if (tag == 'V') {
+                        int textStart = line.indexOf('\t', line.indexOf('\t') + 1) + 1;
+                        // Poetry line breaks become spaces so phrases can span them.
+                        String text = line.substring(textStart).replace("\\n", " ");
+                        if (query.matches(text)) {
                             if (hits.size() == limit) {
                                 return new SearchResult(hits, true);
                             }
-                            hits.add(new Hit(new Reference(book, chapter, item.verse),
-                                    item.text.replace('\n', ' ')));
+                            int verse = parseVerse(book, line).verse;
+                            hits.add(new Hit(new Reference(book, chapter, verse), text));
                         }
                     }
                 }
             }
         }
         return new SearchResult(hits, false);
-    }
-
-    private static boolean containsAll(String text, List<String> words) {
-        for (String word : words) {
-            if (!text.contains(word)) {
-                return false;
-            }
-        }
-        return true;
     }
 
     private List<List<Item>> load(Book book) throws IOException {

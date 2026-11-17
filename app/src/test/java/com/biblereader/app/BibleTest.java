@@ -150,6 +150,9 @@ public class BibleTest {
         assertReference("phil 4:13", "Philippians 4:13");
         assertReference("rev. 22", "Revelation 22");
         assertReference("3 john", "3 John");
+        // A range opens at its first verse.
+        assertReference("John 3:16-18", "John 3:16");
+        assertReference("ps 23:1 \u2013 3", "Psalms 23:1");
     }
 
     @Test
@@ -161,9 +164,13 @@ public class BibleTest {
         assertNull(bible.parseReference(""));
     }
 
+    private Bible.SearchResult search(String query, int limit) throws IOException {
+        return bible.search(Bible.Query.parse(query), limit, () -> false);
+    }
+
     @Test
     public void searchFindsVersesContainingEveryWord() throws IOException {
-        Bible.SearchResult result = bible.search("  Pastures  GREEN ", 50, () -> false);
+        Bible.SearchResult result = search("  Pastures  GREEN ", 50);
         assertFalse(result.truncated);
         assertEquals(1, result.hits.size());
         Bible.Hit hit = result.hits.get(0);
@@ -172,35 +179,77 @@ public class BibleTest {
         assertFalse(hit.text.contains("\n"));
         assertTrue(hit.text.contains("green pastures"));
 
-        // Every word must be present, in any order and as part of longer words.
-        Bible.SearchResult two = bible.search("shepherd lack", 50, () -> false);
+        // Every word must be present, in any order; "lack" also finds "lacking".
+        Bible.SearchResult two = search("shepherd lack", 50);
         assertEquals(2, two.hits.size());
         assertEquals("Psalms 23:1", two.hits.get(0).reference.title());
         assertEquals("Jeremiah 23:4", two.hits.get(1).reference.title());
     }
 
     @Test
-    public void searchReportsWhenThereAreMoreResults() throws IOException {
-        Bible.SearchResult limited = bible.search("the", 10, () -> false);
-        assertTrue(limited.truncated);
-        assertEquals(10, limited.hits.size());
-        assertEquals("Genesis 1:1", limited.hits.get(0).reference.title());
-        assertTrue(bible.search("", 10, () -> false).hits.isEmpty());
-        assertTrue(bible.search("zzzzqqq", 10, () -> false).hits.isEmpty());
+    public void searchMatchesOnlyAtTheStartOfAWord() throws IOException {
+        Bible.SearchResult result = search("ark", 100000);
+        assertFalse(result.hits.isEmpty());
+        java.util.regex.Pattern wordStart =
+                java.util.regex.Pattern.compile("(?i)(^|[^\\p{L}\\p{N}])ark");
+        for (Bible.Hit hit : result.hits) {
+            // "dark" and "market" contain the letters but do not count.
+            assertTrue(hit.text, wordStart.matcher(hit.text).find());
+        }
+        assertTrue(search("arkness", 10).hits.isEmpty());
     }
 
     @Test
-    public void searchDoesNotMatchTheRecordPrefix() throws IOException {
-        // "p" and "v" occur in every stored line's prefix but not in every verse.
-        for (Bible.Hit hit : bible.search("v1", 20, () -> false).hits) {
-            assertTrue(hit.text, hit.text.toLowerCase().contains("v1"));
-        }
+    public void quotedSearchFindsTheExactPhrase() throws IOException {
+        // Unquoted, the two words may be anywhere in the verse.
+        assertEquals(2, search("still waters", 50).hits.size());
+        Bible.SearchResult phrase = search("\"still waters\"", 50);
+        assertEquals(1, phrase.hits.size());
+        assertEquals("Psalms 23:2", phrase.hits.get(0).reference.title());
+        // A phrase may run across a line break in poetry.
+        Bible.SearchResult across = search("\u201cpastures. He leads\u201d", 50);
+        assertEquals(1, across.hits.size());
+        assertEquals("Psalms 23:2", across.hits.get(0).reference.title());
+        assertTrue(search("\"\"", 50).hits.isEmpty());
+    }
+
+    @Test
+    public void searchTreatsStraightAndCurlyApostrophesAlike() throws IOException {
+        Bible.SearchResult result = search("\"doesn't walk\"", 50);
+        // The text itself uses the curly form: "doesn’t walk".
+        assertEquals(2, result.hits.size());
+        assertEquals("Psalms 1:1", result.hits.get(0).reference.title());
+        assertEquals("Revelation 16:15", result.hits.get(1).reference.title());
+    }
+
+    @Test
+    public void queryReportsWhereItMatched() {
+        String text = "The LORD is my shepherd; the end, and other things";
+        List<int[]> ranges = Bible.Query.parse("the shepherd").ranges(text);
+        assertEquals(3, ranges.size());
+        assertEquals(0, ranges.get(0)[0]);
+        assertEquals(3, ranges.get(0)[1]);
+        assertEquals("the", text.substring(ranges.get(1)[0], ranges.get(1)[1]));
+        assertEquals("shepherd", text.substring(ranges.get(2)[0], ranges.get(2)[1]));
+        assertTrue(Bible.Query.parse("   ").isEmpty());
+        assertFalse(Bible.Query.parse("the").matches("another"));
+    }
+
+    @Test
+    public void searchReportsWhenThereAreMoreResults() throws IOException {
+        Bible.SearchResult limited = search("the", 10);
+        assertTrue(limited.truncated);
+        assertEquals(10, limited.hits.size());
+        assertEquals("Genesis 1:1", limited.hits.get(0).reference.title());
+        assertTrue(search("", 10).hits.isEmpty());
+        assertTrue(search("zzzzqqq", 10).hits.isEmpty());
     }
 
     @Test
     public void searchStopsWhenCancelled() throws IOException {
         AtomicInteger checks = new AtomicInteger();
-        Bible.SearchResult result = bible.search("the", 100000, () -> checks.incrementAndGet() > 2);
+        Bible.SearchResult result = bible.search(
+                Bible.Query.parse("the"), 100000, () -> checks.incrementAndGet() > 2);
         // Only the first two books were read before the search was called off.
         for (Bible.Hit hit : result.hits) {
             assertFalse(hit.reference.title(), hit.reference.book.newTestament);

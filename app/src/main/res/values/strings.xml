@@ -19,7 +19,7 @@
     <string name="verse_share_format">%1$s\n— %2$s (WEB)</string>
     <string name="back">Back</string>
     <string name="search_hint">Search or go to John 3:16</string>
-    <string name="search_hint_long">Type words to find the verses that contain them, or a reference such as “John 3:16” or “Ps 23” to go straight there.</string>
+    <string name="search_hint_long">Type words to find the verses that contain them, or a reference such as John 3:16 or Ps 23 to go straight there. Put a phrase in "double quotes" to find those exact words.</string>
     <string name="search_no_results">No verses contain “%1$s”.</string>
     <string name="search_failed">The search could not be completed.</string>
     <plurals name="search_truncated">

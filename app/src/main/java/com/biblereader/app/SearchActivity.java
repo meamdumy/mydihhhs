@@ -28,10 +28,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.appbar.MaterialToolbar;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -75,6 +73,8 @@ public class SearchActivity extends AppCompatActivity {
         RecyclerView list = findViewById(R.id.results);
         list.setLayoutManager(new LinearLayoutManager(this));
         list.setAdapter(results);
+        ReadingWidth.apply(list);
+        ReadingWidth.apply(status);
 
         try {
             bible = BibleProvider.get(this);
@@ -125,16 +125,16 @@ public class SearchActivity extends AppCompatActivity {
         String query = rawQuery.trim();
         int id = latestSearch.incrementAndGet();
         if (query.length() < MIN_QUERY_LENGTH) {
-            results.show(null, Collections.emptyList(), Collections.emptyList());
+            results.show(null, Collections.emptyList(), null);
             status.setText(R.string.search_hint_long);
             return;
         }
         Bible.Reference reference = bible.parseReference(query);
-        List<String> words = wordsOf(query);
+        Bible.Query parsed = Bible.Query.parse(query);
         worker.execute(() -> {
             Bible.SearchResult found;
             try {
-                found = bible.search(query, MAX_RESULTS, () -> latestSearch.get() != id);
+                found = bible.search(parsed, MAX_RESULTS, () -> latestSearch.get() != id);
             } catch (IOException e) {
                 found = null;
             }
@@ -144,11 +144,11 @@ public class SearchActivity extends AppCompatActivity {
                     return;
                 }
                 if (result == null) {
-                    results.show(reference, Collections.emptyList(), words);
+                    results.show(reference, Collections.emptyList(), parsed);
                     status.setText(R.string.search_failed);
                     return;
                 }
-                results.show(reference, result.hits, words);
+                results.show(reference, result.hits, parsed);
                 int count = result.hits.size();
                 if (result.truncated) {
                     status.setText(getResources()
@@ -164,16 +164,6 @@ public class SearchActivity extends AppCompatActivity {
         });
     }
 
-    private static List<String> wordsOf(String query) {
-        List<String> words = new ArrayList<>();
-        for (String word : query.toLowerCase(Locale.ROOT).split("\\s+")) {
-            if (!word.isEmpty()) {
-                words.add(word);
-            }
-        }
-        return words;
-    }
-
     private void choose(Bible.Reference reference) {
         setResult(RESULT_OK, new Intent()
                 .putExtra(EXTRA_CHAPTER_INDEX, bible.indexOf(reference.book, reference.chapter))
@@ -186,13 +176,13 @@ public class SearchActivity extends AppCompatActivity {
 
         private Bible.Reference reference;
         private List<Bible.Hit> hits = Collections.emptyList();
-        private List<String> words = Collections.emptyList();
+        private Bible.Query query;
 
         @SuppressLint("NotifyDataSetChanged") // Every search replaces the whole list.
-        void show(Bible.Reference reference, List<Bible.Hit> hits, List<String> words) {
+        void show(Bible.Reference reference, List<Bible.Hit> hits, Bible.Query query) {
             this.reference = reference;
             this.hits = hits;
-            this.words = words;
+            this.query = query;
             notifyDataSetChanged();
         }
 
@@ -220,7 +210,7 @@ public class SearchActivity extends AppCompatActivity {
             Bible.Hit hit = hits.get(position - (reference == null ? 0 : 1));
             holder.title.setText(hit.reference.title());
             holder.text.setVisibility(View.VISIBLE);
-            holder.text.setText(emphasise(hit.text, words));
+            holder.text.setText(emphasise(hit.text, query));
             holder.itemView.setOnClickListener(v -> choose(hit.reference));
         }
 
@@ -236,21 +226,12 @@ public class SearchActivity extends AppCompatActivity {
         }
     }
 
-    /** Returns the text with every occurrence of the given words in bold. */
-    static CharSequence emphasise(String text, List<String> words) {
+    /** Returns the text with everything the query matched in bold. */
+    static CharSequence emphasise(String text, Bible.Query query) {
         SpannableString out = new SpannableString(text);
-        String lower = text.toLowerCase(Locale.ROOT);
-        if (lower.length() != text.length()) {
-            // Lower-casing changed the length, so positions would not line up.
-            return out;
-        }
-        for (String word : words) {
-            int at = lower.indexOf(word);
-            while (at >= 0) {
-                out.setSpan(new StyleSpan(Typeface.BOLD), at, at + word.length(),
-                        Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-                at = lower.indexOf(word, at + word.length());
-            }
+        for (int[] range : query.ranges(text)) {
+            out.setSpan(new StyleSpan(Typeface.BOLD), range[0], range[1],
+                    Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         }
         return out;
     }

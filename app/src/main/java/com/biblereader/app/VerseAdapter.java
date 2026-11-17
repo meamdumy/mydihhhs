@@ -7,6 +7,7 @@ import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
 import android.text.style.ForegroundColorSpan;
+import android.text.style.LeadingMarginSpan;
 import android.text.style.RelativeSizeSpan;
 import android.text.style.StyleSpan;
 import android.text.style.SuperscriptSpan;
@@ -126,7 +127,7 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
                 int accent = MaterialColors.getColor(context,
                         androidx.appcompat.R.attr.colorPrimary, 0xFF7A4B1E);
                 text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
-                text.setText(verseText(item, accent));
+                text.setText(verseText(item, accent, Math.round(text.getTextSize() * 1.2f)));
                 int gap = item.startsParagraph && position > 1
                         ? context.getResources().getDimensionPixelSize(R.dimen.paragraph_gap)
                         : 0;
@@ -147,8 +148,12 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
         }
     }
 
-    /** The verse number as a small raised label, followed by the verse text. */
-    private static CharSequence verseText(Bible.Item item, int accent) {
+    /**
+     * The verse number as a small raised label, followed by the verse text.
+     * In poetry, where the text has line breaks, the continuation of a line
+     * too long for the screen is indented to set it apart from a new line.
+     */
+    private static CharSequence verseText(Bible.Item item, int accent, int wrapIndent) {
         String number = String.valueOf(item.verse);
         SpannableStringBuilder out = new SpannableStringBuilder(number);
         int flags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
@@ -156,7 +161,12 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
         out.setSpan(new RelativeSizeSpan(0.65f), 0, number.length(), flags);
         out.setSpan(new StyleSpan(Typeface.BOLD), 0, number.length(), flags);
         out.setSpan(new ForegroundColorSpan(accent), 0, number.length(), flags);
-        out.append(' ').append(item.text);
+        // A non-breaking space keeps the number attached to the first word.
+        out.append('\u00a0').append(item.text);
+        if (item.text.indexOf('\n') >= 0) {
+            out.setSpan(new LeadingMarginSpan.Standard(0, wrapIndent), 0, out.length(),
+                    Spanned.SPAN_INCLUSIVE_INCLUSIVE);
+        }
         return out;
     }
 

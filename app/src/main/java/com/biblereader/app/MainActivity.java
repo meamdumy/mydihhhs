@@ -1,5 +1,6 @@
 package com.biblereader.app;
 
+import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
@@ -34,6 +35,7 @@ import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.android.material.slider.Slider;
 
 import java.io.IOException;
+import java.util.ArrayDeque;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -47,12 +49,23 @@ public class MainActivity extends AppCompatActivity {
     private static final String KEY_CHAPTER = "chapter";
     private static final String KEY_ROW = "item";
     private static final String KEY_TEXT_SIZE = "textSize";
+    private static final String STATE_HISTORY = "history";
+    /** How many earlier places the Back button can return to. */
+    private static final int MAX_HISTORY = 30;
 
     private static final float DEFAULT_TEXT_SP = 18f;
     private static final float MIN_TEXT_SP = 12f;
     private static final float MAX_TEXT_SP = 34f;
 
     private final ExecutorService loader = Executors.newSingleThreadExecutor();
+    /** Places left by jumping elsewhere, most recent first, as {chapter, row}. */
+    private final ArrayDeque<int[]> history = new ArrayDeque<>();
+    private final OnBackPressedCallback returnToPlace = new OnBackPressedCallback(false) {
+        @Override
+        public void handleOnBackPressed() {
+            returnToPreviousPlace();
+        }
+    };
 
     private Bible bible;
     private SharedPreferences prefs;
@@ -62,6 +75,9 @@ public class MainActivity extends AppCompatActivity {
     private RecyclerView bookList;
     private BookListAdapter bookAdapter;
     private float textSizeSp;
+    /** The dialog on show, if any, so it can be closed with the screen. */
+    private Dialog openDialog;
+    private PopupMenu openPopup;
 
     private final ActivityResultLauncher<Intent> search = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
@@ -111,6 +127,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 showPosition(position);
+                pagerAdapter.onPageSelected(position);
             }
         });
 
@@ -124,6 +141,15 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setOnClickListener(v -> pickChapter(bible.bookAt(pager.getCurrentItem())));
         showPosition(chapter);
 
+        if (savedInstanceState != null) {
+            int[] saved = savedInstanceState.getIntArray(STATE_HISTORY);
+            for (int i = 0; saved != null && i + 1 < saved.length; i += 2) {
+                history.addLast(new int[] {saved[i], saved[i + 1]});
+            }
+        }
+        // Registered first so that an open book menu, added below, closes first.
+        returnToPlace.setEnabled(!history.isEmpty());
+        getOnBackPressedDispatcher().addCallback(this, returnToPlace);
         OnBackPressedCallback closeDrawer = new OnBackPressedCallback(false) {
             @Override
             public void handleOnBackPressed() {
@@ -150,21 +176,35 @@ public class MainActivity extends AppCompatActivity {
         if (bible == null) {
             return;
         }
-        int chapter = pager.getCurrentItem();
-        RecyclerView pages = (RecyclerView) pager.getChildAt(0);
-        RecyclerView.ViewHolder page = pages.findViewHolderForAdapterPosition(chapter);
-        int row = page instanceof ChapterPagerAdapter.Page
-                ? ((ChapterPagerAdapter.Page) page).firstVisibleRow() : 0;
         prefs.edit()
-                .putInt(KEY_CHAPTER, chapter)
-                .putInt(KEY_ROW, row)
+                .putInt(KEY_CHAPTER, pager.getCurrentItem())
+                .putInt(KEY_ROW, currentRow())
                 .putFloat(KEY_TEXT_SIZE, textSizeSp)
                 .apply();
     }
 
     @Override
+    protected void onSaveInstanceState(@NonNull Bundle outState) {
+        super.onSaveInstanceState(outState);
+        int[] saved = new int[history.size() * 2];
+        int i = 0;
+        for (int[] place : history) {
+            saved[i++] = place[0];
+            saved[i++] = place[1];
+        }
+        outState.putIntArray(STATE_HISTORY, saved);
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
+        // A window left open would outlive the screen it belongs to.
+        if (openDialog != null) {
+            openDialog.dismiss();
+        }
+        if (openPopup != null) {
+            openPopup.dismiss();
+        }
         pager.setAdapter(null);
         loader.shutdown();
     }
@@ -201,9 +241,40 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void goTo(int chapterIndex) {
+        rememberPlaceBeforeJumpingTo(chapterIndex);
         // Animate only between neighbours; a long jump would scroll through
         // every chapter in between.
         pager.setCurrentItem(chapterIndex, Math.abs(chapterIndex - pager.getCurrentItem()) == 1);
+    }
+
+    /** Row at the top of the chapter on screen. */
+    private int currentRow() {
+        RecyclerView pages = (RecyclerView) pager.getChildAt(0);
+        RecyclerView.ViewHolder page = pages.findViewHolderForAdapterPosition(pager.getCurrentItem());
+        return page instanceof ChapterPagerAdapter.Page
+                ? ((ChapterPagerAdapter.Page) page).firstVisibleRow() : 0;
+    }
+
+    /** Lets the Back button return here after a jump to another chapter. */
+    private void rememberPlaceBeforeJumpingTo(int chapterIndex) {
+        if (chapterIndex == pager.getCurrentItem()) {
+            return;
+        }
+        history.addFirst(new int[] {pager.getCurrentItem(), currentRow()});
+        if (history.size() > MAX_HISTORY) {
+            history.removeLast();
+        }
+        returnToPlace.setEnabled(true);
+    }
+
+    private void returnToPreviousPlace() {
+        int[] place = history.pollFirst();
+        returnToPlace.setEnabled(!history.isEmpty());
+        if (place != null) {
+            pagerAdapter.clearHighlight();
+            pager.setCurrentItem(place[0], false);
+            pagerAdapter.scrollToRow(place[0], place[1]);
+        }
     }
 
     /** Jumps to a chapter and, if a verse is given, scrolls to and highlights it. */
@@ -211,6 +282,7 @@ public class MainActivity extends AppCompatActivity {
         if (chapterIndex < 0 || chapterIndex >= bible.chapterCount()) {
             return;
         }
+        rememberPlaceBeforeJumpingTo(chapterIndex);
         pager.setCurrentItem(chapterIndex, false);
         if (verse > 0) {
             pagerAdapter.showVerse(chapterIndex, verse);
@@ -288,6 +360,15 @@ public class MainActivity extends AppCompatActivity {
         if (currentNumber > 0) {
             grid.scrollToPosition(currentNumber - 1);
         }
+        show(dialog);
+    }
+
+    /** Shows a dialog, replacing any already open. */
+    private void show(Dialog dialog) {
+        if (openDialog != null) {
+            openDialog.dismiss();
+        }
+        openDialog = dialog;
         dialog.show();
     }
 
@@ -314,6 +395,10 @@ public class MainActivity extends AppCompatActivity {
             }
             return true;
         });
+        if (openPopup != null) {
+            openPopup.dismiss();
+        }
+        openPopup = menu;
         menu.show();
     }
 
@@ -326,19 +411,19 @@ public class MainActivity extends AppCompatActivity {
         slider.setStepSize(1f);
         slider.setValue(Math.round(textSizeSp));
         slider.addOnChangeListener((s, value, fromUser) -> setTextSize(value));
-        new MaterialAlertDialogBuilder(this)
+        show(new MaterialAlertDialogBuilder(this)
                 .setTitle(R.string.text_size)
                 .setView(view)
                 .setPositiveButton(R.string.done, null)
-                .show();
+                .create());
     }
 
     private void showAbout() {
-        new MaterialAlertDialogBuilder(this)
+        show(new MaterialAlertDialogBuilder(this)
                 .setTitle(getString(R.string.about_title, BuildConfig.VERSION_NAME))
                 .setMessage(R.string.about_message)
                 .setPositiveButton(android.R.string.ok, null)
-                .show();
+                .create());
     }
 
     private void setTextSize(float sizeSp) {

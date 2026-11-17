@@ -11,46 +11,46 @@ if (keystoreFile.exists()) {
 }
 
 android {
-    namespace "com.biblereader.app"
-    compileSdk 37
+    namespace = "com.biblereader.app"
+    compileSdk = 37
 
     defaultConfig {
-        applicationId "com.biblereader.app"
-        minSdk 23
-        targetSdk 37
-        versionCode 1
-        versionName "1.0.0"
+        applicationId = "com.biblereader.app"
+        minSdk = 23
+        targetSdk = 37
+        versionCode = 1
+        versionName = "1.0.0"
     }
 
     signingConfigs {
         if (keystoreFile.exists()) {
             release {
-                storeFile rootProject.file(keystore["storeFile"])
-                storePassword keystore["storePassword"]
-                keyAlias keystore["keyAlias"]
-                keyPassword keystore["keyPassword"]
+                storeFile = rootProject.file(keystore["storeFile"])
+                storePassword = keystore["storePassword"]
+                keyAlias = keystore["keyAlias"]
+                keyPassword = keystore["keyPassword"]
             }
         }
     }
 
     buildTypes {
         release {
-            minifyEnabled true
-            shrinkResources true
+            minifyEnabled = true
+            shrinkResources = true
             proguardFiles getDefaultProguardFile("proguard-android-optimize.txt")
             // Without keystore.properties the build is signed with the debug
             // key, which is enough to install it by sideloading.
-            signingConfig keystoreFile.exists() ? signingConfigs.release : signingConfigs.debug
+            signingConfig = keystoreFile.exists() ? signingConfigs.release : signingConfigs.debug
         }
     }
 
     buildFeatures {
-        buildConfig true
+        buildConfig = true
     }
 
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_17
-        targetCompatibility JavaVersion.VERSION_17
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
 
     testOptions {

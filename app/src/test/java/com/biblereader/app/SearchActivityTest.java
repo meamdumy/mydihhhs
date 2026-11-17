@@ -23,8 +23,6 @@ import org.junit.runner.RunWith;
 import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 
-import java.util.Arrays;
-
 /** Drives the search screen: word search, reference jumps and the result returned. */
 @RunWith(RobolectricTestRunner.class)
 @Config(sdk = 36)
@@ -108,7 +106,7 @@ public class SearchActivityTest {
     @Test
     public void emphasisesTheWordsSearchedFor() {
         CharSequence out = SearchActivity.emphasise("The LORD is my shepherd; the end",
-                Arrays.asList("the", "shepherd"));
+                Bible.Query.parse("the shepherd"));
         Spanned spanned = (Spanned) out;
         StyleSpan[] spans = spanned.getSpans(0, out.length(), StyleSpan.class);
         assertEquals(3, spans.length);
