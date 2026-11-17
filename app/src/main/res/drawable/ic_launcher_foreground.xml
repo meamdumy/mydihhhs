@@ -1,0 +1,19 @@
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- An open book: two pages meeting at a centre fold. -->
+    <path
+        android:fillColor="#FBF7EF"
+        android:pathData="M30,39 C38,35 46,35 53,40 L53,74 C46,69 38,69 30,73 Z" />
+    <path
+        android:fillColor="#F2EADB"
+        android:pathData="M78,39 C70,35 62,35 55,40 L55,74 C62,69 70,69 78,73 Z" />
+    <path
+        android:fillColor="#00000000"
+        android:pathData="M35,46 C40,44 45,44.500 49,47 M35,53 C40,51 45,51.500 49,54 M35,60 C40,58 45,58.500 49,61 M73,46 C68,44 63,44.500 59,47 M73,53 C68,51 63,51.500 59,54 M73,60 C68,58 63,58.500 59,61"
+        android:strokeWidth="1.8"
+        android:strokeColor="#7A4B1E"
+        android:strokeLineCap="round" />
+</vector>

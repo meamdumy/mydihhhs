@@ -1,0 +1,1112 @@
+C1
+V1	p	There was a man in the land of Uz, whose name was Job. That man was blameless and upright, and one who feared God, and turned away from evil.
+V2	-	There were born to him seven sons and three daughters.
+V3	-	His possessions also were seven thousand sheep, three thousand camels, five hundred yoke of oxen, five hundred female donkeys, and a very great household; so that this man was the greatest of all the children of the east.
+V4	-	His sons went and held a feast in the house of each one on his birthday; and they sent and called for their three sisters to eat and to drink with them.
+V5	-	It was so, when the days of their feasting had run their course, that Job sent and sanctified them, and rose up early in the morning, and offered burnt offerings according to the number of them all. For Job said, “It may be that my sons have sinned, and renounced God in their hearts.” Job did so continually.
+V6	p	Now on the day when God’s sons came to present themselves before Yahweh, Satan also came among them.
+V7	-	Yahweh said to Satan, “Where have you come from?”\nThen Satan answered Yahweh, and said, “From going back and forth in the earth, and from walking up and down in it.”
+V8	p	Yahweh said to Satan, “Have you considered my servant, Job? For there is no one like him in the earth, a blameless and an upright man, one who fears God, and turns away from evil.”
+V9	p	Then Satan answered Yahweh, and said, “Does Job fear God for nothing?
+V10	-	Haven’t you made a hedge around him, and around his house, and around all that he has, on every side? You have blessed the work of his hands, and his substance is increased in the land.
+V11	-	But stretch out your hand now, and touch all that he has, and he will renounce you to your face.”
+V12	p	Yahweh said to Satan, “Behold, all that he has is in your power. Only on himself don’t stretch out your hand.”\nSo Satan went out from the presence of Yahweh.
+V13	-	It fell on a day when his sons and his daughters were eating and drinking wine in their oldest brother’s house,
+V14	-	that there came a messenger to Job, and said, “The oxen were plowing, and the donkeys feeding beside them,
+V15	-	and the Sabeans attacked, and took them away. Yes, they have killed the servants with the edge of the sword, and I alone have escaped to tell you.”
+V16	p	While he was still speaking, there also came another, and said, “The fire of God has fallen from the sky, and has burned up the sheep and the servants, and consumed them, and I alone have escaped to tell you.”
+V17	p	While he was still speaking, there came also another, and said, “The Chaldeans made three bands, and swept down on the camels, and have taken them away, yes, and killed the servants with the edge of the sword; and I alone have escaped to tell you.”
+V18	p	While he was still speaking, there came also another, and said, “Your sons and your daughters were eating and drinking wine in their oldest brother’s house,
+V19	-	and behold, there came a great wind from the wilderness, and struck the four corners of the house, and it fell on the young men, and they are dead. I alone have escaped to tell you.”
+V20	p	Then Job arose, and tore his robe, and shaved his head, and fell down on the ground, and worshiped.
+V21	-	He said, “Naked I came out of my mother’s womb, and naked will I return there. Yahweh gave, and Yahweh has taken away. Blessed be Yahweh’s name.”
+V22	-	In all this, Job didn’t sin, nor charge God with wrongdoing.
+C2
+V1	p	Again, on the day when the God’s sons came to present themselves before Yahweh, Satan came also among them to present himself before Yahweh.
+V2	-	Yahweh said to Satan, “Where have you come from?”\nSatan answered Yahweh, and said, “From going back and forth in the earth, and from walking up and down in it.”
+V3	p	Yahweh said to Satan, “Have you considered my servant Job? For there is no one like him in the earth, a blameless and an upright man, one who fears God, and turns away from evil. He still maintains his integrity, although you incited me against him, to ruin him without cause.”
+V4	p	Satan answered Yahweh, and said, “Skin for skin. Yes, all that a man has he will give for his life.
+V5	-	But stretch out your hand now, and touch his bone and his flesh, and he will renounce you to your face.”
+V6	p	Yahweh said to Satan, “Behold, he is in your hand. Only spare his life.”
+V7	p	So Satan went out from the presence of Yahweh, and struck Job with painful sores from the sole of his foot to his head.
+V8	-	He took for himself a potsherd to scrape himself with, and he sat among the ashes.
+V9	-	Then his wife said to him, “Do you still maintain your integrity? Renounce God, and die.”
+V10	p	But he said to her, “You speak as one of the foolish women would speak. What? Shall we receive good at the hand of God, and shall we not receive evil?”\nIn all this Job didn’t sin with his lips.
+V11	-	Now when Job’s three friends heard of all this evil that had come on him, they each came from his own place: Eliphaz the Temanite, Bildad the Shuhite, and Zophar the Naamathite; and they made an appointment together to come to sympathize with him and to comfort him.
+V12	-	When they lifted up their eyes from a distance, and didn’t recognize him, they raised their voices, and wept; and they each tore his robe, and sprinkled dust on their heads toward the sky.
+V13	-	So they sat down with him on the ground seven days and seven nights, and no one spoke a word to him, for they saw that his grief was very great.
+C3
+V1	p	After this Job opened his mouth, and cursed the day of his birth.
+V2	-	Job answered:
+V3	-	“Let the day perish in which I was born,\nthe night which said, ‘There is a boy conceived.’
+V4	-	Let that day be darkness.\nDon’t let God from above seek for it,\nneither let the light shine on it.
+V5	-	Let darkness and the shadow of death claim it for their own.\nLet a cloud dwell on it.\nLet all that makes black the day terrify it.
+V6	-	As for that night, let thick darkness seize on it.\nLet it not rejoice among the days of the year.\nLet it not come into the number of the months.
+V7	-	Behold, let that night be barren.\nLet no joyful voice come therein.
+V8	-	Let them curse it who curse the day,\nwho are ready to rouse up leviathan.
+V9	-	Let the stars of its twilight be dark.\nLet it look for light, but have none,\nneither let it see the eyelids of the morning,
+V10	-	because it didn’t shut up the doors of my mother’s womb,\nnor did it hide trouble from my eyes.
+V11	-	“Why didn’t I die from the womb?\nWhy didn’t I give up the spirit when my mother bore me?
+V12	-	Why did the knees receive me?\nOr why the breast, that I should nurse?
+V13	-	For now should I have lain down and been quiet.\nI should have slept, then I would have been at rest,
+V14	-	with kings and counselors of the earth,\nwho built up waste places for themselves;
+V15	-	or with princes who had gold,\nwho filled their houses with silver:
+V16	-	or as a hidden untimely birth I had not been,\nas infants who never saw light.
+V17	-	There the wicked cease from troubling.\nThere the weary are at rest.
+V18	-	There the prisoners are at ease together.\nThey don’t hear the voice of the taskmaster.
+V19	-	The small and the great are there.\nThe servant is free from his master.
+V20	-	“Why is light given to him who is in misery,\nlife to the bitter in soul,
+V21	-	Who long for death, but it doesn’t come;\nand dig for it more than for hidden treasures,
+V22	-	who rejoice exceedingly,\nand are glad, when they can find the grave?
+V23	-	Why is light given to a man whose way is hidden,\nwhom God has hedged in?
+V24	-	For my sighing comes before I eat.\nMy groanings are poured out like water.
+V25	-	For the thing which I fear comes on me,\nThat which I am afraid of comes to me.
+V26	-	I am not at ease, neither am I quiet, neither have I rest;\nbut trouble comes.”
+C4
+V1	p	Then Eliphaz the Temanite answered,
+V2	-	“If someone ventures to talk with you, will you be grieved?\nBut who can withhold himself from speaking?
+V3	-	Behold, you have instructed many,\nyou have strengthened the weak hands.
+V4	-	Your words have supported him who was falling,\nYou have made firm the feeble knees.
+V5	-	But now it has come to you, and you faint.\nIt touches you, and you are troubled.
+V6	-	Isn’t your piety your confidence?\nIsn’t the integrity of your ways your hope?
+V7	-	“Remember, now, whoever perished, being innocent?\nOr where were the upright cut off?
+V8	-	According to what I have seen, those who plow iniquity,\nand sow trouble,\nreap the same.
+V9	-	By the breath of God they perish.\nBy the blast of his anger are they consumed.
+V10	-	The roaring of the lion,\nand the voice of the fierce lion,\nthe teeth of the young lions, are broken.
+V11	-	The old lion perishes for lack of prey.\nThe cubs of the lioness are scattered abroad.
+V12	-	“Now a thing was secretly brought to me.\nMy ear received a whisper of it.
+V13	-	In thoughts from the visions of the night,\nwhen deep sleep falls on men,
+V14	-	fear came on me, and trembling,\nwhich made all my bones shake.
+V15	-	Then a spirit passed before my face.\nThe hair of my flesh stood up.
+V16	-	It stood still, but I couldn’t discern its appearance.\nA form was before my eyes.\nSilence, then I heard a voice, saying,
+V17	-	‘Shall mortal man be more just than God?\nShall a man be more pure than his Maker?
+V18	-	Behold, he puts no trust in his servants.\nHe charges his angels with error.
+V19	-	How much more, those who dwell in houses of clay,\nwhose foundation is in the dust,\nwho are crushed before the moth!
+V20	-	Between morning and evening they are destroyed.\nThey perish forever without any regarding it.
+V21	-	Isn’t their tent cord plucked up within them?\nThey die, and that without wisdom.’
+C5
+V1	p	“Call now; is there any who will answer you?\nTo which of the holy ones will you turn?
+V2	-	For resentment kills the foolish man,\nand jealousy kills the simple.
+V3	-	I have seen the foolish taking root,\nbut suddenly I cursed his habitation.
+V4	-	His children are far from safety.\nThey are crushed in the gate.\nNeither is there any to deliver them,
+V5	-	whose harvest the hungry eats up,\nand take it even out of the thorns.\nThe snare gapes for their substance.
+V6	-	For affliction doesn’t come out of the dust,\nneither does trouble spring out of the ground;
+V7	-	but man is born to trouble,\nas the sparks fly upward.
+V8	-	“But as for me, I would seek God.\nI would commit my cause to God,
+V9	-	who does great things that can’t be fathomed,\nmarvelous things without number;
+V10	-	who gives rain on the earth,\nand sends waters on the fields;
+V11	-	so that he sets up on high those who are low,\nthose who mourn are exalted to safety.
+V12	-	He frustrates the plans of the crafty,\nSo that their hands can’t perform their enterprise.
+V13	-	He takes the wise in their own craftiness;\nthe counsel of the cunning is carried headlong.
+V14	-	They meet with darkness in the day time,\nand grope at noonday as in the night.
+V15	-	But he saves from the sword of their mouth,\neven the needy from the hand of the mighty.
+V16	-	So the poor has hope,\nand injustice shuts her mouth.
+V17	-	“Behold, happy is the man whom God corrects.\nTherefore do not despise the chastening of the Almighty.
+V18	-	For he wounds and binds up.\nHe injures and his hands make whole.
+V19	-	He will deliver you in six troubles;\nyes, in seven no evil will touch you.
+V20	-	In famine he will redeem you from death;\nin war, from the power of the sword.
+V21	-	You will be hidden from the scourge of the tongue,\nneither will you be afraid of destruction when it comes.
+V22	-	You will laugh at destruction and famine,\nneither will you be afraid of the animals of the earth.
+V23	-	For you will be allied with the stones of the field.\nThe animals of the field will be at peace with you.
+V24	-	You will know that your tent is in peace.\nYou will visit your fold, and will miss nothing.
+V25	-	You will know also that your offspring will be great,\nYour offspring as the grass of the earth.
+V26	-	You will come to your grave in a full age,\nlike a shock of grain comes in its season.
+V27	-	Look at this. We have searched it. It is so.\nHear it, and know it for your good.”
+C6
+V1	p	Then Job answered,
+V2	-	“Oh that my anguish were weighed,\nand all my calamity laid in the balances!
+V3	-	For now it would be heavier than the sand of the seas,\ntherefore have my words been rash.
+V4	-	For the arrows of the Almighty are within me.\nMy spirit drinks up their poison.\nThe terrors of God set themselves in array against me.
+V5	-	Does the wild donkey bray when he has grass?\nOr does the ox low over his fodder?
+V6	-	Can that which has no flavor be eaten without salt?\nOr is there any taste in the white of an egg?
+V7	-	My soul refuses to touch them.\nThey are as loathsome food to me.
+V8	-	“Oh that I might have my request,\nthat God would grant the thing that I long for,
+V9	-	even that it would please God to crush me;\nthat he would let loose his hand, and cut me off!
+V10	-	Let still be my consolation,\nyes, let me exult in pain that doesn’t spare,\nthat I have not denied the words of the Holy One.
+V11	-	What is my strength, that I should wait?\nWhat is my end, that I should be patient?
+V12	-	Is my strength the strength of stones?\nOr is my flesh of bronze?
+V13	-	Isn’t it that I have no help in me,\nThat wisdom is driven quite from me?
+V14	-	“To him who is ready to faint, kindness should be shown from his friend;\neven to him who forsakes the fear of the Almighty.
+V15	-	My brothers have dealt deceitfully as a brook,\nas the channel of brooks that pass away;
+V16	-	Which are black by reason of the ice,\nin which the snow hides itself.
+V17	-	In the dry season, they vanish.\nWhen it is hot, they are consumed out of their place.
+V18	-	The caravans that travel beside them turn away.\nThey go up into the waste, and perish.
+V19	-	The caravans of Tema looked.\nThe companies of Sheba waited for them.
+V20	-	They were distressed because they were confident.\nThey came there, and were confounded.
+V21	-	For now you are nothing.\nYou see a terror, and are afraid.
+V22	-	Did I say, ‘Give to me?’\nor, ‘Offer a present for me from your substance?’
+V23	-	or, ‘Deliver me from the adversary’s hand?’\nor, ‘Redeem me from the hand of the oppressors?’
+V24	-	“Teach me, and I will hold my peace.\nCause me to understand my error.
+V25	-	How forcible are words of uprightness!\nBut your reproof, what does it reprove?
+V26	-	Do you intend to reprove words,\nsince the speeches of one who is desperate are as wind?
+V27	-	Yes, you would even cast lots for the fatherless,\nand make merchandise of your friend.
+V28	-	Now therefore be pleased to look at me,\nfor surely I will not lie to your face.
+V29	-	Please return.\nLet there be no injustice.\nYes, return again.\nMy cause is righteous.
+V30	-	Is there injustice on my tongue?\nCan’t my taste discern mischievous things?
+C7
+V1	p	“Isn’t a man forced to labor on earth?\nAren’t his days like the days of a hired hand?
+V2	-	As a servant who earnestly desires the shadow,\nas a hireling who looks for his wages,
+V3	-	so am I made to possess months of misery,\nwearisome nights are appointed to me.
+V4	-	When I lie down, I say,\n‘When will I arise, and the night be gone?’\nI toss and turn until the dawning of the day.
+V5	-	My flesh is clothed with worms and clods of dust.\nMy skin closes up, and breaks out afresh.
+V6	-	My days are swifter than a weaver’s shuttle,\nand are spent without hope.
+V7	-	Oh remember that my life is a breath.\nMy eye will no more see good.
+V8	-	The eye of him who sees me will see me no more.\nYour eyes will be on me, but I will not be.
+V9	-	As the cloud is consumed and vanishes away,\nso he who goes down to Sheol will come up no more.
+V10	-	He will return no more to his house,\nneither will his place know him any more.
+V11	-	“Therefore I will not keep silent.\nI will speak in the anguish of my spirit.\nI will complain in the bitterness of my soul.
+V12	-	Am I a sea, or a sea monster,\nthat you put a guard over me?
+V13	-	When I say, ‘My bed will comfort me.\nMy couch will ease my complaint;’
+V14	-	then you scare me with dreams,\nand terrify me through visions:
+V15	-	so that my soul chooses strangling,\ndeath rather than my bones.
+V16	-	I loathe my life.\nI don’t want to live forever.\nLeave me alone, for my days are but a breath.
+V17	-	What is man, that you should magnify him,\nthat you should set your mind on him,
+V18	-	that you should visit him every morning,\nand test him every moment?
+V19	-	How long will you not look away from me,\nnor leave me alone until I swallow down my spittle?
+V20	-	If I have sinned, what do I do to you, you watcher of men?\nWhy have you set me as a mark for you,\nso that I am a burden to myself?
+V21	-	Why do you not pardon my disobedience, and take away my iniquity?\nFor now will I lie down in the dust.\nYou will seek me diligently, but I will not be.”
+C8
+V1	p	Then Bildad the Shuhite answered,
+V2	-	“How long will you speak these things?\nShall the words of your mouth be a mighty wind?
+V3	-	Does God pervert justice?\nOr does the Almighty pervert righteousness?
+V4	-	If your children have sinned against him,\nhe has delivered them into the hand of their disobedience.
+V5	-	If you want to seek God diligently,\nmake your supplication to the Almighty.
+V6	-	If you were pure and upright,\nsurely now he would awaken for you,\nand make the habitation of your righteousness prosperous.
+V7	-	Though your beginning was small,\nyet your latter end would greatly increase.
+V8	-	“Please inquire of past generations.\nFind out about the learning of their fathers.
+V9	-	(For we are but of yesterday, and know nothing,\nbecause our days on earth are a shadow.)
+V10	-	Shall they not teach you, tell you,\nand utter words out of their heart?
+V11	-	“Can the papyrus grow up without mire?\nCan the rushes grow without water?
+V12	-	While it is yet in its greenness, not cut down,\nit withers before any other reed.
+V13	-	So are the paths of all who forget God.\nThe hope of the godless man will perish,
+V14	-	Whose confidence will break apart,\nWhose trust is a spider’s web.
+V15	-	He will lean on his house, but it will not stand.\nHe will cling to it, but it will not endure.
+V16	-	He is green before the sun.\nHis shoots go out along his garden.
+V17	-	His roots are wrapped around the rock pile.\nHe sees the place of stones.
+V18	-	If he is destroyed from his place,\nthen it will deny him, saying, ‘I have not seen you.’
+V19	-	Behold, this is the joy of his way:\nout of the earth, others will spring.
+V20	-	“Behold, God will not cast away a blameless man,\nneither will he uphold the evildoers.
+V21	-	He will still fill your mouth with laughter,\nyour lips with shouting.
+V22	-	Those who hate you will be clothed with shame.\nThe tent of the wicked will be no more.”
+C9
+V1	p	Then Job answered,
+V2	-	“Truly I know that it is so,\nbut how can man be just with God?
+V3	-	If he is pleased to contend with him,\nhe can’t answer him one time in a thousand.
+V4	-	God who is wise in heart, and mighty in strength:\nwho has hardened himself against him and prospered?
+V5	-	He removes the mountains, and they don’t know it,\nwhen he overturns them in his anger.
+V6	-	He shakes the earth out of its place.\nIts pillars tremble.
+V7	-	He commands the sun and it doesn’t rise,\nand seals up the stars.
+V8	-	He alone stretches out the heavens,\nand treads on the waves of the sea.
+V9	-	He makes the Bear, Orion, and the Pleiades,\nand the rooms of the south.
+V10	-	He does great things past finding out;\nyes, marvelous things without number.
+V11	-	Behold, he goes by me, and I don’t see him.\nHe passes on also, but I don’t perceive him.
+V12	-	Behold, he snatches away.\nWho can hinder him?\nWho will ask him, ‘What are you doing?’
+V13	-	“God will not withdraw his anger.\nThe helpers of Rahab stoop under him.
+V14	-	How much less will I answer him,\nAnd choose my words to argue with him?
+V15	-	Though I were righteous, yet I wouldn’t answer him.\nI would make supplication to my judge.
+V16	-	If I had called, and he had answered me,\nyet I wouldn’t believe that he listened to my voice.
+V17	-	For he breaks me with a storm,\nand multiplies my wounds without cause.
+V18	-	He will not allow me to catch my breath,\nbut fills me with bitterness.
+V19	-	If it is a matter of strength, behold, he is mighty!\nIf of justice, ‘Who,’ says he, ‘will summon me?’
+V20	-	Though I am righteous, my own mouth will condemn me.\nThough I am blameless, it will prove me perverse.
+V21	-	I am blameless.\nI don’t respect myself.\nI despise my life.
+V22	-	“It is all the same.\nTherefore I say he destroys the blameless and the wicked.
+V23	-	If the scourge kills suddenly,\nhe will mock at the trial of the innocent.
+V24	-	The earth is given into the hand of the wicked.\nHe covers the faces of its judges.\nIf not he, then who is it?
+V25	-	“Now my days are swifter than a runner.\nThey flee away. They see no good.
+V26	-	They have passed away as the swift ships,\nas the eagle that swoops on the prey.
+V27	-	If I say, ‘I will forget my complaint,\nI will put off my sad face, and cheer up;’
+V28	-	I am afraid of all my sorrows,\nI know that you will not hold me innocent.
+V29	-	I will be condemned.\nWhy then do I labor in vain?
+V30	-	If I wash myself with snow,\nand cleanse my hands with lye,
+V31	-	yet you will plunge me in the ditch.\nMy own clothes will abhor me.
+V32	-	For he is not a man, as I am, that I should answer him,\nthat we should come together in judgment.
+V33	-	There is no umpire between us,\nthat might lay his hand on us both.
+V34	-	Let him take his rod away from me.\nLet his terror not make me afraid;
+V35	-	then I would speak, and not fear him,\nfor I am not so in myself.
+C10
+V1	p	“My soul is weary of my life.\nI will give free course to my complaint.\nI will speak in the bitterness of my soul.
+V2	-	I will tell God, ‘Do not condemn me.\nShow me why you contend with me.
+V3	-	Is it good to you that you should oppress,\nthat you should despise the work of your hands,\nand smile on the counsel of the wicked?
+V4	-	Do you have eyes of flesh?\nOr do you see as man sees?
+V5	-	Are your days as the days of mortals,\nor your years as man’s years,
+V6	-	that you inquire after my iniquity,\nand search after my sin?
+V7	-	Although you know that I am not wicked,\nthere is no one who can deliver out of your hand.
+V8	-	“ ‘Your hands have framed me and fashioned me altogether,\nyet you destroy me.
+V9	-	Remember, I beg you, that you have fashioned me as clay.\nWill you bring me into dust again?
+V10	-	Haven’t you poured me out like milk,\nand curdled me like cheese?
+V11	-	You have clothed me with skin and flesh,\nand knit me together with bones and sinews.
+V12	-	You have granted me life and loving kindness.\nYour visitation has preserved my spirit.
+V13	-	Yet you hid these things in your heart.\nI know that this is with you:
+V14	-	if I sin, then you mark me.\nYou will not acquit me from my iniquity.
+V15	-	If I am wicked, woe to me.\nIf I am righteous, I still will not lift up my head,\nbeing filled with disgrace,\nand conscious of my affliction.
+V16	-	If my head is held high, you hunt me like a lion.\nAgain you show yourself powerful to me.
+V17	-	You renew your witnesses against me,\nand increase your indignation on me.\nChanges and warfare are with me.
+V18	-	“ ‘Why, then, have you brought me out of the womb?\nI wish I had given up the spirit, and no eye had seen me.
+V19	-	I should have been as though I had not been.\nI should have been carried from the womb to the grave.
+V20	-	Aren’t my days few?\nStop!\nLeave me alone, that I may find a little comfort,
+V21	-	before I go where I will not return from,\nto the land of darkness and of the shadow of death;
+V22	-	the land dark as midnight,\nof the shadow of death,\nwithout any order,\nwhere the light is as midnight.’ ”
+C11
+V1	p	Then Zophar, the Naamathite, answered,
+V2	-	“Shouldn’t the multitude of words be answered?\nShould a man full of talk be justified?
+V3	-	Should your boastings make men hold their peace?\nWhen you mock, will no man make you ashamed?
+V4	-	For you say, ‘My doctrine is pure.\nI am clean in your eyes.’
+V5	-	But oh that God would speak,\nand open his lips against you,
+V6	-	that he would show you the secrets of wisdom!\nFor true wisdom has two sides.\nKnow therefore that God exacts of you less than your iniquity deserves.
+V7	-	“Can you fathom the mystery of God?\nOr can you probe the limits of the Almighty?
+V8	-	They are high as heaven. What can you do?\nThey are deeper than Sheol. What can you know?
+V9	-	Its measure is longer than the earth,\nand broader than the sea.
+V10	-	If he passes by, or confines,\nor convenes a court, then who can oppose him?
+V11	-	For he knows false men.\nHe sees iniquity also, even though he doesn’t consider it.
+V12	-	An empty-headed man becomes wise\nwhen a man is born as a wild donkey’s colt.
+V13	-	“If you set your heart aright,\nstretch out your hands toward him.
+V14	-	If iniquity is in your hand, put it far away.\nDon’t let unrighteousness dwell in your tents.
+V15	-	Surely then you will lift up your face without spot;\nYes, you will be steadfast, and will not fear:
+V16	-	for you will forget your misery.\nYou will remember it like waters that have passed away.
+V17	-	Life will be clearer than the noonday.\nThough there is darkness, it will be as the morning.
+V18	-	You will be secure, because there is hope.\nYes, you will search, and will take your rest in safety.
+V19	-	Also you will lie down, and no one will make you afraid.\nYes, many will court your favor.
+V20	-	But the eyes of the wicked will fail.\nThey will have no way to flee.\nTheir hope will be the giving up of the spirit.”
+C12
+V1	p	Then Job answered,
+V2	-	“No doubt, but you are the people,\nand wisdom will die with you.
+V3	-	But I have understanding as well as you;\nI am not inferior to you.\nYes, who doesn’t know such things as these?
+V4	-	I am like one who is a joke to his neighbor,\nI, who called on God, and he answered.\nThe just, the blameless man is a joke.
+V5	-	In the thought of him who is at ease there is contempt for misfortune.\nIt is ready for them whose foot slips.
+V6	-	The tents of robbers prosper.\nThose who provoke God are secure,\nwho carry their god in their hands.
+V7	-	“But ask the animals, now, and they will teach you;\nthe birds of the sky, and they will tell you.
+V8	-	Or speak to the earth, and it will teach you.\nThe fish of the sea will declare to you.
+V9	-	Who doesn’t know that in all these,\nYahweh’s hand has done this,
+V10	-	in whose hand is the life of every living thing,\nand the breath of all mankind?
+V11	-	Doesn’t the ear try words,\neven as the palate tastes its food?
+V12	-	With aged men is wisdom,\nin length of days understanding.
+V13	-	“With God is wisdom and might.\nHe has counsel and understanding.
+V14	-	Behold, he breaks down, and it can’t be built again.\nHe imprisons a man, and there can be no release.
+V15	-	Behold, he withholds the waters, and they dry up.\nAgain, he sends them out, and they overturn the earth.
+V16	-	With him is strength and wisdom.\nThe deceived and the deceiver are his.
+V17	-	He leads counselors away stripped.\nHe makes judges fools.
+V18	-	He loosens the bond of kings.\nHe binds their waist with a belt.
+V19	-	He leads priests away stripped,\nand overthrows the mighty.
+V20	-	He removes the speech of those who are trusted,\nand takes away the understanding of the elders.
+V21	-	He pours contempt on princes,\nand loosens the belt of the strong.
+V22	-	He uncovers deep things out of darkness,\nand brings out to light the shadow of death.
+V23	-	He increases the nations, and he destroys them.\nHe enlarges the nations, and he leads them captive.
+V24	-	He takes away understanding from the chiefs of the people of the earth,\nand causes them to wander in a wilderness where there is no way.
+V25	-	They grope in the dark without light.\nHe makes them stagger like a drunken man.
+C13
+V1	p	“Behold, my eye has seen all this.\nMy ear has heard and understood it.
+V2	-	What you know, I know also.\nI am not inferior to you.
+V3	-	“Surely I would speak to the Almighty.\nI desire to reason with God.
+V4	-	But you are forgers of lies.\nYou are all physicians of no value.
+V5	-	Oh that you would be completely silent!\nThen you would be wise.
+V6	-	Hear now my reasoning.\nListen to the pleadings of my lips.
+V7	-	Will you speak unrighteously for God,\nand talk deceitfully for him?
+V8	-	Will you show partiality to him?\nWill you contend for God?
+V9	-	Is it good that he should search you out?\nOr as one deceives a man, will you deceive him?
+V10	-	He will surely reprove you\nif you secretly show partiality.
+V11	-	Shall not his majesty make you afraid,\nand his dread fall on you?
+V12	-	Your memorable sayings are proverbs of ashes.\nYour defenses are defenses of clay.
+V13	-	“Be silent!\nLeave me alone, that I may speak.\nLet come on me what will.
+V14	-	Why should I take my flesh in my teeth,\nand put my life in my hand?
+V15	-	Behold, he will kill me.\nI have no hope.\nNevertheless, I will maintain my ways before him.
+V16	-	This also will be my salvation,\nthat a godless man will not come before him.
+V17	-	Listen carefully to my speech.\nLet my declaration be in your ears.
+V18	-	See now, I have set my cause in order.\nI know that I am righteous.
+V19	-	Who is he who will contend with me?\nFor then would I hold my peace and give up the spirit.
+V20	-	“Only don’t do two things to me,\nthen I will not hide myself from your face:
+V21	-	withdraw your hand far from me,\nand don’t let your terror make me afraid.
+V22	-	Then call, and I will answer,\nor let me speak, and you answer me.
+V23	-	How many are my iniquities and sins?\nMake me know my disobedience and my sin.
+V24	-	Why do you hide your face,\nand consider me your enemy?
+V25	-	Will you harass a driven leaf?\nWill you pursue the dry stubble?
+V26	-	For you write bitter things against me,\nand make me inherit the iniquities of my youth:
+V27	-	You also put my feet in the stocks,\nand mark all my paths.\nYou set a bound to the soles of my feet,
+V28	-	though I am decaying like a rotten thing,\nlike a garment that is moth-eaten.
+C14
+V1	p	“Man, who is born of a woman,\nis of few days, and full of trouble.
+V2	-	He grows up like a flower, and is cut down.\nHe also flees like a shadow, and doesn’t continue.
+V3	-	Do you open your eyes on such a one,\nand bring me into judgment with you?
+V4	-	Who can bring a clean thing out of an unclean?\nNot one.
+V5	-	Seeing his days are determined,\nthe number of his months is with you,\nand you have appointed his bounds that he can’t pass;
+V6	-	Look away from him, that he may rest,\nuntil he accomplishes, as a hireling, his day.
+V7	-	“For there is hope for a tree if it is cut down,\nthat it will sprout again,\nthat the tender branch of it will not cease.
+V8	-	Though its root grows old in the earth,\nand its stock dies in the ground,
+V9	-	yet through the scent of water it will bud,\nand sprout boughs like a plant.
+V10	-	But man dies, and is laid low.\nYes, man gives up the spirit, and where is he?
+V11	-	As the waters fail from the sea,\nand the river wastes and dries up,
+V12	-	so man lies down and doesn’t rise.\nUntil the heavens are no more, they will not awake,\nnor be roused out of their sleep.
+V13	-	“Oh that you would hide me in Sheol,\nthat you would keep me secret until your wrath is past,\nthat you would appoint me a set time and remember me!
+V14	-	If a man dies, will he live again?\nI would wait all the days of my warfare,\nuntil my release should come.
+V15	-	You would call, and I would answer you.\nYou would have a desire for the work of your hands.
+V16	-	But now you count my steps.\nDon’t you watch over my sin?
+V17	-	My disobedience is sealed up in a bag.\nYou fasten up my iniquity.
+V18	-	“But the mountain falling comes to nothing.\nThe rock is removed out of its place;
+V19	-	The waters wear the stones.\nThe torrents of it wash away the dust of the earth.\nSo you destroy the hope of man.
+V20	-	You forever prevail against him, and he departs.\nYou change his face, and send him away.
+V21	-	His sons come to honor, and he doesn’t know it.\nThey are brought low, but he doesn’t perceive it of them.
+V22	-	But his flesh on him has pain,\nand his soul within him mourns.”
+C15
+V1	p	Then Eliphaz the Temanite answered,
+V2	-	“Should a wise man answer with vain knowledge,\nand fill himself with the east wind?
+V3	-	Should he reason with unprofitable talk,\nor with speeches with which he can do no good?
+V4	-	Yes, you do away with fear,\nand hinder devotion before God.
+V5	-	For your iniquity teaches your mouth,\nand you choose the language of the crafty.
+V6	-	Your own mouth condemns you, and not I.\nYes, your own lips testify against you.
+V7	-	“Are you the first man who was born?\nOr were you brought out before the hills?
+V8	-	Have you heard the secret counsel of God?\nDo you limit wisdom to yourself?
+V9	-	What do you know that we don’t know?\nWhat do you understand which is not in us?
+V10	-	With us are both the gray-headed and the very aged men,\nmuch elder than your father.
+V11	-	Are the consolations of God too small for you,\neven the word that is gentle toward you?
+V12	-	Why does your heart carry you away?\nWhy do your eyes flash,
+V13	-	That you turn your spirit against God,\nand let such words go out of your mouth?
+V14	-	What is man, that he should be clean?\nWhat is he who is born of a woman, that he should be righteous?
+V15	-	Behold, he puts no trust in his holy ones.\nYes, the heavens are not clean in his sight;
+V16	-	how much less one who is abominable and corrupt,\na man who drinks iniquity like water!
+V17	-	“I will show you, listen to me;\nthat which I have seen I will declare
+V18	-	(which wise men have told by their fathers,\nand have not hidden it;
+V19	-	to whom alone the land was given,\nand no stranger passed among them):
+V20	-	the wicked man writhes in pain all his days,\neven the number of years that are laid up for the oppressor.
+V21	-	A sound of terrors is in his ears.\nIn prosperity the destroyer will come on him.
+V22	-	He doesn’t believe that he will return out of darkness.\nHe is waited for by the sword.
+V23	-	He wanders abroad for bread, saying, ‘Where is it?’\nHe knows that the day of darkness is ready at his hand.
+V24	-	Distress and anguish make him afraid.\nThey prevail against him, as a king ready to the battle.
+V25	-	Because he has stretched out his hand against God,\nand behaves himself proudly against the Almighty,
+V26	-	he runs at him with a stiff neck,\nwith the thick shields of his bucklers,
+V27	-	because he has covered his face with his fatness,\nand gathered fat on his thighs.
+V28	-	He has lived in desolate cities,\nin houses which no one inhabited,\nwhich were ready to become heaps.
+V29	-	He will not be rich, neither will his substance continue,\nneither will their possessions be extended on the earth.
+V30	-	He will not depart out of darkness.\nThe flame will dry up his branches.\nHe will go away by the breath of God’s mouth.
+V31	-	Let him not trust in emptiness, deceiving himself;\nfor emptiness will be his reward.
+V32	-	It will be accomplished before his time.\nHis branch will not be green.
+V33	-	He will shake off his unripe grape as the vine,\nand will cast off his flower as the olive tree.
+V34	-	For the company of the godless will be barren,\nand fire will consume the tents of bribery.
+V35	-	They conceive mischief, and produce iniquity.\nTheir heart prepares deceit.”
+C16
+V1	p	Then Job answered,
+V2	-	“I have heard many such things.\nYou are all miserable comforters!
+V3	-	Shall vain words have an end?\nOr what provokes you that you answer?
+V4	-	I also could speak as you do.\nIf your soul were in my soul’s place,\nI could join words together against you,\nand shake my head at you,
+V5	-	but I would strengthen you with my mouth.\nThe solace of my lips would relieve you.
+V6	-	“Though I speak, my grief is not subsided.\nThough I forbear, what am I eased?
+V7	-	But now, God, you have surely worn me out.\nYou have made all my company desolate.
+V8	-	You have shriveled me up. This is a witness against me.\nMy leanness rises up against me.\nIt testifies to my face.
+V9	-	He has torn me in his wrath and persecuted me.\nHe has gnashed on me with his teeth.\nMy adversary sharpens his eyes on me.
+V10	-	They have gaped on me with their mouth.\nThey have struck me on the cheek reproachfully.\nThey gather themselves together against me.
+V11	-	God delivers me to the ungodly,\nand casts me into the hands of the wicked.
+V12	-	I was at ease, and he broke me apart.\nYes, he has taken me by the neck, and dashed me to pieces.\nHe has also set me up for his target.
+V13	-	His archers surround me.\nHe splits my kidneys apart, and does not spare.\nHe pours out my bile on the ground.
+V14	-	He breaks me with breach on breach.\nHe runs at me like a giant.
+V15	-	I have sewed sackcloth on my skin,\nand have thrust my horn in the dust.
+V16	-	My face is red with weeping.\nDeep darkness is on my eyelids.
+V17	-	Although there is no violence in my hands,\nand my prayer is pure.
+V18	-	“Earth, don’t cover my blood.\nLet my cry have no place to rest.
+V19	-	Even now, behold, my witness is in heaven.\nHe who vouches for me is on high.
+V20	-	My friends scoff at me.\nMy eyes pour out tears to God,
+V21	-	that he would maintain the right of a man with God,\nof a son of man with his neighbor!
+V22	-	For when a few years have come,\nI will go the way of no return.
+C17
+V1	p	“My spirit is consumed.\nMy days are extinct,\nand the grave is ready for me.
+V2	-	Surely there are mockers with me.\nMy eye dwells on their provocation.
+V3	-	“Now give a pledge. Be collateral for me with yourself.\nWho is there who will strike hands with me?
+V4	-	For you have hidden their heart from understanding,\nTherefore you will not exalt them.
+V5	-	He who denounces his friends for plunder,\nEven the eyes of his children will fail.
+V6	-	“But he has made me a byword of the people.\nThey spit in my face.
+V7	-	My eye also is dim by reason of sorrow.\nAll my members are as a shadow.
+V8	-	Upright men will be astonished at this.\nThe innocent will stir himself up against the godless.
+V9	-	Yet the righteous will hold to his way.\nHe who has clean hands will grow stronger and stronger.
+V10	-	But as for you all, come back.\nI will not find a wise man among you.
+V11	-	My days are past.\nMy plans are broken off,\nas are the thoughts of my heart.
+V12	-	They change the night into day,\nsaying ‘The light is near’ in the presence of darkness.
+V13	-	If I look for Sheol as my house,\nif I have spread my couch in the darkness,
+V14	-	if I have said to corruption, ‘You are my father;’\nto the worm, ‘My mother,’ and ‘My sister,’
+V15	-	where then is my hope?\nas for my hope, who will see it?
+V16	-	Shall it go down with me to the gates of Sheol,\nor descend together into the dust?”
+C18
+V1	p	Then Bildad the Shuhite answered,
+V2	-	“How long will you hunt for words?\nConsider, and afterwards we will speak.
+V3	-	Why are we counted as animals,\nwhich have become unclean in your sight?
+V4	-	You who tear yourself in your anger,\nwill the earth be forsaken for you?\nOr will the rock be removed out of its place?
+V5	-	“Yes, the light of the wicked will be put out.\nThe spark of his fire won’t shine.
+V6	-	The light will be dark in his tent.\nHis lamp above him will be put out.
+V7	-	The steps of his strength will be shortened.\nHis own counsel will cast him down.
+V8	-	For he is cast into a net by his own feet,\nand he wanders into its mesh.
+V9	-	A snare will take him by the heel.\nA trap will catch him.
+V10	-	A noose is hidden for him in the ground,\na trap for him on the path.
+V11	-	Terrors will make him afraid on every side,\nand will chase him at his heels.
+V12	-	His strength will be famished.\nCalamity will be ready at his side.
+V13	-	The members of his body will be devoured.\nThe firstborn of death will devour his members.
+V14	-	He will be rooted out of the security of his tent.\nHe will be brought to the king of terrors.
+V15	-	There will dwell in his tent that which is none of his.\nSulfur will be scattered on his habitation.
+V16	-	His roots will be dried up beneath.\nHis branch will be cut off above.
+V17	-	His memory will perish from the earth.\nHe will have no name in the street.
+V18	-	He will be driven from light into darkness,\nand chased out of the world.
+V19	-	He will have neither son nor grandson among his people,\nnor any remaining where he lived.
+V20	-	Those who come after will be astonished at his day,\nas those who went before were frightened.
+V21	-	Surely such are the dwellings of the unrighteous.\nThis is the place of him who doesn’t know God.”
+C19
+V1	p	Then Job answered,
+V2	-	“How long will you torment me,\nand crush me with words?
+V3	-	You have reproached me ten times.\nYou aren’t ashamed that you attack me.
+V4	-	If it is true that I have erred,\nmy error remains with myself.
+V5	-	If indeed you will magnify yourselves against me,\nand plead against me my reproach,
+V6	-	know now that God has subverted me,\nand has surrounded me with his net.
+V7	-	“Behold, I cry out of wrong, but I am not heard.\nI cry for help, but there is no justice.
+V8	-	He has walled up my way so that I can’t pass,\nand has set darkness in my paths.
+V9	-	He has stripped me of my glory,\nand taken the crown from my head.
+V10	-	He has broken me down on every side, and I am gone.\nHe has plucked my hope up like a tree.
+V11	-	He has also kindled his wrath against me.\nHe counts me among his adversaries.
+V12	-	His troops come on together,\nbuild a siege ramp against me,\nand encamp around my tent.
+V13	-	“He has put my brothers far from me.\nMy acquaintances are wholly estranged from me.
+V14	-	My relatives have gone away.\nMy familiar friends have forgotten me.
+V15	-	Those who dwell in my house and my maids consider me a stranger.\nI am an alien in their sight.
+V16	-	I call to my servant, and he gives me no answer.\nI beg him with my mouth.
+V17	-	My breath is offensive to my wife.\nI am loathsome to the children of my own mother.
+V18	-	Even young children despise me.\nIf I arise, they speak against me.
+V19	-	All my familiar friends abhor me.\nThey whom I loved have turned against me.
+V20	-	My bones stick to my skin and to my flesh.\nI have escaped by the skin of my teeth.
+V21	-	“Have pity on me. Have pity on me, you my friends;\nfor the hand of God has touched me.
+V22	-	Why do you persecute me as God,\nand are not satisfied with my flesh?
+V23	-	“Oh that my words were now written!\nOh that they were inscribed in a book!
+V24	-	That with an iron pen and lead\nthey were engraved in the rock forever!
+V25	-	But as for me, I know that my Redeemer lives.\nIn the end, he will stand upon the earth.
+V26	-	After my skin is destroyed,\nthen I will see God in my flesh,
+V27	-	whom I, even I, will see on my side.\nMy eyes will see, and not as a stranger.\n“My heart is consumed within me.
+V28	-	If you say, ‘How we will persecute him!’\nbecause the root of the matter is found in me,
+V29	-	be afraid of the sword,\nfor wrath brings the punishments of the sword,\nthat you may know there is a judgment.”
+C20
+V1	p	Then Zophar the Naamathite answered,
+V2	-	“Therefore my thoughts answer me,\neven by reason of my haste that is in me.
+V3	-	I have heard the reproof which puts me to shame.\nThe spirit of my understanding answers me.
+V4	-	Don’t you know this from old time,\nsince man was placed on earth,
+V5	-	that the triumphing of the wicked is short,\nthe joy of the godless but for a moment?
+V6	-	Though his height mount up to the heavens,\nand his head reach to the clouds,
+V7	-	yet he will perish forever like his own dung.\nThose who have seen him will say, ‘Where is he?’
+V8	-	He will fly away as a dream, and will not be found.\nYes, he will be chased away like a vision of the night.
+V9	-	The eye which saw him will see him no more,\nneither will his place see him any more.
+V10	-	His children will seek the favor of the poor.\nHis hands will give back his wealth.
+V11	-	His bones are full of his youth,\nbut youth will lie down with him in the dust.
+V12	-	“Though wickedness is sweet in his mouth,\nthough he hide it under his tongue,
+V13	-	though he spare it, and will not let it go,\nbut keep it still within his mouth;
+V14	-	yet his food in his bowels is turned.\nIt is cobra venom within him.
+V15	-	He has swallowed down riches, and he will vomit them up again.\nGod will cast them out of his belly.
+V16	-	He will suck cobra venom.\nThe viper’s tongue will kill him.
+V17	-	He will not look at the rivers,\nthe flowing streams of honey and butter.
+V18	-	He will restore that for which he labored, and will not swallow it down.\nHe will not rejoice according to the substance that he has gotten.
+V19	-	For he has oppressed and forsaken the poor.\nHe has violently taken away a house, and he will not build it up.
+V20	-	“Because he knew no quietness within him,\nhe will not save anything of that in which he delights.
+V21	-	There was nothing left that he didn’t devour,\ntherefore his prosperity will not endure.
+V22	-	In the fullness of his sufficiency, distress will overtake him.\nThe hand of everyone who is in misery will come on him.
+V23	-	When he is about to fill his belly, God will cast the fierceness of his wrath on him.\nIt will rain on him while he is eating.
+V24	-	He will flee from the iron weapon.\nThe bronze arrow will strike him through.
+V25	-	He draws it out, and it comes out of his body.\nYes, the glittering point comes out of his liver.\nTerrors are on him.
+V26	-	All darkness is laid up for his treasures.\nAn unfanned fire will devour him.\nIt will consume that which is left in his tent.
+V27	-	The heavens will reveal his iniquity.\nThe earth will rise up against him.
+V28	-	The increase of his house will depart.\nThey will rush away in the day of his wrath.
+V29	-	This is the portion of a wicked man from God,\nthe heritage appointed to him by God.”
+C21
+V1	p	Then Job answered,
+V2	-	“Listen diligently to my speech.\nLet this be your consolation.
+V3	-	Allow me, and I also will speak;\nAfter I have spoken, mock on.
+V4	-	As for me, is my complaint to man?\nWhy shouldn’t I be impatient?
+V5	-	Look at me, and be astonished.\nLay your hand on your mouth.
+V6	-	When I remember, I am troubled.\nHorror takes hold of my flesh.
+V7	-	“Why do the wicked live,\nbecome old, yes, and grow mighty in power?
+V8	-	Their child is established with them in their sight,\ntheir offspring before their eyes.
+V9	-	Their houses are safe from fear,\nneither is the rod of God upon them.
+V10	-	Their bulls breed without fail.\nTheir cows calve, and don’t miscarry.
+V11	-	They send out their little ones like a flock.\nTheir children dance.
+V12	-	They sing to the tambourine and harp,\nand rejoice at the sound of the pipe.
+V13	-	They spend their days in prosperity.\nIn an instant they go down to Sheol.
+V14	-	They tell God, ‘Depart from us,\nfor we don’t want to know about your ways.
+V15	-	What is the Almighty, that we should serve him?\nWhat profit should we have, if we pray to him?’
+V16	-	Behold, their prosperity is not in their hand.\nThe counsel of the wicked is far from me.
+V17	-	“How often is it that the lamp of the wicked is put out,\nthat their calamity comes on them,\nthat God distributes sorrows in his anger?
+V18	-	How often is it that they are as stubble before the wind,\nas chaff that the storm carries away?
+V19	-	You say, ‘God lays up his iniquity for his children.’\nLet him recompense it to himself, that he may know it.
+V20	-	Let his own eyes see his destruction.\nLet him drink of the wrath of the Almighty.
+V21	-	For what does he care for his house after him,\nwhen the number of his months is cut off?
+V22	-	“Shall any teach God knowledge,\nsince he judges those who are high?
+V23	-	One dies in his full strength,\nbeing wholly at ease and quiet.
+V24	-	His pails are full of milk.\nThe marrow of his bones is moistened.
+V25	-	Another dies in bitterness of soul,\nand never tastes of good.
+V26	-	They lie down alike in the dust.\nThe worm covers them.
+V27	-	“Behold, I know your thoughts,\nthe plans with which you would wrong me.
+V28	-	For you say, ‘Where is the house of the prince?\nWhere is the tent in which the wicked lived?’
+V29	-	Haven’t you asked wayfaring men?\nDon’t you know their evidences,
+V30	-	that the evil man is reserved to the day of calamity,\nThat they are led out to the day of wrath?
+V31	-	Who will declare his way to his face?\nWho will repay him what he has done?
+V32	-	Yet he will be borne to the grave.\nMen will keep watch over the tomb.
+V33	-	The clods of the valley will be sweet to him.\nAll men will draw after him,\nas there were innumerable before him.
+V34	-	So how can you comfort me with nonsense,\nbecause in your answers there remains only falsehood?”
+C22
+V1	p	Then Eliphaz the Temanite answered,
+V2	-	“Can a man be profitable to God?\nSurely he who is wise is profitable to himself.
+V3	-	Is it any pleasure to the Almighty that you are righteous?\nOr does it benefit him that you make your ways perfect?
+V4	-	Is it for your piety that he reproves you,\nthat he enters with you into judgment?
+V5	-	Isn’t your wickedness great?\nNeither is there any end to your iniquities.
+V6	-	For you have taken pledges from your brother for nothing,\nand stripped the naked of their clothing.
+V7	-	You haven’t given water to the weary to drink,\nand you have withheld bread from the hungry.
+V8	-	But as for the mighty man, he had the earth.\nThe honorable man, he lived in it.
+V9	-	You have sent widows away empty,\nand the arms of the fatherless have been broken.
+V10	-	Therefore snares are around you.\nSudden fear troubles you,
+V11	-	or darkness, so that you can not see,\nand floods of waters cover you.
+V12	-	“Isn’t God in the heights of heaven?\nSee the height of the stars, how high they are!
+V13	-	You say, ‘What does God know?\nCan he judge through the thick darkness?
+V14	-	Thick clouds are a covering to him, so that he doesn’t see.\nHe walks on the vault of the sky.’
+V15	-	Will you keep the old way,\nwhich wicked men have trodden,
+V16	-	who were snatched away before their time,\nwhose foundation was poured out as a stream,
+V17	-	who said to God, ‘Depart from us;’\nand, ‘What can the Almighty do for us?’
+V18	-	Yet he filled their houses with good things,\nbut the counsel of the wicked is far from me.
+V19	-	The righteous see it, and are glad.\nThe innocent ridicule them,
+V20	-	saying, ‘Surely those who rose up against us are cut off.\nThe fire has consumed their remnant.’
+V21	-	“Acquaint yourself with him, now, and be at peace.\nBy it, good will come to you.
+V22	-	Please receive instruction from his mouth,\nand lay up his words in your heart.
+V23	-	If you return to the Almighty, you will be built up,\nif you put away unrighteousness far from your tents.
+V24	-	Lay your treasure in the dust,\nthe gold of Ophir among the stones of the brooks.
+V25	-	The Almighty will be your treasure,\nand precious silver to you.
+V26	-	For then you will delight yourself in the Almighty,\nand will lift up your face to God.
+V27	-	You will make your prayer to him, and he will hear you.\nYou will pay your vows.
+V28	-	You will also decree a thing, and it will be established to you.\nLight will shine on your ways.
+V29	-	When they cast down, you will say, ‘be lifted up.’\nHe will save the humble person.
+V30	-	He will even deliver him who is not innocent.\nYes, he will be delivered through the cleanness of your hands.”
+C23
+V1	p	Then Job answered,
+V2	-	“Even today my complaint is rebellious.\nHis hand is heavy in spite of my groaning.
+V3	-	Oh that I knew where I might find him!\nThat I might come even to his seat!
+V4	-	I would set my cause in order before him,\nand fill my mouth with arguments.
+V5	-	I would know the words which he would answer me,\nand understand what he would tell me.
+V6	-	Would he contend with me in the greatness of his power?\nNo, but he would listen to me.
+V7	-	There the upright might reason with him,\nso I should be delivered forever from my judge.
+V8	-	“If I go east, he is not there;\nif west, I can’t find him;
+V9	-	He works to the north, but I can’t see him.\nHe turns south, but I can’t catch a glimpse of him.
+V10	-	But he knows the way that I take.\nWhen he has tried me, I will come out like gold.
+V11	-	My foot has held fast to his steps.\nI have kept his way, and not turned away.
+V12	-	I haven’t gone back from the commandment of his lips.\nI have treasured up the words of his mouth more than my necessary food.
+V13	-	But he stands alone, and who can oppose him?\nWhat his soul desires, even that he does.
+V14	-	For he performs that which is appointed for me.\nMany such things are with him.
+V15	-	Therefore I am terrified at his presence.\nWhen I consider, I am afraid of him.
+V16	-	For God has made my heart faint.\nThe Almighty has terrified me.
+V17	-	Because I was not cut off before the darkness,\nneither did he cover the thick darkness from my face.
+C24
+V1	p	“Why aren’t times laid up by the Almighty?\nWhy don’t those who know him see his days?
+V2	-	There are people who remove the landmarks.\nThey violently take away flocks, and feed them.
+V3	-	They drive away the donkey of the fatherless,\nand they take the widow’s ox for a pledge.
+V4	-	They turn the needy out of the way.\nThe poor of the earth all hide themselves.
+V5	-	Behold, as wild donkeys in the desert,\nthey go out to their work, seeking diligently for food.\nThe wilderness yields them bread for their children.
+V6	-	They cut their food in the field.\nThey glean the vineyard of the wicked.
+V7	-	They lie all night naked without clothing,\nand have no covering in the cold.
+V8	-	They are wet with the showers of the mountains,\nand embrace the rock for lack of a shelter.
+V9	-	There are those who pluck the fatherless from the breast,\nand take a pledge of the poor,
+V10	-	So that they go around naked without clothing.\nBeing hungry, they carry the sheaves.
+V11	-	They make oil within the walls of these men.\nThey tread wine presses, and suffer thirst.
+V12	-	From out of the populous city, men groan.\nThe soul of the wounded cries out,\nyet God doesn’t regard the folly.
+V13	-	“These are of those who rebel against the light.\nThey don’t know its ways,\nnor stay in its paths.
+V14	-	The murderer rises with the light.\nHe kills the poor and needy.\nIn the night he is like a thief.
+V15	-	The eye also of the adulterer waits for the twilight,\nsaying, ‘No eye will see me.’\nHe disguises his face.
+V16	-	In the dark they dig through houses.\nThey shut themselves up in the daytime.\nThey don’t know the light.
+V17	-	For the morning is to all of them like thick darkness,\nfor they know the terrors of the thick darkness.
+V18	-	“They are foam on the surface of the waters.\nTheir portion is cursed in the earth.\nThey don’t turn into the way of the vineyards.
+V19	-	Drought and heat consume the snow waters,\nso does Sheol those who have sinned.
+V20	-	The womb will forget him.\nThe worm will feed sweetly on him.\nHe will be no more remembered.\nUnrighteousness will be broken as a tree.
+V21	-	He devours the barren who don’t bear.\nHe shows no kindness to the widow.
+V22	-	Yet God preserves the mighty by his power.\nHe rises up who has no assurance of life.
+V23	-	God gives them security, and they rest in it.\nHis eyes are on their ways.
+V24	-	They are exalted; yet a little while, and they are gone.\nYes, they are brought low, they are taken out of the way as all others,\nand are cut off as the tops of the ears of grain.
+V25	-	If it isn’t so now, who will prove me a liar,\nand make my speech worth nothing?”
+C25
+V1	p	Then Bildad the Shuhite answered,
+V2	-	“Dominion and fear are with him.\nHe makes peace in his high places.
+V3	-	Can his armies be counted?\nOn whom does his light not arise?
+V4	-	How then can man be just with God?\nOr how can he who is born of a woman be clean?
+V5	-	Behold, even the moon has no brightness,\nand the stars are not pure in his sight;
+V6	-	How much less man, who is a worm,\nthe son of man, who is a worm!”
+C26
+V1	p	Then Job answered,
+V2	-	“How have you helped him who is without power!\nHow have you saved the arm that has no strength!
+V3	-	How have you counseled him who has no wisdom,\nand plentifully declared sound knowledge!
+V4	-	To whom have you uttered words?\nWhose spirit came out of you?
+V5	-	“The departed spirits tremble,\nthose beneath the waters and all that live in them.
+V6	-	Sheol is naked before God,\nand Abaddon has no covering.
+V7	-	He stretches out the north over empty space,\nand hangs the earth on nothing.
+V8	-	He binds up the waters in his thick clouds,\nand the cloud is not burst under them.
+V9	-	He encloses the face of his throne,\nand spreads his cloud on it.
+V10	-	He has described a boundary on the surface of the waters,\nand to the confines of light and darkness.
+V11	-	The pillars of heaven tremble\nand are astonished at his rebuke.
+V12	-	He stirs up the sea with his power,\nand by his understanding he strikes through Rahab.
+V13	-	By his Spirit the heavens are garnished.\nHis hand has pierced the swift serpent.
+V14	-	Behold, these are but the outskirts of his ways.\nHow small a whisper do we hear of him!\nBut the thunder of his power who can understand?”
+C27
+V1	p	Job again took up his parable, and said,
+V2	-	“As God lives, who has taken away my right,\nthe Almighty, who has made my soul bitter
+V3	-	(for the length of my life is still in me,\nand the spirit of God is in my nostrils);
+V4	-	surely my lips will not speak unrighteousness,\nneither will my tongue utter deceit.
+V5	-	Far be it from me that I should justify you.\nUntil I die I will not put away my integrity from me.
+V6	-	I hold fast to my righteousness, and will not let it go.\nMy heart will not reproach me so long as I live.
+V7	-	“Let my enemy be as the wicked.\nLet him who rises up against me be as the unrighteous.
+V8	-	For what is the hope of the godless, when he is cut off, when God takes away his life?
+V9	-	Will God hear his cry when trouble comes on him?
+V10	-	Will he delight himself in the Almighty,\nand call on God at all times?
+V11	-	I will teach you about the hand of God.\nI will not conceal that which is with the Almighty.
+V12	-	Behold, all of you have seen it yourselves;\nwhy then have you become altogether vain?
+V13	-	“This is the portion of a wicked man with God,\nthe heritage of oppressors, which they receive from the Almighty.
+V14	-	If his children are multiplied, it is for the sword.\nHis offspring will not be satisfied with bread.
+V15	-	Those who remain of him will be buried in death.\nHis widows will make no lamentation.
+V16	-	Though he heap up silver as the dust,\nand prepare clothing as the clay;
+V17	-	he may prepare it, but the just will put it on,\nand the innocent will divide the silver.
+V18	-	He builds his house as the moth,\nas a booth which the watchman makes.
+V19	-	He lies down rich, but he will not do so again.\nHe opens his eyes, and he is not.
+V20	-	Terrors overtake him like waters.\nA storm steals him away in the night.
+V21	-	The east wind carries him away, and he departs.\nIt sweeps him out of his place.
+V22	-	For it hurls at him, and does not spare,\nas he flees away from his hand.
+V23	-	Men will clap their hands at him,\nand will hiss him out of his place.
+C28
+V1	p	“Surely there is a mine for silver,\nand a place for gold which they refine.
+V2	-	Iron is taken out of the earth,\nand copper is smelted out of the ore.
+V3	-	Man sets an end to darkness,\nand searches out, to the furthest bound,\nthe stones of obscurity and of thick darkness.
+V4	-	He breaks open a shaft away from where people live.\nThey are forgotten by the foot.\nThey hang far from men, they swing back and forth.
+V5	-	As for the earth, out of it comes bread;\nUnderneath it is turned up as it were by fire.
+V6	-	Sapphires come from its rocks.\nIt has dust of gold.
+V7	-	That path no bird of prey knows,\nneither has the falcon’s eye seen it.
+V8	-	The proud animals have not trodden it,\nnor has the fierce lion passed by there.
+V9	-	He puts his hand on the flinty rock,\nand he overturns the mountains by the roots.
+V10	-	He cuts out channels among the rocks.\nHis eye sees every precious thing.
+V11	-	He binds the streams that they don’t trickle.\nThe thing that is hidden he brings out to light.
+V12	-	“But where will wisdom be found?\nWhere is the place of understanding?
+V13	-	Man doesn’t know its price;\nNeither is it found in the land of the living.
+V14	-	The deep says, ‘It isn’t in me.’\nThe sea says, ‘It isn’t with me.’
+V15	-	It can’t be gotten for gold,\nneither will silver be weighed for its price.
+V16	-	It can’t be valued with the gold of Ophir,\nwith the precious onyx, or the sapphire.
+V17	-	Gold and glass can’t equal it,\nneither will it be exchanged for jewels of fine gold.
+V18	-	No mention will be made of coral or of crystal.\nYes, the price of wisdom is above rubies.
+V19	-	The topaz of Ethiopia will not equal it,\nnor will it be valued with pure gold.
+V20	-	Where then does wisdom come from?\nWhere is the place of understanding?
+V21	-	Seeing it is hidden from the eyes of all living,\nand kept close from the birds of the sky.
+V22	-	Destruction and Death say,\n‘We have heard a rumor of it with our ears.’
+V23	-	“God understands its way,\nand he knows its place.
+V24	-	For he looks to the ends of the earth,\nand sees under the whole sky.
+V25	-	He establishes the force of the wind.\nYes, he measures out the waters by measure.
+V26	-	When he made a decree for the rain,\nand a way for the lightning of the thunder,
+V27	-	then he saw it, and declared it.\nHe established it, yes, and searched it out.
+V28	-	To man he said,\n‘Behold, the fear of the Lord, that is wisdom.\nTo depart from evil is understanding.’ ”
+C29
+V1	p	Job again took up his parable, and said,
+V2	-	“Oh that I were as in the months of old,\nas in the days when God watched over me;
+V3	-	when his lamp shone on my head,\nand by his light I walked through darkness,
+V4	-	as I was in my prime,\nwhen the friendship of God was in my tent,
+V5	-	when the Almighty was yet with me,\nand my children were around me,
+V6	-	when my steps were washed with butter,\nand the rock poured out streams of oil for me,
+V7	-	when I went out to the city gate,\nwhen I prepared my seat in the street.
+V8	-	The young men saw me and hid themselves.\nThe aged rose up and stood.
+V9	-	The princes refrained from talking,\nand laid their hand on their mouth.
+V10	-	The voice of the nobles was hushed,\nand their tongue stuck to the roof of their mouth.
+V11	-	For when the ear heard me, then it blessed me;\nand when the eye saw me, it commended me:
+V12	-	Because I delivered the poor who cried,\nand the fatherless also, who had no one to help him,
+V13	-	the blessing of him who was ready to perish came on me,\nand I caused the widow’s heart to sing for joy.
+V14	-	I put on righteousness, and it clothed me.\nMy justice was as a robe and a diadem.
+V15	-	I was eyes to the blind,\nand feet to the lame.
+V16	-	I was a father to the needy.\nI researched the cause of him who I didn’t know.
+V17	-	I broke the jaws of the unrighteous\nand plucked the prey out of his teeth.
+V18	-	Then I said, ‘I will die in my own house,\nI will count my days as the sand.
+V19	-	My root is spread out to the waters.\nThe dew lies all night on my branch.
+V20	-	My glory is fresh in me.\nMy bow is renewed in my hand.’
+V21	-	“Men listened to me, waited,\nand kept silence for my counsel.
+V22	-	After my words they didn’t speak again.\nMy speech fell on them.
+V23	-	They waited for me as for the rain.\nTheir mouths drank as with the spring rain.
+V24	-	I smiled on them when they had no confidence.\nThey didn’t reject the light of my face.
+V25	-	I chose out their way, and sat as chief.\nI lived as a king in the army,\nas one who comforts the mourners.
+C30
+V1	p	“But now those who are younger than I have me in derision,\nwhose fathers I considered unworthy to put with my sheep dogs.
+V2	-	Of what use is the strength of their hands to me,\nmen in whom ripe age has perished?
+V3	-	They are gaunt from lack and famine.\nThey gnaw the dry ground, in the gloom of waste and desolation.
+V4	-	They pluck salt herbs by the bushes.\nThe roots of the broom tree are their food.
+V5	-	They are driven out from among men.\nThey cry after them as after a thief;
+V6	-	So that they dwell in frightful valleys,\nand in holes of the earth and of the rocks.
+V7	-	They bray among the bushes.\nThey are gathered together under the nettles .
+V8	-	They are children of fools, yes, children of wicked men.\nThey were flogged out of the land.
+V9	-	“Now I have become their song.\nYes, I am a byword to them.
+V10	-	They abhor me, they stand aloof from me,\nand don’t hesitate to spit in my face.
+V11	-	For he has untied his cord, and afflicted me;\nand they have thrown off restraint before me.
+V12	-	On my right hand rise the rabble.\nThey thrust aside my feet,\nThey cast up against me their ways of destruction.
+V13	-	They mar my path.\nThey promote my destruction\nwithout anyone’s help.
+V14	-	As through a wide breach they come.\nThey roll themselves in amid the ruin.
+V15	-	Terrors have turned on me.\nThey chase my honor as the wind.\nMy welfare has passed away as a cloud.
+V16	-	“Now my soul is poured out within me.\nDays of affliction have taken hold of me.
+V17	-	In the night season my bones are pierced in me,\nand the pains that gnaw me take no rest.
+V18	-	My garment is disfigured by great force.\nIt binds me about as the collar of my tunic.
+V19	-	He has cast me into the mire.\nI have become like dust and ashes.
+V20	-	I cry to you, and you do not answer me.\nI stand up, and you gaze at me.
+V21	-	You have turned to be cruel to me.\nWith the might of your hand you persecute me.
+V22	-	You lift me up to the wind, and drive me with it.\nYou dissolve me in the storm.
+V23	-	For I know that you will bring me to death,\nTo the house appointed for all living.
+V24	-	“However doesn’t one stretch out a hand in his fall?\nOr in his calamity therefore cry for help?
+V25	-	Didn’t I weep for him who was in trouble?\nWasn’t my soul grieved for the needy?
+V26	-	When I looked for good, then evil came.\nWhen I waited for light, darkness came.
+V27	-	My heart is troubled, and doesn’t rest.\nDays of affliction have come on me.
+V28	-	I go mourning without the sun.\nI stand up in the assembly, and cry for help.
+V29	-	I am a brother to jackals,\nand a companion to ostriches.
+V30	-	My skin grows black and peels from me.\nMy bones are burned with heat.
+V31	-	Therefore my harp has turned to mourning,\nand my pipe into the voice of those who weep.
+C31
+V1	p	“I made a covenant with my eyes,\nhow then should I look lustfully at a young woman?
+V2	-	For what is the portion from God above,\nand the heritage from the Almighty on high?
+V3	-	Is it not calamity to the unrighteous,\nand disaster to the workers of iniquity?
+V4	-	Doesn’t he see my ways,\nand count all my steps?
+V5	-	“If I have walked with falsehood,\nand my foot has hurried to deceit
+V6	-	(let me be weighed in an even balance,\nthat God may know my integrity);
+V7	-	if my step has turned out of the way,\nif my heart walked after my eyes,\nif any defilement has stuck to my hands,
+V8	-	then let me sow, and let another eat.\nYes, let the produce of my field be rooted out.
+V9	-	“If my heart has been enticed to a woman,\nand I have laid wait at my neighbor’s door,
+V10	-	then let my wife grind for another,\nand let others sleep with her.
+V11	-	For that would be a heinous crime.\nYes, it would be an iniquity to be punished by the judges;
+V12	-	for it is a fire that consumes to destruction,\nand would root out all my increase.
+V13	-	“If I have despised the cause of my male servant\nor of my female servant,\nwhen they contended with me,
+V14	-	what then will I do when God rises up?\nWhen he visits, what will I answer him?
+V15	-	Didn’t he who made me in the womb make him?\nDidn’t one fashion us in the womb?
+V16	-	“If I have withheld the poor from their desire,\nor have caused the eyes of the widow to fail,
+V17	-	or have eaten my morsel alone,\nand the fatherless has not eaten of it
+V18	-	(no, from my youth he grew up with me as with a father,\nI have guided her from my mother’s womb);
+V19	-	if I have seen any perish for want of clothing,\nor that the needy had no covering;
+V20	-	if his heart hasn’t blessed me,\nif he hasn’t been warmed with my sheep’s fleece;
+V21	-	if I have lifted up my hand against the fatherless,\nbecause I saw my help in the gate,
+V22	-	then let my shoulder fall from the shoulder blade,\nand my arm be broken from the bone.
+V23	-	For calamity from God is a terror to me.\nBecause of his majesty, I can do nothing.
+V24	-	“If I have made gold my hope,\nand have said to the fine gold, ‘You are my confidence;’
+V25	-	If I have rejoiced because my wealth was great,\nand because my hand had gotten much;
+V26	-	if I have seen the sun when it shined,\nor the moon moving in splendor,
+V27	-	and my heart has been secretly enticed,\nand my hand threw a kiss from my mouth,
+V28	-	this also would be an iniquity to be punished by the judges;\nfor I should have denied the God who is above.
+V29	-	“If I have rejoiced at the destruction of him who hated me,\nor lifted up myself when evil found him
+V30	-	(yes, I have not allowed my mouth to sin\nby asking his life with a curse);
+V31	-	if the men of my tent have not said,\n‘Who can find one who has not been filled with his meat?’
+V32	-	(the foreigner has not camped in the street,\nbut I have opened my doors to the traveler);
+V33	-	if like Adam I have covered my transgressions,\nby hiding my iniquity in my heart,
+V34	-	because I feared the great multitude,\nand the contempt of families terrified me,\nso that I kept silence, and didn’t go out of the door—
+V35	-	oh that I had one to hear me!\nBehold, here is my signature! Let the Almighty answer me!\nLet the accuser write my indictment!
+V36	-	Surely I would carry it on my shoulder;\nand I would bind it to me as a crown.
+V37	-	I would declare to him the number of my steps.\nas a prince would I go near to him.
+V38	-	If my land cries out against me,\nand its furrows weep together;
+V39	-	if I have eaten its fruits without money,\nor have caused its owners to lose their life,
+V40	-	let briers grow instead of wheat,\nand stinkweed instead of barley.”\nThe words of Job are ended.
+C32
+V1	p	So these three men ceased to answer Job, because he was righteous in his own eyes.
+V2	-	Then the wrath of Elihu the son of Barachel, the Buzite, of the family of Ram, was kindled against Job. His wrath was kindled because he justified himself rather than God.
+V3	-	Also his wrath was kindled against his three friends, because they had found no answer, and yet had condemned Job.
+V4	-	Now Elihu had waited to speak to Job, because they were elder than he.
+V5	-	When Elihu saw that there was no answer in the mouth of these three men, his wrath was kindled.
+V6	p	Elihu the son of Barachel the Buzite answered,\n“I am young, and you are very old;\nTherefore I held back, and didn’t dare show you my opinion.
+V7	-	I said, ‘Days should speak,\nand multitude of years should teach wisdom.’
+V8	-	But there is a spirit in man,\nand the Spirit of the Almighty gives them understanding.
+V9	-	It is not the great who are wise,\nnor the aged who understand justice.
+V10	-	Therefore I said, ‘Listen to me;\nI also will show my opinion.’
+V11	-	“Behold, I waited for your words,\nand I listened for your reasoning,\nwhile you searched out what to say.
+V12	-	Yes, I gave you my full attention,\nbut there was no one who convinced Job,\nor who answered his words, among you.
+V13	-	Beware lest you say, ‘We have found wisdom.\nGod may refute him, not man;’
+V14	-	for he has not directed his words against me;\nneither will I answer him with your speeches.
+V15	-	“They are amazed. They answer no more.\nThey don’t have a word to say.
+V16	-	Shall I wait, because they don’t speak,\nbecause they stand still, and answer no more?
+V17	-	I also will answer my part,\nand I also will show my opinion.
+V18	-	For I am full of words.\nThe spirit within me constrains me.
+V19	-	Behold, my breast is as wine which has no vent;\nlike new wineskins it is ready to burst.
+V20	-	I will speak, that I may be refreshed.\nI will open my lips and answer.
+V21	-	Please don’t let me respect any man’s person,\nneither will I give flattering titles to any man.
+V22	-	For I don’t know how to give flattering titles,\nor else my Maker would soon take me away.
+C33
+V1	p	“However, Job, please hear my speech,\nand listen to all my words.
+V2	-	See now, I have opened my mouth.\nMy tongue has spoken in my mouth.
+V3	-	My words will utter the uprightness of my heart.\nThat which my lips know they will speak sincerely.
+V4	-	The Spirit of God has made me,\nand the breath of the Almighty gives me life.
+V5	-	If you can, answer me.\nSet your words in order before me, and stand up.
+V6	-	Behold, I am toward God even as you are.\nI am also formed out of the clay.
+V7	-	Behold, my terror will not make you afraid,\nneither will my pressure be heavy on you.
+V8	-	“Surely you have spoken in my hearing,\nI have heard the voice of your words, saying,
+V9	-	‘I am clean, without disobedience.\nI am innocent, neither is there iniquity in me.
+V10	-	Behold, he finds occasions against me.\nHe counts me for his enemy.
+V11	-	He puts my feet in the stocks.\nHe marks all my paths.’
+V12	-	“Behold, I will answer you. In this you are not just,\nfor God is greater than man.
+V13	-	Why do you strive against him,\nbecause he doesn’t give account of any of his matters?
+V14	-	For God speaks once,\nyes twice, though man pays no attention.
+V15	-	In a dream, in a vision of the night,\nwhen deep sleep falls on men,\nin slumbering on the bed;
+V16	-	Then he opens the ears of men,\nand seals their instruction,
+V17	-	that he may withdraw man from his purpose,\nand hide pride from man.
+V18	-	He keeps back his soul from the pit,\nand his life from perishing by the sword.
+V19	-	He is chastened also with pain on his bed,\nwith continual strife in his bones,
+V20	-	so that his life abhors bread,\nand his soul dainty food.
+V21	-	His flesh is so consumed away that it can’t be seen.\nHis bones that were not seen stick out.
+V22	-	Yes, his soul draws near to the pit,\nand his life to the destroyers.
+V23	-	“If there is beside him an angel,\nan interpreter, one among a thousand,\nto show to man what is right for him;
+V24	-	then God is gracious to him, and says,\n‘Deliver him from going down to the pit,\nI have found a ransom.’
+V25	-	His flesh will be fresher than a child’s.\nHe returns to the days of his youth.
+V26	-	He prays to God, and he is favorable to him,\nso that he sees his face with joy.\nHe restores to man his righteousness.
+V27	-	He sings before men, and says,\n‘I have sinned, and perverted that which was right,\nand it didn’t profit me.
+V28	-	He has redeemed my soul from going into the pit.\nMy life will see the light.’
+V29	-	“Behold, God does all these things,\ntwice, yes three times, with a man,
+V30	-	to bring back his soul from the pit,\nthat he may be enlightened with the light of the living.
+V31	-	Mark well, Job, and listen to me.\nHold your peace, and I will speak.
+V32	-	If you have anything to say, answer me.\nSpeak, for I desire to justify you.
+V33	-	If not, listen to me.\nHold your peace, and I will teach you wisdom.”
+C34
+V1	p	Moreover Elihu answered,
+V2	-	“Hear my words, you wise men.\nGive ear to me, you who have knowledge.
+V3	-	For the ear tries words,\nas the palate tastes food.
+V4	-	Let us choose for us that which is right.\nLet us know among ourselves what is good.
+V5	-	For Job has said, ‘I am righteous,\nGod has taken away my right:
+V6	-	Notwithstanding my right I am considered a liar.\nMy wound is incurable, though I am without disobedience.’
+V7	-	What man is like Job,\nwho drinks scorn like water,
+V8	-	Who goes in company with the workers of iniquity,\nand walks with wicked men?
+V9	-	For he has said, ‘It profits a man nothing\nthat he should delight himself with God.’
+V10	-	“Therefore listen to me, you men of understanding:\nfar be it from God, that he should do wickedness,\nfrom the Almighty, that he should commit iniquity.
+V11	-	For the work of a man he will render to him,\nand cause every man to find according to his ways.
+V12	-	Yes surely, God will not do wickedly,\nneither will the Almighty pervert justice.
+V13	-	Who put him in charge of the earth?\nOr who has appointed him over the whole world?
+V14	-	If he set his heart on himself,\nif he gathered to himself his spirit and his breath,
+V15	-	all flesh would perish together,\nand man would turn again to dust.
+V16	-	“If now you have understanding, hear this.\nListen to the voice of my words.
+V17	-	Should even one who hates justice govern?\nWill you condemn him who is righteous and mighty?—
+V18	-	Who says to a king, ‘Vile!’\nor to nobles, ‘Wicked!’?
+V19	-	He doesn’t respect the persons of princes,\nnor respect the rich more than the poor;\nfor they all are the work of his hands.
+V20	-	In a moment they die, even at midnight.\nThe people are shaken and pass away.\nThe mighty are taken away without a hand.
+V21	-	“For his eyes are on the ways of a man.\nHe sees all his goings.
+V22	-	There is no darkness, nor thick gloom,\nwhere the workers of iniquity may hide themselves.
+V23	-	For he doesn’t need to consider a man further,\nthat he should go before God in judgment.
+V24	-	He breaks mighty men in pieces in ways past finding out,\nand sets others in their place.
+V25	-	Therefore he takes knowledge of their works.\nHe overturns them in the night, so that they are destroyed.
+V26	-	He strikes them as wicked men\nin the open sight of others;
+V27	-	because they turned away from following him,\nand wouldn’t pay attention to any of his ways,
+V28	-	so that they caused the cry of the poor to come to him.\nHe heard the cry of the afflicted.
+V29	-	When he gives quietness, who then can condemn?\nWhen he hides his face, who then can see him?\nHe is over a nation or a man alike,
+V30	-	that the godless man may not reign,\nthat there be no one to ensnare the people.
+V31	-	“For has any said to God,\n‘I am guilty, but I will not offend any more.
+V32	-	Teach me that which I don’t see.\nIf I have done iniquity, I will do it no more’?
+V33	-	Shall his recompense be as you desire, that you refuse it?\nFor you must choose, and not I.\nTherefore speak what you know.
+V34	-	Men of understanding will tell me,\nyes, every wise man who hears me:
+V35	-	‘Job speaks without knowledge.\nHis words are without wisdom.’
+V36	-	I wish that Job were tried to the end,\nbecause of his answering like wicked men.
+V37	-	For he adds rebellion to his sin.\nHe claps his hands among us,\nand multiplies his words against God.”
+C35
+V1	p	Moreover Elihu answered,
+V2	-	“Do you think this to be your right,\nor do you say, ‘My righteousness is more than God’s,’
+V3	-	that you ask, ‘What advantage will it be to you?\nWhat profit will I have, more than if I had sinned?’
+V4	-	I will answer you,\nand your companions with you.
+V5	-	Look to the skies, and see.\nSee the skies, which are higher than you.
+V6	-	If you have sinned, what effect do you have against him?\nIf your transgressions are multiplied, what do you do to him?
+V7	-	If you are righteous, what do you give him?\nOr what does he receive from your hand?
+V8	-	Your wickedness may hurt a man as you are,\nand your righteousness may profit a son of man.
+V9	-	“By reason of the multitude of oppressions they cry out.\nThey cry for help by reason of the arm of the mighty.
+V10	-	But no one says, ‘Where is God my Maker,\nwho gives songs in the night,
+V11	-	who teaches us more than the animals of the earth,\nand makes us wiser than the birds of the sky?’
+V12	-	There they cry, but no one answers,\nbecause of the pride of evil men.
+V13	-	Surely God will not hear an empty cry,\nneither will the Almighty regard it.
+V14	-	How much less when you say you don’t see him.\nThe cause is before him, and you wait for him!
+V15	-	But now, because he has not visited in his anger,\nneither does he greatly regard arrogance.
+V16	-	Therefore Job opens his mouth with empty talk,\nand he multiplies words without knowledge.”
+C36
+V1	p	Elihu also continued, and said,
+V2	-	“Bear with me a little, and I will show you;\nfor I still have something to say on God’s behalf.
+V3	-	I will get my knowledge from afar,\nand will ascribe righteousness to my Maker.
+V4	-	For truly my words are not false.\nOne who is perfect in knowledge is with you.
+V5	-	“Behold, God is mighty, and doesn’t despise anyone.\nHe is mighty in strength of understanding.
+V6	-	He doesn’t preserve the life of the wicked,\nbut gives justice to the afflicted.
+V7	-	He doesn’t withdraw his eyes from the righteous,\nbut with kings on the throne,\nhe sets them forever, and they are exalted.
+V8	-	If they are bound in fetters,\nand are taken in the cords of afflictions,
+V9	-	then he shows them their work,\nand their transgressions, that they have behaved themselves proudly.
+V10	-	He also opens their ears to instruction,\nand commands that they return from iniquity.
+V11	-	If they listen and serve him,\nthey will spend their days in prosperity,\nand their years in pleasures.
+V12	-	But if they don’t listen, they will perish by the sword;\nthey will die without knowledge.
+V13	-	“But those who are godless in heart lay up anger.\nThey don’t cry for help when he binds them.
+V14	-	They die in youth.\nTheir life perishes among the unclean.
+V15	-	He delivers the afflicted by their affliction,\nand opens their ear in oppression.
+V16	-	Yes, he would have allured you out of distress,\ninto a wide place, where there is no restriction.\nThat which is set on your table would be full of fatness.
+V17	-	“But you are full of the judgment of the wicked.\nJudgment and justice take hold of you.
+V18	-	Don’t let riches entice you to wrath,\nneither let the great size of a bribe turn you aside.
+V19	-	Would your wealth sustain you in distress,\nor all the might of your strength?
+V20	-	Don’t desire the night,\nwhen people are cut off in their place.
+V21	-	Take heed, don’t regard iniquity;\nfor you have chosen this rather than affliction.
+V22	-	Behold, God is exalted in his power.\nWho is a teacher like him?
+V23	-	Who has prescribed his way for him?\nOr who can say, ‘You have committed unrighteousness?’
+V24	-	“Remember that you magnify his work,\nabout which men have sung.
+V25	-	All men have looked on it.\nMan sees it afar off.
+V26	-	Behold, God is great, and we don’t know him.\nThe number of his years is unsearchable.
+V27	-	For he draws up the drops of water,\nwhich distill in rain from his vapor,
+V28	-	which the skies pour down\nand which drop on man abundantly.
+V29	-	Yes, can any understand the spreading of the clouds,\nand the thunderings of his pavilion?
+V30	-	Behold, he spreads his light around him.\nHe covers the bottom of the sea.
+V31	-	For by these he judges the people.\nHe gives food in abundance.
+V32	-	He covers his hands with the lightning,\nand commands it to strike the mark.
+V33	-	Its noise tells about him,\nand the livestock also concerning the storm that comes up.
+C37
+V1	p	“Yes, at this my heart trembles,\nand is moved out of its place.
+V2	-	Hear, oh, hear the noise of his voice,\nthe sound that goes out of his mouth.
+V3	-	He sends it out under the whole sky,\nand his lightning to the ends of the earth.
+V4	-	After it a voice roars.\nHe thunders with the voice of his majesty.\nHe doesn’t hold back anything when his voice is heard.
+V5	-	God thunders marvelously with his voice.\nHe does great things, which we can’t comprehend.
+V6	-	For he says to the snow, ‘Fall on the earth,’\nlikewise to the shower of rain,\nand to the showers of his mighty rain.
+V7	-	He seals up the hand of every man,\nthat all men whom he has made may know it.
+V8	-	Then the animals take cover,\nand remain in their dens.
+V9	-	Out of its room comes the storm,\nand cold out of the north.
+V10	-	By the breath of God, ice is given,\nand the width of the waters is frozen.
+V11	-	Yes, he loads the thick cloud with moisture.\nHe spreads abroad the cloud of his lightning.
+V12	-	It is turned around by his guidance,\nthat they may do whatever he commands them\non the surface of the habitable world,
+V13	-	Whether it is for correction, or for his land,\nor for loving kindness, that he causes it to come.
+V14	-	“Listen to this, Job.\nStand still, and consider the wondrous works of God.
+V15	-	Do you know how God controls them,\nand causes the lightning of his cloud to shine?
+V16	-	Do you know the workings of the clouds,\nthe wondrous works of him who is perfect in knowledge?
+V17	-	You whose clothing is warm,\nwhen the earth is still by reason of the south wind?
+V18	-	Can you, with him, spread out the sky,\nwhich is strong as a cast metal mirror?
+V19	-	Teach us what we will tell him,\nfor we can’t make our case by reason of darkness.
+V20	-	Will it be told him that I would speak?\nOr should a man wish that he were swallowed up?
+V21	-	Now men don’t see the light which is bright in the skies,\nbut the wind passes, and clears them.
+V22	-	Out of the north comes golden splendor.\nWith God is awesome majesty.
+V23	-	We can’t reach the Almighty.\nHe is exalted in power.\nIn justice and great righteousness, he will not oppress.
+V24	-	Therefore men revere him.\nHe doesn’t regard any who are wise of heart.”
+C38
+V1	p	Then Yahweh answered Job out of the whirlwind,
+V2	-	“Who is this who darkens counsel\nby words without knowledge?
+V3	-	Brace yourself like a man,\nfor I will question you, then you answer me!
+V4	-	“Where were you when I laid the foundations of the earth?\nDeclare, if you have understanding.
+V5	-	Who determined its measures, if you know?\nOr who stretched the line on it?
+V6	-	What were its foundations fastened on?\nOr who laid its cornerstone,
+V7	-	when the morning stars sang together,\nand all the sons of God shouted for joy?
+V8	-	“Or who shut up the sea with doors,\nwhen it broke out of the womb,
+V9	-	when I made clouds its garment,\nand wrapped it in thick darkness,
+V10	-	marked out for it my bound,\nset bars and doors,
+V11	-	and said, ‘You may come here, but no further.\nYour proud waves shall be stopped here?’
+V12	-	“Have you commanded the morning in your days,\nand caused the dawn to know its place,
+V13	-	that it might take hold of the ends of the earth,\nand shake the wicked out of it?
+V14	-	It is changed as clay under the seal,\nand presented as a garment.
+V15	-	From the wicked, their light is withheld.\nThe high arm is broken.
+V16	-	“Have you entered into the springs of the sea?\nOr have you walked in the recesses of the deep?
+V17	-	Have the gates of death been revealed to you?\nOr have you seen the gates of the shadow of death?
+V18	-	Have you comprehended the earth in its width?\nDeclare, if you know it all.
+V19	-	“What is the way to the dwelling of light?\nAs for darkness, where is its place,
+V20	-	that you should take it to its bound,\nthat you should discern the paths to its house?
+V21	-	Surely you know, for you were born then,\nand the number of your days is great!
+V22	-	Have you entered the treasuries of the snow,\nor have you seen the treasures of the hail,
+V23	-	which I have reserved against the time of trouble,\nagainst the day of battle and war?
+V24	-	By what way is the lightning distributed,\nor the east wind scattered on the earth?
+V25	-	Who has cut a channel for the flood water,\nor the path for the thunder storm,
+V26	-	to cause it to rain on a land where there is no man,\non the wilderness, in which there is no man,
+V27	-	to satisfy the waste and desolate ground,\nto cause the tender grass to grow?
+V28	-	Does the rain have a father?\nOr who fathers the drops of dew?
+V29	-	Whose womb did the ice come out of?\nWho has given birth to the gray frost of the sky?
+V30	-	The waters become hard like stone,\nwhen the surface of the deep is frozen.
+V31	-	“Can you bind the cluster of the Pleiades,\nor loosen the cords of Orion?
+V32	-	Can you lead the constellations out in their season?\nOr can you guide the Bear with her cubs?
+V33	-	Do you know the laws of the heavens?\nCan you establish its dominion over the earth?
+V34	-	“Can you lift up your voice to the clouds,\nThat abundance of waters may cover you?
+V35	-	Can you send out lightnings, that they may go?\nDo they report to you, ‘Here we are?’
+V36	-	Who has put wisdom in the inward parts?\nOr who has given understanding to the mind?
+V37	-	Who can count the clouds by wisdom?\nOr who can pour out the containers of the sky,
+V38	-	when the dust runs into a mass,\nand the clods of earth stick together?
+V39	-	“Can you hunt the prey for the lioness,\nor satisfy the appetite of the young lions,
+V40	-	when they crouch in their dens,\nand lie in wait in the thicket?
+V41	-	Who provides for the raven his prey,\nwhen his young ones cry to God,\nand wander for lack of food?
+C39
+V1	p	“Do you know the time when the mountain goats give birth?\nDo you watch when the doe bears fawns?
+V2	-	Can you count the months that they fulfill?\nOr do you know the time when they give birth?
+V3	-	They bow themselves. They bear their young.\nThey end their labor pains.
+V4	-	Their young ones become strong.\nThey grow up in the open field.\nThey go out, and don’t return again.
+V5	-	“Who has set the wild donkey free?\nOr who has loosened the bonds of the swift donkey,
+V6	-	whose home I have made the wilderness,\nand the salt land his dwelling place?
+V7	-	He scorns the tumult of the city,\nneither does he hear the shouting of the driver.
+V8	-	The range of the mountains is his pasture,\nHe searches after every green thing.
+V9	-	“Will the wild ox be content to serve you?\nOr will he stay by your feeding trough?
+V10	-	Can you hold the wild ox in the furrow with his harness?\nOr will he till the valleys after you?
+V11	-	Will you trust him, because his strength is great?\nOr will you leave to him your labor?
+V12	-	Will you confide in him, that he will bring home your seed,\nand gather the grain of your threshing floor?
+V13	-	“The wings of the ostrich wave proudly;\nbut are they the feathers and plumage of love?
+V14	-	For she leaves her eggs on the earth,\nwarms them in the dust,
+V15	-	and forgets that the foot may crush them,\nor that the wild animal may trample them.
+V16	-	She deals harshly with her young ones, as if they were not hers.\nThough her labor is in vain, she is without fear,
+V17	-	because God has deprived her of wisdom,\nneither has he imparted to her understanding.
+V18	-	When she lifts up herself on high,\nshe scorns the horse and his rider.
+V19	-	“Have you given the horse might?\nHave you clothed his neck with a quivering mane?
+V20	-	Have you made him to leap as a locust?\nThe glory of his snorting is awesome.
+V21	-	He paws in the valley, and rejoices in his strength.\nHe goes out to meet the armed men.
+V22	-	He mocks at fear, and is not dismayed,\nneither does he turn back from the sword.
+V23	-	The quiver rattles against him,\nthe flashing spear and the javelin.
+V24	-	He eats up the ground with fierceness and rage,\nneither does he stand still at the sound of the trumpet.
+V25	-	As often as the trumpet sounds he snorts, ‘Aha!’\nHe smells the battle afar off,\nthe thunder of the captains, and the shouting.
+V26	-	“Is it by your wisdom that the hawk soars,\nand stretches her wings toward the south?
+V27	-	Is it at your command that the eagle mounts up,\nand makes his nest on high?
+V28	-	On the cliff he dwells, and makes his home,\non the point of the cliff, and the stronghold.
+V29	-	From there he spies out the prey.\nHis eyes see it afar off.
+V30	-	His young ones also suck up blood.\nWhere the slain are, there he is.”
+C40
+V1	p	Moreover Yahweh answered Job,
+V2	-	“Shall he who argues contend with the Almighty?\nHe who argues with God, let him answer it.”
+V3	p	Then Job answered Yahweh,
+V4	-	“Behold, I am of small account. What will I answer you?\nI lay my hand on my mouth.
+V5	-	I have spoken once, and I will not answer;\nYes, twice, but I will proceed no further.”
+V6	p	Then Yahweh answered Job out of the whirlwind,
+V7	-	“Now brace yourself like a man.\nI will question you, and you will answer me.
+V8	-	Will you even annul my judgment?\nWill you condemn me, that you may be justified?
+V9	-	Or do you have an arm like God?\nCan you thunder with a voice like him?
+V10	-	“Now deck yourself with excellency and dignity.\nArray yourself with honor and majesty.
+V11	-	Pour out the fury of your anger.\nLook at everyone who is proud, and bring him low.
+V12	-	Look at everyone who is proud, and humble him.\nCrush the wicked in their place.
+V13	-	Hide them in the dust together.\nBind their faces in the hidden place.
+V14	-	Then I will also admit to you\nthat your own right hand can save you.
+V15	-	“See now, behemoth, which I made as well as you.\nHe eats grass as an ox.
+V16	-	Look now, his strength is in his thighs.\nHis force is in the muscles of his belly.
+V17	-	He moves his tail like a cedar.\nThe sinews of his thighs are knit together.
+V18	-	His bones are like tubes of bronze.\nHis limbs are like bars of iron.
+V19	-	He is the chief of the ways of God.\nHe who made him gives him his sword.
+V20	-	Surely the mountains produce food for him,\nwhere all the animals of the field play.
+V21	-	He lies under the lotus trees,\nin the covert of the reed, and the marsh.
+V22	-	The lotuses cover him with their shade.\nThe willows of the brook surround him.
+V23	-	Behold, if a river overflows, he doesn’t tremble.\nHe is confident, though the Jordan swells even to his mouth.
+V24	-	Shall any take him when he is on the watch,\nor pierce through his nose with a snare?
+C41
+V1	p	“Can you draw out Leviathan with a fish hook,\nor press down his tongue with a cord?
+V2	-	Can you put a rope into his nose,\nor pierce his jaw through with a hook?
+V3	-	Will he make many petitions to you,\nor will he speak soft words to you?
+V4	-	Will he make a covenant with you,\nthat you should take him for a servant forever?
+V5	-	Will you play with him as with a bird?\nOr will you bind him for your girls?
+V6	-	Will traders barter for him?\nWill they part him among the merchants?
+V7	-	Can you fill his skin with barbed irons,\nor his head with fish spears?
+V8	-	Lay your hand on him.\nRemember the battle, and do so no more.
+V9	-	Behold, the hope of him is in vain.\nWon’t one be cast down even at the sight of him?
+V10	-	None is so fierce that he dare stir him up.\nWho then is he who can stand before me?
+V11	-	Who has first given to me, that I should repay him?\nEverything under the heavens is mine.
+V12	-	“I will not keep silence concerning his limbs,\nnor his mighty strength, nor his goodly frame.
+V13	-	Who can strip off his outer garment?\nWho will come within his jaws?
+V14	-	Who can open the doors of his face?\nAround his teeth is terror.
+V15	-	Strong scales are his pride,\nshut up together with a close seal.
+V16	-	One is so near to another,\nthat no air can come between them.
+V17	-	They are joined to one another.\nThey stick together, so that they can’t be pulled apart.
+V18	-	His sneezing flashes out light.\nHis eyes are like the eyelids of the morning.
+V19	-	Out of his mouth go burning torches.\nSparks of fire leap out.
+V20	-	Out of his nostrils a smoke goes,\nas of a boiling pot over a fire of reeds.
+V21	-	His breath kindles coals.\nA flame goes out of his mouth.
+V22	-	There is strength in his neck.\nTerror dances before him.
+V23	-	The flakes of his flesh are joined together.\nThey are firm on him.\nThey can’t be moved.
+V24	-	His heart is as firm as a stone,\nyes, firm as the lower millstone.
+V25	-	When he raises himself up, the mighty are afraid.\nThey retreat before his thrashing.
+V26	-	If one attacks him with the sword, it can’t prevail;\nnor the spear, the dart, nor the pointed shaft.
+V27	-	He counts iron as straw;\nand bronze as rotten wood.
+V28	-	The arrow can’t make him flee.\nSling stones are like chaff to him.
+V29	-	Clubs are counted as stubble.\nHe laughs at the rushing of the javelin.
+V30	-	His undersides are like sharp potsherds,\nleaving a trail in the mud like a threshing sledge.
+V31	-	He makes the deep to boil like a pot.\nHe makes the sea like a pot of ointment.
+V32	-	He makes a path shine after him.\nOne would think the deep had white hair.
+V33	-	On earth there is not his equal,\nthat is made without fear.
+V34	-	He sees everything that is high.\nHe is king over all the sons of pride.”
+C42
+V1	p	Then Job answered Yahweh,
+V2	-	“I know that you can do all things,\nand that no purpose of yours can be restrained.
+V3	-	You asked, ‘Who is this who hides counsel without knowledge?’\ntherefore I have uttered that which I didn’t understand,\nthings too wonderful for me, which I didn’t know.
+V4	-	You said, ‘Listen, now, and I will speak;\nI will question you, and you will answer me.’
+V5	-	I had heard of you by the hearing of the ear,\nbut now my eye sees you.
+V6	-	Therefore I abhor myself,\nand repent in dust and ashes.”
+V7	p	It was so, that after Yahweh had spoken these words to Job, Yahweh said to Eliphaz the Temanite, “My wrath is kindled against you, and against your two friends; for you have not spoken of me the thing that is right, as my servant Job has.
+V8	-	Now therefore, take to yourselves seven bulls and seven rams, and go to my servant Job, and offer up for yourselves a burnt offering; and my servant Job shall pray for you, for I will accept him, that I not deal with you according to your folly. For you have not spoken of me the thing that is right, as my servant Job has.”
+V9	p	So Eliphaz the Temanite and Bildad the Shuhite and Zophar the Naamathite went, and did what Yahweh commanded them, and Yahweh accepted Job.
+V10	p	Yahweh turned the captivity of Job, when he prayed for his friends. Yahweh gave Job twice as much as he had before.
+V11	-	Then came there to him all his brothers, and all his sisters, and all those who had been of his acquaintance before, and ate bread with him in his house. They comforted him, and consoled him concerning all the evil that Yahweh had brought on him. Everyone also gave him a piece of money, and everyone a ring of gold.
+V12	p	So Yahweh blessed the latter end of Job more than his beginning. He had fourteen thousand sheep, six thousand camels, one thousand yoke of oxen, and a thousand female donkeys.
+V13	-	He had also seven sons and three daughters.
+V14	-	He called the name of the first, Jemimah; and the name of the second, Keziah; and the name of the third, Keren Happuch.
+V15	-	In all the land were no women found so beautiful as the daughters of Job. Their father gave them an inheritance among their brothers.
+V16	-	After this Job lived one hundred forty years, and saw his sons, and his sons’ sons, to four generations.
+V17	-	So Job died, being old and full of days.

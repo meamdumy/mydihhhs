@@ -1,0 +1,13 @@
+<resources>
+    <string name="app_name">Bible</string>
+    <string name="books">Books</string>
+    <string name="translation">World English Bible</string>
+    <string name="old_testament">Old Testament</string>
+    <string name="new_testament">New Testament</string>
+    <string name="open_books">Open the list of books</string>
+    <string name="chapters">Chapters</string>
+    <string name="text_larger">Larger text</string>
+    <string name="text_smaller">Smaller text</string>
+    <string name="bible_load_failed">The Bible text could not be loaded. Reinstalling the app should fix this.</string>
+    <string name="chapter_load_failed">%1$s could not be loaded.</string>
+</resources>

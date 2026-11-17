@@ -1,0 +1,18 @@
+<resources>
+    <style name="Theme.Bible" parent="Theme.Material3.Dark.NoActionBar">
+        <item name="colorPrimary">@color/brown_light</item>
+        <item name="colorOnPrimary">@color/night</item>
+        <item name="colorSecondaryContainer">@color/night_raised</item>
+        <item name="colorOnSecondaryContainer">@color/night_ink</item>
+        <item name="android:colorBackground">@color/night</item>
+        <item name="colorSurface">@color/night</item>
+        <item name="colorSurfaceContainer">@color/night_raised</item>
+        <item name="colorSurfaceContainerHigh">@color/night_raised</item>
+        <item name="colorOnSurface">@color/night_ink</item>
+        <item name="colorOnSurfaceVariant">@color/night_ink_muted</item>
+        <item name="android:statusBarColor">@color/night</item>
+        <item name="android:windowLightStatusBar">false</item>
+        <item name="android:navigationBarColor">@color/night</item>
+        <item name="android:windowLightNavigationBar" tools:targetApi="27" xmlns:tools="http://schemas.android.com/tools">false</item>
+    </style>
+</resources>

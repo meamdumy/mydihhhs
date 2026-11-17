@@ -1,0 +1,5 @@
+<resources>
+    <dimen name="page_margin">20dp</dimen>
+    <dimen name="paragraph_gap">12dp</dimen>
+    <dimen name="drawer_width">300dp</dimen>
+</resources>

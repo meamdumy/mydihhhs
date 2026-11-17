@@ -1,0 +1,13 @@
+<resources>
+    <color name="brown">#7A4B1E</color>
+    <color name="brown_light">#E0B682</color>
+    <color name="paper">#FBF7EF</color>
+    <color name="paper_raised">#F2EADB</color>
+    <color name="ink">#221C15</color>
+    <color name="ink_muted">#6B6053</color>
+    <color name="night">#15130F</color>
+    <color name="night_raised">#221F19</color>
+    <color name="night_ink">#E8E1D5</color>
+    <color name="night_ink_muted">#A69C8D</color>
+    <color name="icon_background">#7A4B1E</color>
+</resources>
