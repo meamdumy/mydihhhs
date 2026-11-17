@@ -10,5 +10,24 @@
         <item name="colorSurfaceContainerHigh">@color/night_raised</item>
         <item name="colorOnSurface">@color/night_ink</item>
         <item name="colorOnSurfaceVariant">@color/night_ink_muted</item>
+        <!-- The remaining colour roles, so that no component falls back to the
+             library's default purple. -->
+        <item name="colorPrimaryContainer">@color/night_tan</item>
+        <item name="colorOnPrimaryContainer">@color/night_tan_ink</item>
+        <item name="colorPrimaryInverse">@color/brown</item>
+        <item name="colorSecondary">@color/night_umber</item>
+        <item name="colorOnSecondary">@color/night</item>
+        <item name="colorTertiary">@color/olive_light</item>
+        <item name="colorOnTertiary">@color/night</item>
+        <item name="colorTertiaryContainer">@color/olive</item>
+        <item name="colorOnTertiaryContainer">@color/night_ink</item>
+        <item name="colorSurfaceVariant">@color/night_raised</item>
+        <item name="colorSurfaceInverse">@color/paper_raised</item>
+        <item name="colorOnSurfaceInverse">@color/ink</item>
+        <item name="colorSurfaceContainerLowest">@color/night</item>
+        <item name="colorSurfaceContainerLow">@color/night</item>
+        <item name="colorSurfaceContainerHighest">@color/night_raised</item>
+        <item name="colorOutline">@color/night_outline</item>
+        <item name="colorOutlineVariant">@color/night_outline_faint</item>
     </style>
 </resources>

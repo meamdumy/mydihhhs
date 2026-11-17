@@ -1,7 +1,6 @@
 package com.biblereader.app;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import android.os.Handler;
@@ -36,14 +35,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 /**
  * Finds verses by the words they contain, and offers a direct jump when the
- * query is a reference such as "John 3:16". Finishes with the chosen place.
+ * query is a reference such as "John 3:16". Finishes with the chosen place as
+ * a {@link PlaceResult}.
  */
 public class SearchActivity extends AppCompatActivity {
-
-    /** Result extra: global index of the chosen chapter. */
-    static final String EXTRA_CHAPTER_INDEX = "chapterIndex";
-    /** Result extra: chosen verse number, or 0 for the top of the chapter. */
-    static final String EXTRA_VERSE = "verse";
 
     private static final int MAX_RESULTS = 200;
     private static final int MIN_QUERY_LENGTH = 2;
@@ -174,9 +169,8 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     private void choose(Bible.Reference reference) {
-        setResult(RESULT_OK, new Intent()
-                .putExtra(EXTRA_CHAPTER_INDEX, bible.indexOf(reference.book, reference.chapter))
-                .putExtra(EXTRA_VERSE, reference.verse));
+        setResult(RESULT_OK, PlaceResult.of(
+                bible.indexOf(reference.book, reference.chapter), reference.verse));
         finish();
     }
 

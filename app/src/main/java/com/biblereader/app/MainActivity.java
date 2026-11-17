@@ -4,7 +4,6 @@ import android.app.Dialog;
 import android.content.ClipData;
 import android.content.ClipboardManager;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
@@ -45,16 +44,9 @@ import java.util.concurrent.Executors;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String KEY_CHAPTER = "chapter";
-    private static final String KEY_ROW = "item";
-    private static final String KEY_TEXT_SIZE = "textSize";
     private static final String STATE_HISTORY = "history";
     /** How many earlier places the Back button can return to. */
     private static final int MAX_HISTORY = 30;
-
-    private static final float DEFAULT_TEXT_SP = 18f;
-    private static final float MIN_TEXT_SP = 12f;
-    private static final float MAX_TEXT_SP = 34f;
 
     private final ExecutorService loader = Executors.newSingleThreadExecutor();
     /** Places left by jumping elsewhere, most recent first, as {chapter, row}. */
@@ -68,7 +60,6 @@ public class MainActivity extends AppCompatActivity {
 
     private Bible bible;
     private Bookmarks bookmarks;
-    private SharedPreferences prefs;
     private DrawerLayout drawer;
     private ViewPager2 pager;
     private ChapterPagerAdapter pagerAdapter;
@@ -84,8 +75,7 @@ public class MainActivity extends AppCompatActivity {
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 Intent data = result.getData();
                 if (result.getResultCode() == RESULT_OK && data != null && bible != null) {
-                    showVerse(data.getIntExtra(SearchActivity.EXTRA_CHAPTER_INDEX, 0),
-                            data.getIntExtra(SearchActivity.EXTRA_VERSE, 0));
+                    showVerse(PlaceResult.chapterIndex(data), PlaceResult.verse(data));
                 }
             });
 
@@ -113,15 +103,13 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        prefs = Settings.prefs(this);
         bookmarks = new Bookmarks(this);
-        textSizeSp = clampTextSize(prefs.getFloat(KEY_TEXT_SIZE, DEFAULT_TEXT_SP));
-        int chapter = Math.max(0,
-                Math.min(prefs.getInt(KEY_CHAPTER, 0), bible.chapterCount() - 1));
+        textSizeSp = Settings.textSize(this);
+        int chapter = Math.max(0, Math.min(Settings.chapter(this), bible.chapterCount() - 1));
 
         pagerAdapter = new ChapterPagerAdapter(bible, loader, bookmarks, textSizeSp,
                 this::showVerseMenu);
-        pagerAdapter.scrollToRow(chapter, prefs.getInt(KEY_ROW, 0));
+        pagerAdapter.scrollToRow(chapter, Settings.row(this));
         pager.setAdapter(pagerAdapter);
         // Keep the neighbouring chapters laid out so swipes start instantly.
         pager.setOffscreenPageLimit(1);
@@ -193,13 +181,10 @@ public class MainActivity extends AppCompatActivity {
         int row = currentRow();
         if (row < 0) {
             // Still loading: keep the row saved for this chapter, if it was this one.
-            row = chapter == prefs.getInt(KEY_CHAPTER, -1) ? prefs.getInt(KEY_ROW, 0) : 0;
+            row = chapter == Settings.chapter(this) ? Settings.row(this) : 0;
         }
-        prefs.edit()
-                .putInt(KEY_CHAPTER, chapter)
-                .putInt(KEY_ROW, row)
-                .putFloat(KEY_TEXT_SIZE, textSizeSp)
-                .apply();
+        Settings.savePosition(this, chapter, row);
+        Settings.setTextSize(this, textSizeSp);
     }
 
     @Override
@@ -464,14 +449,16 @@ public class MainActivity extends AppCompatActivity {
     void setKeepScreenOn(boolean keepOn) {
         Settings.setKeepScreenOn(this, keepOn);
         pager.setKeepScreenOn(keepOn);
+        // Redraw the menu so its tick matches straight away.
+        invalidateOptionsMenu();
     }
 
     /** Shows a slider that resizes the text as it moves. */
     private void pickTextSize() {
         View view = getLayoutInflater().inflate(R.layout.dialog_text_size, null);
         Slider slider = view.findViewById(R.id.text_size_slider);
-        slider.setValueFrom(MIN_TEXT_SP);
-        slider.setValueTo(MAX_TEXT_SP);
+        slider.setValueFrom(Settings.MIN_TEXT_SP);
+        slider.setValueTo(Settings.MAX_TEXT_SP);
         slider.setStepSize(1f);
         slider.setValue(Math.round(textSizeSp));
         slider.addOnChangeListener((s, value, fromUser) -> setTextSize(value));
@@ -491,11 +478,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void setTextSize(float sizeSp) {
-        textSizeSp = clampTextSize(sizeSp);
+        textSizeSp = Settings.clampTextSize(sizeSp);
         pagerAdapter.setTextSize(textSizeSp);
-    }
-
-    private static float clampTextSize(float sizeSp) {
-        return Math.max(MIN_TEXT_SP, Math.min(MAX_TEXT_SP, sizeSp));
     }
 }

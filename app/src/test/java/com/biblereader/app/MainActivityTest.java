@@ -191,9 +191,7 @@ public class MainActivityTest {
                 while (!"John 3".equals(titleAt(activity, john3))) {
                     john3++;
                 }
-                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, new Intent()
-                        .putExtra(SearchActivity.EXTRA_CHAPTER_INDEX, john3)
-                        .putExtra(SearchActivity.EXTRA_VERSE, 16));
+                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, PlaceResult.of(john3, 16));
                 idle();
 
                 assertEquals("John 3", title(activity));
@@ -361,9 +359,7 @@ public class MainActivityTest {
                 idle();
                 Intent started = shadowOf(activity).getNextStartedActivityForResult().intent;
                 int john3 = book(activity, "John").firstChapter + 2;
-                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, new Intent()
-                        .putExtra(SearchActivity.EXTRA_CHAPTER_INDEX, john3)
-                        .putExtra(SearchActivity.EXTRA_VERSE, 16));
+                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, PlaceResult.of(john3, 16));
                 idle();
                 ChapterPagerAdapter.Page page = currentPage(activity);
                 showAllRows(page.list);
@@ -446,9 +442,7 @@ public class MainActivityTest {
                         started.getComponent().getClassName());
                 // Choosing a bookmark there opens that verse here.
                 int john3 = book(activity, "John").firstChapter + 2;
-                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, new Intent()
-                        .putExtra(SearchActivity.EXTRA_CHAPTER_INDEX, john3)
-                        .putExtra(SearchActivity.EXTRA_VERSE, 16));
+                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, PlaceResult.of(john3, 16));
                 idle();
                 assertEquals("John 3", title(activity));
             });

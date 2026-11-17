@@ -59,9 +59,8 @@ public class SearchActivityTest {
             ActivityResult result = scenario.getResult();
             assertEquals(Activity.RESULT_OK, result.getResultCode());
             // Psalms starts at chapter index 478.
-            assertEquals(500, result.getResultData()
-                    .getIntExtra(SearchActivity.EXTRA_CHAPTER_INDEX, -1));
-            assertEquals(2, result.getResultData().getIntExtra(SearchActivity.EXTRA_VERSE, -1));
+            assertEquals(500, PlaceResult.chapterIndex(result.getResultData()));
+            assertEquals(2, PlaceResult.verse(result.getResultData()));
         }
     }
 
@@ -79,7 +78,7 @@ public class SearchActivityTest {
             });
             ActivityResult result = scenario.getResult();
             assertEquals(Activity.RESULT_OK, result.getResultCode());
-            assertEquals(16, result.getResultData().getIntExtra(SearchActivity.EXTRA_VERSE, -1));
+            assertEquals(16, PlaceResult.verse(result.getResultData()));
         }
     }
 

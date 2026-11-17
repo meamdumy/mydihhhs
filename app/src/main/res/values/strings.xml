@@ -11,7 +11,7 @@
     <string name="done">Done</string>
     <string name="about">About</string>
     <string name="about_title">Bible %1$s</string>
-    <string name="about_message">The text is the World English Bible, a modern English translation in the public domain.\n\nEverything is stored on this device; the app works offline and collects no data.</string>
+    <string name="about_message">The text is the World English Bible, a modern English translation in the public domain.\n\nHold a verse to bookmark, copy or share it.\n\nEverything, including your bookmarks, is stored on this device; the app works offline and collects no data.</string>
     <string name="verse_actions">Bookmark, copy or share</string>
     <string name="bookmarks">Bookmarks</string>
     <string name="add_bookmark">Bookmark</string>

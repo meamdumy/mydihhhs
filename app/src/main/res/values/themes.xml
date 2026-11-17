@@ -10,5 +10,24 @@
         <item name="colorSurfaceContainerHigh">@color/paper_raised</item>
         <item name="colorOnSurface">@color/ink</item>
         <item name="colorOnSurfaceVariant">@color/ink_muted</item>
+        <!-- The remaining colour roles, so that no component falls back to the
+             library's default purple. -->
+        <item name="colorPrimaryContainer">@color/tan</item>
+        <item name="colorOnPrimaryContainer">@color/tan_ink</item>
+        <item name="colorPrimaryInverse">@color/brown_light</item>
+        <item name="colorSecondary">@color/umber</item>
+        <item name="colorOnSecondary">@android:color/white</item>
+        <item name="colorTertiary">@color/olive</item>
+        <item name="colorOnTertiary">@android:color/white</item>
+        <item name="colorTertiaryContainer">@color/olive_light</item>
+        <item name="colorOnTertiaryContainer">@color/ink</item>
+        <item name="colorSurfaceVariant">@color/paper_raised</item>
+        <item name="colorSurfaceInverse">@color/night_raised</item>
+        <item name="colorOnSurfaceInverse">@color/night_ink</item>
+        <item name="colorSurfaceContainerLowest">@color/paper</item>
+        <item name="colorSurfaceContainerLow">@color/paper</item>
+        <item name="colorSurfaceContainerHighest">@color/paper_raised</item>
+        <item name="colorOutline">@color/outline</item>
+        <item name="colorOutlineVariant">@color/outline_faint</item>
     </style>
 </resources>

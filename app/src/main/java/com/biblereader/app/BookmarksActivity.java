@@ -1,7 +1,6 @@
 package com.biblereader.app;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
@@ -27,20 +26,20 @@ import java.util.concurrent.Executors;
 
 /**
  * Lists the bookmarked verses, newest first. Tapping one finishes with that
- * place, in the same form as {@link SearchActivity}; each can be removed.
+ * place as a {@link PlaceResult}; each can be removed.
  */
 public class BookmarksActivity extends AppCompatActivity {
 
-    /** A bookmark with the text needed to show it. */
+    /** A bookmark and what is needed to show it. */
     private static final class Row {
         final Bookmarks.Entry entry;
         final Bible.Book book;
-        final String text;
+        /** The verse on one line; empty until it has been read from storage. */
+        String text = "";
 
-        Row(Bookmarks.Entry entry, Bible.Book book, String text) {
+        Row(Bookmarks.Entry entry, Bible.Book book) {
             this.entry = entry;
             this.book = book;
-            this.text = text;
         }
     }
 
@@ -83,40 +82,33 @@ public class BookmarksActivity extends AppCompatActivity {
         worker.shutdown();
     }
 
-    /** Reads the text of each bookmarked verse in the background, then shows the list. */
+    /** Lists the bookmarks at once, then fills in each verse's text as it is read. */
     private void load() {
-        List<Bookmarks.Entry> entries = bookmarks.all();
-        worker.execute(() -> {
-            List<Row> loaded = new ArrayList<>();
-            for (Bookmarks.Entry entry : entries) {
-                Bible.Book book = bible.bookById(entry.bookId);
-                if (book == null || entry.chapter > book.chapterCount) {
-                    // Left over from a different text; there is nothing to open.
-                    continue;
-                }
-                loaded.add(new Row(entry, book, textOf(book, entry)));
+        List<Row> listed = new ArrayList<>();
+        for (Bookmarks.Entry entry : bookmarks.all()) {
+            Bible.Book book = bible.bookById(entry.bookId);
+            if (book != null && entry.chapter <= book.chapterCount) {
+                listed.add(new Row(entry, book));
             }
-            main.post(() -> {
-                if (!isDestroyed()) {
-                    rows.show(loaded);
-                    showEmptyMessageIfNeeded();
-                }
-            });
-        });
-    }
-
-    /** The verse's text on one line, or nothing if it cannot be read. */
-    private String textOf(Bible.Book book, Bookmarks.Entry entry) {
-        try {
-            Bible.Chapter chapter = bible.chapterAt(bible.indexOf(book, entry.chapter));
-            int index = chapter.indexOfVerse(entry.verse);
-            if (index >= 0 && chapter.items.get(index).verse == entry.verse) {
-                return chapter.items.get(index).text.replace('\n', ' ');
-            }
-        } catch (IOException e) {
-            // Listed without its text; opening it reports the problem.
+            // Anything else is left over from a different text and cannot be opened.
         }
-        return "";
+        rows.show(listed);
+        showEmptyMessageIfNeeded();
+        worker.execute(() -> {
+            for (Row row : listed) {
+                String text;
+                try {
+                    text = bible.verseText(row.book, row.entry.chapter, row.entry.verse);
+                } catch (IOException e) {
+                    // Listed without its text; opening it reports the problem.
+                    text = null;
+                }
+                if (text != null) {
+                    String read = text;
+                    main.post(() -> rows.showText(row, read));
+                }
+            }
+        });
     }
 
     private void showEmptyMessageIfNeeded() {
@@ -126,10 +118,8 @@ public class BookmarksActivity extends AppCompatActivity {
     }
 
     private void open(Row row) {
-        setResult(RESULT_OK, new Intent()
-                .putExtra(SearchActivity.EXTRA_CHAPTER_INDEX,
-                        bible.indexOf(row.book, row.entry.chapter))
-                .putExtra(SearchActivity.EXTRA_VERSE, row.entry.verse));
+        setResult(RESULT_OK, PlaceResult.of(
+                bible.indexOf(row.book, row.entry.chapter), row.entry.verse));
         finish();
     }
 
@@ -162,6 +152,15 @@ public class BookmarksActivity extends AppCompatActivity {
             shown.clear();
             shown.addAll(loaded);
             notifyDataSetChanged();
+        }
+
+        /** Fills in a row's text, unless the row has since been replaced or removed. */
+        void showText(Row row, String text) {
+            int index = shown.indexOf(row);
+            if (index >= 0) {
+                row.text = text;
+                notifyItemChanged(index);
+            }
         }
 
         void removeRow(Row row) {

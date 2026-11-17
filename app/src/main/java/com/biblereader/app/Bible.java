@@ -396,6 +396,32 @@ public final class Bible {
         return chapters == null ? null : chapter(book, chapterIndex, chapters);
     }
 
+    /**
+     * Reads one verse straight from storage, with poetry line breaks as
+     * spaces, without bringing its whole book into memory. Returns null if
+     * the text has no such verse.
+     */
+    public String verseText(Book book, int chapter, int verse) throws IOException {
+        String prefix = "V" + verse + "\t";
+        try (BufferedReader in = reader(book.id + ".txt")) {
+            int current = 0;
+            String line;
+            while ((line = in.readLine()) != null) {
+                if (line.isEmpty()) {
+                    continue;
+                }
+                if (line.charAt(0) == 'C') {
+                    if (++current > chapter) {
+                        break;
+                    }
+                } else if (current == chapter && line.startsWith(prefix)) {
+                    return parseVerse(book, line).text.replace('\n', ' ');
+                }
+            }
+        }
+        return null;
+    }
+
     private static Chapter chapter(Book book, int chapterIndex, List<List<Item>> chapters) {
         int number = chapterIndex - book.firstChapter + 1;
         return new Chapter(book, number, chapters.get(number - 1));

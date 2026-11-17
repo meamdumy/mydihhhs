@@ -8,16 +8,18 @@ An offline Bible reader.
 - Tap the title or the grid button to pick another chapter in the current book.
 - Search for words, or type a reference such as `John 3:16` or `ps 23` to go straight there.
   Put a phrase in double quotes to find those exact words.
-- Long-press a verse to copy or share it.
+- Long-press a verse to bookmark, copy or share it. Bookmarked verses are
+  marked in the margin and listed under Bookmarks in the overflow menu.
 - After a jump, Back returns to where you were reading.
-- Change the text size from the overflow menu.
+- From the overflow menu, change the text size, choose a light or dark theme
+  or follow the device, and keep the screen on while reading.
 
 | Reading | Book menu | Search |
 | --- | --- | --- |
 | ![A chapter open for reading](docs/screenshots/reader.png) | ![The list of books](docs/screenshots/books.png) | ![Search results](docs/screenshots/search.png) |
 
-The app follows the system light or dark theme, reopens where you stopped
-reading, needs no permissions and works without a connection. It runs on
+The app reopens where you stopped reading, needs no permissions and works
+without a connection. It runs on
 Android 6.0 and later.
 
 A ready-to-install build is in `dist/Bible.apk` and attached to each release.

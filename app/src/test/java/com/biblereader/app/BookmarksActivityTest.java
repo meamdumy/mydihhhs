@@ -50,6 +50,15 @@ public class BookmarksActivityTest {
         showAllRows(list(activity));
     }
 
+    private static ViewGroup rowAt(BookmarksActivity activity, int position) {
+        return (ViewGroup) list(activity).getLayoutManager().findViewByPosition(position);
+    }
+
+    private static String textAt(BookmarksActivity activity, int position) {
+        TextView text = rowAt(activity, position).findViewById(R.id.result_text);
+        return text.getText().toString();
+    }
+
     /** The row, a clickable group, that shows the given title. */
     private static ViewGroup row(BookmarksActivity activity, String title) {
         TextView found = findText(list(activity), title);
@@ -78,15 +87,16 @@ public class BookmarksActivityTest {
             scenario.onActivity(activity -> {
                 waitForRows(activity, 2);
                 assertEquals(View.GONE, activity.findViewById(R.id.empty).getVisibility());
-                ViewGroup first = (ViewGroup) list(activity).getLayoutManager().findViewByPosition(0);
-                assertNotNull(findText(first, "John 3:16"));
-                TextView text = first.findViewById(R.id.result_text);
-                assertTrue(text.getText().toString().startsWith("For God so loved the world"));
+                // The references are listed at once; the text follows as it is read.
+                assertNotNull(findText(rowAt(activity, 0), "John 3:16"));
+                assertNotNull(findText(rowAt(activity, 1), "Psalms 23:1"));
+                waitFor("the verse text", () -> {
+                    showAllRows(list(activity));
+                    return textAt(activity, 0).length() > 0 && textAt(activity, 1).length() > 0;
+                });
+                assertTrue(textAt(activity, 0).startsWith("For God so loved the world"));
                 // Poetry is shown on one line.
-                ViewGroup second = (ViewGroup) list(activity).getLayoutManager().findViewByPosition(1);
-                assertNotNull(findText(second, "Psalms 23:1"));
-                assertFalse(((TextView) second.findViewById(R.id.result_text))
-                        .getText().toString().contains("\n"));
+                assertEquals("Yahweh is my shepherd: I shall lack nothing.", textAt(activity, 1));
             });
         }
     }
@@ -103,9 +113,8 @@ public class BookmarksActivityTest {
             ActivityResult result = scenario.getResult();
             assertEquals(Activity.RESULT_OK, result.getResultCode());
             // Psalms starts at chapter index 478.
-            assertEquals(500, result.getResultData()
-                    .getIntExtra(SearchActivity.EXTRA_CHAPTER_INDEX, -1));
-            assertEquals(1, result.getResultData().getIntExtra(SearchActivity.EXTRA_VERSE, -1));
+            assertEquals(500, PlaceResult.chapterIndex(result.getResultData()));
+            assertEquals(1, PlaceResult.verse(result.getResultData()));
         }
     }
 
@@ -133,8 +142,7 @@ public class BookmarksActivityTest {
                 waitForRows(activity, 3);
                 assertTrue(bookmarks.contains("john", 3, 16));
                 // Back in its original place, between the other two.
-                ViewGroup middle = (ViewGroup) list(activity).getLayoutManager().findViewByPosition(1);
-                assertNotNull(findText(middle, "John 3:16"));
+                assertNotNull(findText(rowAt(activity, 1), "John 3:16"));
             });
         }
     }

@@ -108,6 +108,24 @@ public class BibleTest {
     }
 
     @Test
+    public void readsASingleVerseWithoutLoadingItsBook() throws IOException {
+        Bible.Book john = bible.books().get(42);
+        assertTrue(bible.verseText(john, 3, 16).startsWith("For God so loved the world"));
+        // Verse 1 is not confused with verses 10 to 19.
+        assertTrue(bible.verseText(john, 3, 1).startsWith("Now there was a man"));
+        assertNull(bible.chapterIfLoaded(john.firstChapter));
+
+        Bible.Book psalms = bible.books().get(18);
+        assertEquals("Yahweh is my shepherd: I shall lack nothing.",
+                bible.verseText(psalms, 23, 1));
+
+        // Absent: a verse this translation omits, and places past the end.
+        assertNull(bible.verseText(bible.books().get(43), 8, 37));
+        assertNull(bible.verseText(john, 3, 99));
+        assertNull(bible.verseText(john, 99, 1));
+    }
+
+    @Test
     public void booksLoadOnDemand() throws IOException {
         Bible.Book ruth = bible.books().get(7);
         assertNull(bible.chapterIfLoaded(ruth.firstChapter));

@@ -9,5 +9,17 @@
     <color name="night_raised">#221F19</color>
     <color name="night_ink">#E8E1D5</color>
     <color name="night_ink_muted">#A69C8D</color>
+    <color name="tan">#F2DFC6</color>
+    <color name="tan_ink">#2B1700</color>
+    <color name="umber">#6F5B40</color>
+    <color name="olive">#5E6135</color>
+    <color name="olive_light">#C8CB95</color>
+    <color name="outline">#857869</color>
+    <color name="outline_faint">#D8CCBA</color>
+    <color name="night_tan">#5C3A12</color>
+    <color name="night_tan_ink">#FFDDB8</color>
+    <color name="night_umber">#D9C3A3</color>
+    <color name="night_outline">#9C8F7F</color>
+    <color name="night_outline_faint">#4F463B</color>
     <color name="icon_background">#7A4B1E</color>
 </resources>
