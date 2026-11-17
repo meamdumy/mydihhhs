@@ -2,7 +2,6 @@ package com.biblereader.app;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -18,12 +17,15 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
-import androidx.core.graphics.ColorUtils;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.color.MaterialColors;
+
+import java.util.Collections;
+import java.util.HashSet;
+import java.util.Set;
 
 /** The scrolling contents of one chapter: its title, headings and verses. */
 final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
@@ -35,13 +37,11 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
     private static final int TYPE_TITLE = 0;
     private static final int TYPE_HEADING = 1;
     private static final int TYPE_VERSE = 2;
-    /** Opacity, out of 255, of the tint behind a highlighted verse. */
-    private static final int HIGHLIGHT_ALPHA = 46;
-
     private final Listener listener;
     private Bible.Chapter chapter;
     private float textSizeSp;
     private int highlightedVerse;
+    private Set<Integer> bookmarkedVerses = Collections.emptySet();
 
     VerseAdapter(Listener listener) {
         this.listener = listener;
@@ -49,11 +49,29 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
 
     /** Shows a chapter, or nothing if null. Row 0 is the title; items follow. */
     @SuppressLint("NotifyDataSetChanged") // The whole chapter is replaced.
-    void setChapter(Bible.Chapter chapter, float textSizeSp, int highlightedVerse) {
+    void setChapter(Bible.Chapter chapter, float textSizeSp, int highlightedVerse,
+            Set<Integer> bookmarkedVerses) {
         this.chapter = chapter;
         this.textSizeSp = textSizeSp;
         this.highlightedVerse = highlightedVerse;
+        this.bookmarkedVerses = bookmarkedVerses;
         notifyDataSetChanged();
+    }
+
+    /** Marks the given verses as bookmarked, redrawing only the rows that changed. */
+    void setBookmarkedVerses(Set<Integer> verses) {
+        Set<Integer> changed = new HashSet<>(bookmarkedVerses);
+        changed.addAll(verses);
+        Set<Integer> unchanged = new HashSet<>(bookmarkedVerses);
+        unchanged.retainAll(verses);
+        changed.removeAll(unchanged);
+        bookmarkedVerses = verses;
+        for (int verse : changed) {
+            int row = rowOfVerse(verse);
+            if (row >= 0) {
+                notifyItemChanged(row);
+            }
+        }
     }
 
     void setTextSize(float textSizeSp) {
@@ -139,9 +157,15 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
                     params.topMargin = gap;
                     text.setLayoutParams(params);
                 }
-                text.setBackgroundColor(item.verse == highlightedVerse
-                        ? ColorUtils.setAlphaComponent(accent, HIGHLIGHT_ALPHA)
-                        : Color.TRANSPARENT);
+                if (!(text.getBackground() instanceof VerseBackground)) {
+                    text.setBackground(new VerseBackground(accent,
+                            context.getResources().getDisplayMetrics().density));
+                }
+                boolean bookmarked = bookmarkedVerses.contains(item.verse);
+                ((VerseBackground) text.getBackground())
+                        .setState(item.verse == highlightedVerse, bookmarked);
+                ViewCompat.setStateDescription(text,
+                        bookmarked ? context.getString(R.string.bookmarked) : null);
                 text.setOnLongClickListener(v -> {
                     listener.onVerseLongPressed(v, shown, item);
                     return true;

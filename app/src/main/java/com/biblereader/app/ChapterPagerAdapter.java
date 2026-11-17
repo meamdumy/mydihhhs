@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 
 import java.io.IOException;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.Executor;
@@ -27,6 +28,7 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
     private final Bible bible;
     private final Executor loader;
     private final VerseAdapter.Listener verseListener;
+    private final Bookmarks bookmarks;
     private final Handler main = new Handler(Looper.getMainLooper());
     private final Set<Page> boundPages = new HashSet<>();
     private float textSizeSp;
@@ -39,9 +41,10 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
     private int highlightPage = RecyclerView.NO_POSITION;
     private int highlightVerse;
 
-    ChapterPagerAdapter(Bible bible, Executor loader, float textSizeSp,
+    ChapterPagerAdapter(Bible bible, Executor loader, Bookmarks bookmarks, float textSizeSp,
             VerseAdapter.Listener verseListener) {
         this.bible = bible;
+        this.bookmarks = bookmarks;
         this.loader = loader;
         this.textSizeSp = textSizeSp;
         this.verseListener = verseListener;
@@ -81,6 +84,16 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
         highlightPage = RecyclerView.NO_POSITION;
         for (Page bound : boundPages) {
             bound.verses.setHighlightedVerse(0);
+        }
+    }
+
+    /** Redraws the bookmark markers after bookmarks were added or removed. */
+    void refreshBookmarks() {
+        for (Page page : boundPages) {
+            if (page.chapter != null) {
+                page.verses.setBookmarkedVerses(
+                        bookmarks.versesIn(page.chapter.book.id, page.chapter.number));
+            }
         }
     }
 
@@ -141,7 +154,8 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
     }
 
     private void display(Page page, int position, Bible.Chapter chapter) {
-        page.showChapter(chapter, textSizeSp, position == highlightPage ? highlightVerse : 0);
+        page.showChapter(chapter, textSizeSp, position == highlightPage ? highlightVerse : 0,
+                bookmarks.versesIn(chapter.book.id, chapter.number));
         if (position == pendingPage) {
             scrollToPending(page);
         } else {
@@ -192,16 +206,17 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
 
         void showLoading() {
             chapter = null;
-            verses.setChapter(null, 0, 0);
+            verses.setChapter(null, 0, 0, Collections.emptySet());
             list.setVisibility(View.INVISIBLE);
             error.setVisibility(View.GONE);
             // Appears only if loading takes long enough to notice.
             progress.show();
         }
 
-        void showChapter(Bible.Chapter chapter, float textSizeSp, int highlightedVerse) {
+        void showChapter(Bible.Chapter chapter, float textSizeSp, int highlightedVerse,
+                Set<Integer> bookmarkedVerses) {
             this.chapter = chapter;
-            verses.setChapter(chapter, textSizeSp, highlightedVerse);
+            verses.setChapter(chapter, textSizeSp, highlightedVerse, bookmarkedVerses);
             progress.hide();
             error.setVisibility(View.GONE);
             list.setVisibility(View.VISIBLE);

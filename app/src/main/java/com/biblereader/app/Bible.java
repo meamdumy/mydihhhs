@@ -348,6 +348,16 @@ public final class Bible {
         return books.get(lo);
     }
 
+    /** The book with the given file id, such as "john", or null if there is none. */
+    public Book bookById(String id) {
+        for (Book book : books) {
+            if (book.id.equals(id)) {
+                return book;
+            }
+        }
+        return null;
+    }
+
     /** Global index of a chapter, given its book and 1-based chapter number. */
     public int indexOf(Book book, int chapterNumber) {
         return book.firstChapter + chapterNumber - 1;

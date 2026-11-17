@@ -45,7 +45,6 @@ import java.util.concurrent.Executors;
  */
 public class MainActivity extends AppCompatActivity {
 
-    private static final String PREFS = "reader";
     private static final String KEY_CHAPTER = "chapter";
     private static final String KEY_ROW = "item";
     private static final String KEY_TEXT_SIZE = "textSize";
@@ -68,6 +67,7 @@ public class MainActivity extends AppCompatActivity {
     };
 
     private Bible bible;
+    private Bookmarks bookmarks;
     private SharedPreferences prefs;
     private DrawerLayout drawer;
     private ViewPager2 pager;
@@ -79,7 +79,8 @@ public class MainActivity extends AppCompatActivity {
     private Dialog openDialog;
     private PopupMenu openPopup;
 
-    private final ActivityResultLauncher<Intent> search = registerForActivityResult(
+    /** Opens a screen that finishes with a place to go to: search or bookmarks. */
+    private final ActivityResultLauncher<Intent> placePicker = registerForActivityResult(
             new ActivityResultContracts.StartActivityForResult(), result -> {
                 Intent data = result.getData();
                 if (result.getResultCode() == RESULT_OK && data != null && bible != null) {
@@ -112,17 +113,20 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        prefs = getSharedPreferences(PREFS, MODE_PRIVATE);
+        prefs = Settings.prefs(this);
+        bookmarks = new Bookmarks(this);
         textSizeSp = clampTextSize(prefs.getFloat(KEY_TEXT_SIZE, DEFAULT_TEXT_SP));
         int chapter = Math.max(0,
                 Math.min(prefs.getInt(KEY_CHAPTER, 0), bible.chapterCount() - 1));
 
-        pagerAdapter = new ChapterPagerAdapter(bible, loader, textSizeSp, this::showVerseMenu);
+        pagerAdapter = new ChapterPagerAdapter(bible, loader, bookmarks, textSizeSp,
+                this::showVerseMenu);
         pagerAdapter.scrollToRow(chapter, prefs.getInt(KEY_ROW, 0));
         pager.setAdapter(pagerAdapter);
         // Keep the neighbouring chapters laid out so swipes start instantly.
         pager.setOffscreenPageLimit(1);
         pager.setCurrentItem(chapter, false);
+        pager.setKeepScreenOn(Settings.keepScreenOn(this));
         pager.registerOnPageChangeCallback(new ViewPager2.OnPageChangeCallback() {
             @Override
             public void onPageSelected(int position) {
@@ -168,6 +172,15 @@ public class MainActivity extends AppCompatActivity {
                 closeDrawer.setEnabled(false);
             }
         });
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        if (pagerAdapter != null) {
+            // Bookmarks may have been removed on the bookmarks screen.
+            pagerAdapter.refreshBookmarks();
+        }
     }
 
     @Override
@@ -225,14 +238,29 @@ public class MainActivity extends AppCompatActivity {
     }
 
     @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem keepOn = menu.findItem(R.id.action_keep_screen_on);
+        if (keepOn != null) {
+            keepOn.setChecked(Settings.keepScreenOn(this));
+        }
+        return super.onPrepareOptionsMenu(menu);
+    }
+
+    @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
         if (id == R.id.action_search) {
-            search.launch(new Intent(this, SearchActivity.class));
+            placePicker.launch(new Intent(this, SearchActivity.class));
         } else if (id == R.id.action_chapters) {
             pickChapter(bible.bookAt(pager.getCurrentItem()));
+        } else if (id == R.id.action_bookmarks) {
+            placePicker.launch(new Intent(this, BookmarksActivity.class));
         } else if (id == R.id.action_text_size) {
             pickTextSize();
+        } else if (id == R.id.action_theme) {
+            pickTheme();
+        } else if (id == R.id.action_keep_screen_on) {
+            setKeepScreenOn(!Settings.keepScreenOn(this));
         } else if (id == R.id.action_about) {
             showAbout();
         } else {
@@ -379,15 +407,20 @@ public class MainActivity extends AppCompatActivity {
         dialog.show();
     }
 
-    /** Offers to copy or share the verse that was long-pressed. */
+    /** Offers to bookmark, copy or share the verse that was long-pressed. */
     private void showVerseMenu(View anchor, Bible.Chapter chapter, Bible.Item verse) {
         String text = getString(R.string.verse_share_format,
                 verse.text, chapter.book.verseTitle(chapter.number, verse.verse));
+        boolean bookmarked = bookmarks.contains(chapter.book.id, chapter.number, verse.verse);
         PopupMenu menu = new PopupMenu(this, anchor);
-        menu.getMenu().add(Menu.NONE, R.id.action_copy, 0, R.string.copy_verse);
-        menu.getMenu().add(Menu.NONE, R.id.action_share, 1, R.string.share_verse);
+        menu.getMenu().add(Menu.NONE, R.id.action_bookmark, 0,
+                bookmarked ? R.string.remove_bookmark : R.string.add_bookmark);
+        menu.getMenu().add(Menu.NONE, R.id.action_copy, 1, R.string.copy_verse);
+        menu.getMenu().add(Menu.NONE, R.id.action_share, 2, R.string.share_verse);
         menu.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_copy) {
+            if (item.getItemId() == R.id.action_bookmark) {
+                toggleBookmark(chapter, verse);
+            } else if (item.getItemId() == R.id.action_copy) {
                 ClipboardManager clipboard = getSystemService(ClipboardManager.class);
                 clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name), text));
                 // Android 13 and later confirm a copy themselves.
@@ -407,6 +440,30 @@ public class MainActivity extends AppCompatActivity {
         }
         openPopup = menu;
         menu.show();
+    }
+
+    /** Adds a bookmark on the verse, or removes the one already there. */
+    void toggleBookmark(Bible.Chapter chapter, Bible.Item verse) {
+        bookmarks.toggle(chapter.book.id, chapter.number, verse.verse);
+        pagerAdapter.refreshBookmarks();
+    }
+
+    /** Offers the choice of following the system theme, or always light or dark. */
+    private void pickTheme() {
+        show(new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.theme)
+                .setSingleChoiceItems(R.array.theme_names, Settings.theme(this), (dialog, which) -> {
+                    dialog.dismiss();
+                    // Applying a different theme rebuilds this screen.
+                    Settings.setTheme(this, which);
+                })
+                .setNegativeButton(android.R.string.cancel, null)
+                .create());
+    }
+
+    void setKeepScreenOn(boolean keepOn) {
+        Settings.setKeepScreenOn(this, keepOn);
+        pager.setKeepScreenOn(keepOn);
     }
 
     /** Shows a slider that resizes the text as it moves. */

@@ -1,0 +1,8 @@
+<resources>
+    <!-- In the order of the THEME_ constants in Settings. -->
+    <string-array name="theme_names">
+        <item>@string/theme_system</item>
+        <item>@string/theme_light</item>
+        <item>@string/theme_dark</item>
+    </string-array>
+</resources>

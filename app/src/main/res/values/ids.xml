@@ -1,4 +1,5 @@
 <resources>
+    <item name="action_bookmark" type="id" />
     <item name="action_copy" type="id" />
     <item name="action_share" type="id" />
 </resources>

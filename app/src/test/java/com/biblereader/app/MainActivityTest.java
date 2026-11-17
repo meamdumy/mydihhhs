@@ -13,11 +13,11 @@ import static org.robolectric.Shadows.shadowOf;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatDelegate;
 import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
@@ -203,9 +203,9 @@ public class MainActivityTest {
                 showAllRows(page.list);
                 TextView verse16 = (TextView) page.layout.findViewByPosition(row);
                 assertTrue(verse16.getText().toString().contains("For God so loved the world"));
-                assertTrue(Color.alpha(((ColorDrawable) verse16.getBackground()).getColor()) > 0);
+                assertTrue(((VerseBackground) verse16.getBackground()).isHighlighted());
                 TextView verse15 = (TextView) page.layout.findViewByPosition(row - 1);
-                assertEquals(0, Color.alpha(((ColorDrawable) verse15.getBackground()).getColor()));
+                assertFalse(((VerseBackground) verse15.getBackground()).isHighlighted());
             });
         }
     }
@@ -284,7 +284,7 @@ public class MainActivityTest {
                         label = String.valueOf(action.getLabel());
                     }
                 }
-                assertEquals("Copy or share", label);
+                assertEquals("Bookmark, copy or share", label);
                 // The chapter title offers nothing to copy.
                 assertFalse(page.layout.findViewByPosition(0).performLongClick());
             });
@@ -368,7 +368,7 @@ public class MainActivityTest {
                 ChapterPagerAdapter.Page page = currentPage(activity);
                 showAllRows(page.list);
                 TextView verse = (TextView) page.layout.findViewByPosition(16);
-                assertTrue(Color.alpha(((ColorDrawable) verse.getBackground()).getColor()) > 0);
+                assertTrue(((VerseBackground) verse.getBackground()).isHighlighted());
 
                 ViewPager2 pager = activity.findViewById(R.id.pager);
                 pager.setCurrentItem(john3 + 1, false);
@@ -378,8 +378,143 @@ public class MainActivityTest {
                 page = currentPage(activity);
                 showAllRows(page.list);
                 verse = (TextView) page.layout.findViewByPosition(16);
-                assertEquals(0, Color.alpha(((ColorDrawable) verse.getBackground()).getColor()));
+                assertFalse(((VerseBackground) verse.getBackground()).isHighlighted());
             });
+        }
+    }
+
+    private static VerseBackground backgroundOfRow(ChapterPagerAdapter.Page page, int row) {
+        showAllRows(page.list);
+        return (VerseBackground) page.layout.findViewByPosition(row).getBackground();
+    }
+
+    @Test
+    public void bookmarkingAVerseMarksItAndIsRemembered() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                assertFalse(backgroundOfRow(page, 3).isBookmarked());
+                // Row 3 is Genesis 1:3.
+                activity.toggleBookmark(page.chapter, page.chapter.items.get(2));
+                idle();
+                assertTrue(backgroundOfRow(page, 3).isBookmarked());
+                assertFalse(backgroundOfRow(page, 2).isBookmarked());
+                assertTrue(new Bookmarks(activity).contains("genesis", 1, 3));
+            });
+            scenario.recreate();
+            scenario.onActivity(activity -> {
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                assertTrue(backgroundOfRow(page, 3).isBookmarked());
+                activity.toggleBookmark(page.chapter, page.chapter.items.get(2));
+                idle();
+                assertFalse(backgroundOfRow(page, 3).isBookmarked());
+                assertFalse(new Bookmarks(activity).contains("genesis", 1, 3));
+            });
+        }
+    }
+
+    @Test
+    public void bookmarkRemovedElsewhereDisappearsOnReturn() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                activity.toggleBookmark(page.chapter, page.chapter.items.get(0));
+                idle();
+                assertTrue(backgroundOfRow(page, 1).isBookmarked());
+                // As the bookmarks screen does when a bookmark is removed there.
+                new Bookmarks(activity).toggle("genesis", 1, 1);
+            });
+            scenario.moveToState(androidx.lifecycle.Lifecycle.State.STARTED);
+            scenario.moveToState(androidx.lifecycle.Lifecycle.State.RESUMED);
+            scenario.onActivity(activity -> {
+                idle();
+                assertFalse(backgroundOfRow(currentPage(activity), 1).isBookmarked());
+            });
+        }
+    }
+
+    @Test
+    public void bookmarksOpenFromTheMenu() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                idle();
+                MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
+                toolbar.getMenu().performIdentifierAction(R.id.action_bookmarks, 0);
+                idle();
+                Intent started = shadowOf(activity).getNextStartedActivityForResult().intent;
+                assertEquals(BookmarksActivity.class.getName(),
+                        started.getComponent().getClassName());
+                // Choosing a bookmark there opens that verse here.
+                int john3 = book(activity, "John").firstChapter + 2;
+                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, new Intent()
+                        .putExtra(SearchActivity.EXTRA_CHAPTER_INDEX, john3)
+                        .putExtra(SearchActivity.EXTRA_VERSE, 16));
+                idle();
+                assertEquals("John 3", title(activity));
+            });
+        }
+    }
+
+    @Test
+    public void keepScreenOnIsAppliedAndRemembered() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                idle();
+                ViewPager2 pager = activity.findViewById(R.id.pager);
+                assertFalse(pager.getKeepScreenOn());
+                MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
+                toolbar.getMenu().performIdentifierAction(R.id.action_keep_screen_on, 0);
+                idle();
+                assertTrue(pager.getKeepScreenOn());
+                assertTrue(Settings.keepScreenOn(activity));
+            });
+            scenario.recreate();
+            scenario.onActivity(activity -> {
+                idle();
+                ViewPager2 pager = activity.findViewById(R.id.pager);
+                assertTrue(pager.getKeepScreenOn());
+                MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
+                activity.onPrepareOptionsMenu(toolbar.getMenu());
+                assertTrue(toolbar.getMenu().findItem(R.id.action_keep_screen_on).isChecked());
+                toolbar.getMenu().performIdentifierAction(R.id.action_keep_screen_on, 0);
+                idle();
+                assertFalse(pager.getKeepScreenOn());
+                assertFalse(Settings.keepScreenOn(activity));
+            });
+        }
+    }
+
+    @Test
+    public void themeChoiceIsAppliedAndRemembered() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                idle();
+                assertEquals(Settings.THEME_SYSTEM, Settings.theme(activity));
+                MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
+                toolbar.getMenu().performIdentifierAction(R.id.action_theme, 0);
+                idle();
+                AlertDialog dialog = (AlertDialog) ShadowDialog.getLatestDialog();
+                assertEquals(3, dialog.getListView().getCount());
+                assertEquals(Settings.THEME_SYSTEM, dialog.getListView().getCheckedItemPosition());
+                shadowOf(dialog.getListView()).performItemClick(Settings.THEME_DARK);
+                assertEquals(Settings.THEME_DARK, Settings.theme(activity));
+                assertEquals(AppCompatDelegate.MODE_NIGHT_YES,
+                        AppCompatDelegate.getDefaultNightMode());
+            });
+            // The screen rebuilds itself in the new theme and keeps the choice.
+            scenario.onActivity(activity -> {
+                idle();
+                assertEquals(Settings.THEME_DARK, Settings.theme(activity));
+                int night = activity.getResources().getConfiguration().uiMode
+                        & android.content.res.Configuration.UI_MODE_NIGHT_MASK;
+                assertEquals(android.content.res.Configuration.UI_MODE_NIGHT_YES, night);
+                Settings.setTheme(activity, Settings.THEME_LIGHT);
+                assertEquals(AppCompatDelegate.MODE_NIGHT_NO,
+                        AppCompatDelegate.getDefaultNightMode());
+            });
+        } finally {
+            // The night mode is process-wide; leave it as other tests expect.
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM);
         }
     }
 }

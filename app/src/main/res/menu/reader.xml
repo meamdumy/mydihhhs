@@ -12,8 +12,21 @@
         android:title="@string/chapters"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/action_bookmarks"
+        android:title="@string/bookmarks"
+        app:showAsAction="never" />
+    <item
         android:id="@+id/action_text_size"
         android:title="@string/text_size"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_theme"
+        android:title="@string/theme"
+        app:showAsAction="never" />
+    <item
+        android:id="@+id/action_keep_screen_on"
+        android:checkable="true"
+        android:title="@string/keep_screen_on"
         app:showAsAction="never" />
     <item
         android:id="@+id/action_about"
