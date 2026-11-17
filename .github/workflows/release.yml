@@ -41,8 +41,18 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           cp dist/Bible.apk "Bible-${TAG}.apk"
+          {
+            echo "Offline Bible reader for Android 6.0 and later. Download the APK below and open it on your phone to install."
+            echo
+            # This version's section of the changelog, without its heading.
+            awk -v heading="## ${TAG#v}" '
+              $0 == heading { found = 1; next }
+              found && /^## / { exit }
+              found { print }
+            ' CHANGELOG.md
+          } > notes.md
           # Creates the tag at this commit if it does not exist yet.
           gh release create "${TAG}" "Bible-${TAG}.apk" \
             --target "${GITHUB_SHA}" \
             --title "Bible ${TAG}" \
-            --notes "Offline Bible reader for Android 6.0 and later. Download the APK below and open it on your phone to install."
+            --notes-file notes.md

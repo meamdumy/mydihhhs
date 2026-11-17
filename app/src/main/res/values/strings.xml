@@ -1,7 +1,9 @@
 <resources>
     <string name="app_name">Bible</string>
     <string name="books">Books</string>
+    <!-- The bundled text. Change these three if another translation is shipped. -->
     <string name="translation">World English Bible</string>
+    <string name="translation_short">WEB</string>
     <string name="old_testament">Old Testament</string>
     <string name="new_testament">New Testament</string>
     <string name="open_books">Open the list of books</string>
@@ -33,8 +35,8 @@
     <string name="copy_verse">Copy</string>
     <string name="share_verse">Share</string>
     <string name="verse_copied">Verse copied</string>
-    <!-- 1: verse text, 2: reference such as John 3:16 -->
-    <string name="verse_share_format">%1$s\n— %2$s (WEB)</string>
+    <!-- 1: verse text, 2: reference such as John 3:16, 3: translation, abbreviated -->
+    <string name="verse_share_format">%1$s\n— %2$s (%3$s)</string>
     <string name="back">Back</string>
     <string name="search_hint">Search or go to John 3:16</string>
     <string name="search_hint_long">Type words to find the verses that contain them, or a reference such as John 3:16 or Ps 23 to go straight there. Put a phrase in "double quotes" to find those exact words.</string>

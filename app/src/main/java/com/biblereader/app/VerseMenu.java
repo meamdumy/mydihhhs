@@ -51,7 +51,8 @@ final class VerseMenu {
     /** The verse followed by its reference, as copied and shared. */
     static String text(Context context, Bible.Chapter chapter, Bible.Item verse) {
         return context.getString(R.string.verse_share_format,
-                verse.text, chapter.book.verseTitle(chapter.number, verse.verse));
+                verse.text, chapter.book.verseTitle(chapter.number, verse.verse),
+                context.getString(R.string.translation_short));
     }
 
     static void copy(Context context, Bible.Chapter chapter, Bible.Item verse) {
