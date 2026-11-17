@@ -6,8 +6,32 @@
     <string name="new_testament">New Testament</string>
     <string name="open_books">Open the list of books</string>
     <string name="chapters">Chapters</string>
-    <string name="text_larger">Larger text</string>
-    <string name="text_smaller">Smaller text</string>
+    <string name="search">Search</string>
+    <string name="text_size">Text size</string>
+    <string name="done">Done</string>
+    <string name="about">About</string>
+    <string name="about_title">Bible %1$s</string>
+    <string name="about_message">The text is the World English Bible, a modern English translation in the public domain.\n\nEverything is stored on this device; the app works offline and collects no data.</string>
+    <string name="copy_verse">Copy</string>
+    <string name="share_verse">Share</string>
+    <string name="verse_copied">Verse copied</string>
+    <!-- 1: verse text, 2: reference such as John 3:16 -->
+    <string name="verse_share_format">%1$s\n— %2$s (WEB)</string>
+    <string name="back">Back</string>
+    <string name="search_hint">Search or go to John 3:16</string>
+    <string name="search_hint_long">Type words to find the verses that contain them, or a reference such as “John 3:16” or “Ps 23” to go straight there.</string>
+    <string name="search_no_results">No verses contain “%1$s”.</string>
+    <string name="search_failed">The search could not be completed.</string>
+    <plurals name="search_truncated">
+        <item quantity="one">Showing the first verse. Add a word to narrow the search.</item>
+        <item quantity="other">Showing the first %1$d verses. Add a word to narrow the search.</item>
+    </plurals>
+    <plurals name="search_results">
+        <item quantity="one">%1$d verse</item>
+        <item quantity="other">%1$d verses</item>
+    </plurals>
+    <!-- 1: reference such as John 3:16 -->
+    <string name="go_to">Go to %1$s</string>
     <string name="bible_load_failed">The Bible text could not be loaded. Reinstalling the app should fix this.</string>
     <string name="chapter_load_failed">%1$s could not be loaded.</string>
 </resources>

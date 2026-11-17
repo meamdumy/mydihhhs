@@ -10,9 +10,5 @@
         <item name="colorSurfaceContainerHigh">@color/night_raised</item>
         <item name="colorOnSurface">@color/night_ink</item>
         <item name="colorOnSurfaceVariant">@color/night_ink_muted</item>
-        <item name="android:statusBarColor">@color/night</item>
-        <item name="android:windowLightStatusBar">false</item>
-        <item name="android:navigationBarColor">@color/night</item>
-        <item name="android:windowLightNavigationBar" tools:targetApi="27" xmlns:tools="http://schemas.android.com/tools">false</item>
     </style>
 </resources>

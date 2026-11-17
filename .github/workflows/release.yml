@@ -1,0 +1,25 @@
+name: Release
+
+# Pushing a tag such as v1.0.0 publishes a GitHub release carrying the APK
+# committed at dist/Bible.apk, which is the build that was tested.
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Publish the APK
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp dist/Bible.apk "Bible-${GITHUB_REF_NAME}.apk"
+          gh release create "${GITHUB_REF_NAME}" "Bible-${GITHUB_REF_NAME}.apk" \
+            --verify-tag \
+            --title "Bible ${GITHUB_REF_NAME}" \
+            --notes "Offline Bible reader for Android 6.0 and later. Download the APK below and open it on your phone to install."

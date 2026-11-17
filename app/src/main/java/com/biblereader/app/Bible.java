@@ -7,20 +7,32 @@ import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  * The bundled Bible text. Chapters are addressed by a single index running
  * from Genesis 1 (0) to Revelation 22, so the reader can page straight across
  * book boundaries. Books are parsed on first use and a few are kept in memory.
+ *
+ * <p>Safe to use from several threads. Loading and searching read from
+ * storage, so call them off the UI thread.
  */
 public final class Bible {
 
     /** Opens a bundled data file by its path relative to the assets root. */
     public interface Source {
         InputStream open(String path) throws IOException;
+    }
+
+    /** Asked during a long operation whether its result is still wanted. */
+    public interface Cancellation {
+        boolean isCancelled();
     }
 
     public static final class Book {
@@ -37,6 +49,19 @@ public final class Bible {
             this.newTestament = newTestament;
             this.chapterCount = chapterCount;
             this.firstChapter = firstChapter;
+        }
+
+        /** Title of a chapter, such as "John 3", "Psalm 23" or "Jude". */
+        public String chapterTitle(int number) {
+            if (chapterCount == 1) {
+                return name;
+            }
+            return ("psalms".equals(id) ? "Psalm" : name) + " " + number;
+        }
+
+        /** Citation for a verse, such as "John 3:16" or "Jude 5". */
+        public String verseTitle(int chapter, int verse) {
+            return chapterCount == 1 ? name + " " + verse : name + " " + chapter + ":" + verse;
         }
     }
 
@@ -71,16 +96,100 @@ public final class Bible {
         }
 
         public String title() {
-            return book.chapterCount == 1 ? book.name : book.name + " " + number;
+            return book.chapterTitle(number);
+        }
+
+        /**
+         * Index in {@link #items} of the given verse. A verse the translation
+         * omits resolves to the verse before it; returns -1 if there is none.
+         */
+        public int indexOfVerse(int verse) {
+            int found = -1;
+            for (int i = 0; i < items.size(); i++) {
+                Item item = items.get(i);
+                if (!item.isHeading() && item.verse <= verse) {
+                    found = i;
+                }
+            }
+            return found;
+        }
+    }
+
+    /** A place in the text: a chapter and, optionally, a verse within it. */
+    public static final class Reference {
+        public final Book book;
+        public final int chapter;
+        /** Verse number, or 0 for the chapter as a whole. */
+        public final int verse;
+
+        Reference(Book book, int chapter, int verse) {
+            this.book = book;
+            this.chapter = chapter;
+            this.verse = verse;
+        }
+
+        public String title() {
+            return verse == 0 ? book.chapterTitle(chapter) : book.verseTitle(chapter, verse);
+        }
+    }
+
+    /** A verse matching a search. */
+    public static final class Hit {
+        public final Reference reference;
+        public final String text;
+
+        Hit(Reference reference, String text) {
+            this.reference = reference;
+            this.text = text;
+        }
+    }
+
+    public static final class SearchResult {
+        public final List<Hit> hits;
+        /** True when more verses matched than were returned. */
+        public final boolean truncated;
+
+        SearchResult(List<Hit> hits, boolean truncated) {
+            this.hits = hits;
+            this.truncated = truncated;
         }
     }
 
     private static final String DIR = "bible/";
     private static final int CACHED_BOOKS = 4;
 
+    /** Book, then optional chapter, then optional verse: "1 John 2:3", "ps 23", "jude 5". */
+    private static final Pattern REFERENCE = Pattern.compile(
+            "^\\s*((?:[1-3]\\s*)?[a-z][a-z .]*?)\\.?\\s*(?:(\\d{1,3})(?:\\s*[:.,]\\s*(\\d{1,3}))?)?\\s*$");
+
+    /** Common abbreviations that are not simply the start of the book's name. */
+    private static final Map<String, String> ALIASES = new HashMap<>();
+
+    static {
+        String[][] aliases = {
+                {"gn", "genesis"}, {"dt", "deuteronomy"}, {"jdg", "judges"}, {"jgs", "judges"},
+                {"psalm", "psalms"}, {"pss", "psalms"}, {"prv", "proverbs"},
+                {"songofsongs", "songofsolomon"}, {"sos", "songofsolomon"},
+                {"canticles", "songofsolomon"}, {"ezk", "ezekiel"}, {"dn", "daniel"},
+                {"jl", "joel"}, {"ob", "obadiah"}, {"jon", "jonah"}, {"nah", "nahum"},
+                {"hg", "haggai"}, {"zec", "zechariah"}, {"mt", "matthew"}, {"mk", "mark"},
+                {"mrk", "mark"}, {"lk", "luke"}, {"jn", "john"}, {"jhn", "john"},
+                {"rm", "romans"}, {"php", "philippians"}, {"phm", "philemon"},
+                {"phlm", "philemon"}, {"jas", "james"}, {"jm", "james"}, {"rv", "revelation"},
+                {"1sm", "1samuel"}, {"2sm", "2samuel"}, {"1kgs", "1kings"}, {"2kgs", "2kings"},
+                {"1jn", "1john"}, {"2jn", "2john"}, {"3jn", "3john"},
+                {"1pt", "1peter"}, {"2pt", "2peter"}, {"1th", "1thessalonians"},
+                {"2th", "2thessalonians"}, {"1tm", "1timothy"}, {"2tm", "2timothy"},
+        };
+        for (String[] alias : aliases) {
+            ALIASES.put(alias[0], alias[1]);
+        }
+    }
+
     private final Source source;
     private final List<Book> books;
     private final int chapterCount;
+    /** Parsed books, least recently used first. Guarded by itself. */
     private final Map<String, List<List<Item>>> cache =
             new LinkedHashMap<String, List<List<Item>>>(8, 0.75f, true) {
                 @Override
@@ -141,19 +250,149 @@ public final class Bible {
     /** Short title such as "John 3" for the chapter at the given global index. */
     public String titleAt(int chapterIndex) {
         Book book = bookAt(chapterIndex);
-        int number = chapterIndex - book.firstChapter + 1;
-        return book.chapterCount == 1 ? book.name : book.name + " " + number;
+        return book.chapterTitle(chapterIndex - book.firstChapter + 1);
     }
 
-    public synchronized Chapter chapterAt(int chapterIndex) throws IOException {
+    /** The chapter at the given index, reading its book from storage if needed. */
+    public Chapter chapterAt(int chapterIndex) throws IOException {
         Book book = bookAt(chapterIndex);
-        List<List<Item>> chapters = cache.get(book.id);
-        if (chapters == null) {
-            chapters = load(book);
-            cache.put(book.id, chapters);
+        List<List<Item>> chapters;
+        synchronized (cache) {
+            chapters = cache.get(book.id);
         }
+        if (chapters == null) {
+            // Parsed outside the lock so the UI thread never waits on storage.
+            chapters = load(book);
+            synchronized (cache) {
+                cache.put(book.id, chapters);
+            }
+        }
+        return chapter(book, chapterIndex, chapters);
+    }
+
+    /** The chapter at the given index if its book is in memory, otherwise null. */
+    public Chapter chapterIfLoaded(int chapterIndex) {
+        Book book = bookAt(chapterIndex);
+        List<List<Item>> chapters;
+        synchronized (cache) {
+            chapters = cache.get(book.id);
+        }
+        return chapters == null ? null : chapter(book, chapterIndex, chapters);
+    }
+
+    private static Chapter chapter(Book book, int chapterIndex, List<List<Item>> chapters) {
         int number = chapterIndex - book.firstChapter + 1;
         return new Chapter(book, number, chapters.get(number - 1));
+    }
+
+    /**
+     * Reads a reference such as "John 3:16", "1 cor 13", "ps 23" or "Jude 5".
+     * Returns null if the text is not a reference to a chapter that exists.
+     */
+    public Reference parseReference(String text) {
+        Matcher m = REFERENCE.matcher(text.toLowerCase(Locale.ROOT));
+        if (!m.matches()) {
+            return null;
+        }
+        Book book = findBook(m.group(1));
+        if (book == null) {
+            return null;
+        }
+        int first = m.group(2) == null ? 0 : Integer.parseInt(m.group(2));
+        int second = m.group(3) == null ? 0 : Integer.parseInt(m.group(3));
+        int chapter;
+        int verse;
+        if (book.chapterCount == 1 && second == 0) {
+            // "Jude 5" means verse 5 of the only chapter.
+            chapter = 1;
+            verse = first;
+        } else {
+            chapter = first == 0 ? 1 : first;
+            verse = second;
+        }
+        if (chapter < 1 || chapter > book.chapterCount) {
+            return null;
+        }
+        return new Reference(book, chapter, verse);
+    }
+
+    /** Finds a book by its name, an abbreviation, or the start of its name. */
+    private Book findBook(String name) {
+        String key = name.replaceAll("[ .]", "");
+        if (key.isEmpty()) {
+            return null;
+        }
+        String alias = ALIASES.get(key);
+        if (alias != null) {
+            key = alias;
+        }
+        Book prefixMatch = null;
+        for (Book book : books) {
+            if (book.id.equals(key)) {
+                return book;
+            }
+            if (prefixMatch == null && key.length() >= 2 && book.id.startsWith(key)) {
+                prefixMatch = book;
+            }
+        }
+        return prefixMatch;
+    }
+
+    /**
+     * Finds verses containing every word of the query, ignoring case, in
+     * Bible order. Stops early, returning what it has, once {@code cancelled}
+     * reports true.
+     */
+    public SearchResult search(String query, int limit, Cancellation cancelled)
+            throws IOException {
+        List<String> words = new ArrayList<>();
+        for (String word : query.toLowerCase(Locale.ROOT).trim().split("\\s+")) {
+            if (!word.isEmpty()) {
+                words.add(word);
+            }
+        }
+        List<Hit> hits = new ArrayList<>();
+        if (words.isEmpty()) {
+            return new SearchResult(hits, false);
+        }
+        for (Book book : books) {
+            if (cancelled.isCancelled()) {
+                break;
+            }
+            try (BufferedReader in = reader(book.id + ".txt")) {
+                int chapter = 0;
+                String line;
+                while ((line = in.readLine()) != null) {
+                    if (line.isEmpty()) {
+                        continue;
+                    }
+                    char tag = line.charAt(0);
+                    if (tag == 'C') {
+                        chapter++;
+                    } else if (tag == 'V' && containsAll(line.toLowerCase(Locale.ROOT), words)) {
+                        // The whole line passed a cheap test; now test the text alone.
+                        Item item = parseVerse(book, line);
+                        if (containsAll(item.text.toLowerCase(Locale.ROOT), words)) {
+                            if (hits.size() == limit) {
+                                return new SearchResult(hits, true);
+                            }
+                            hits.add(new Hit(new Reference(book, chapter, item.verse),
+                                    item.text.replace('\n', ' ')));
+                        }
+                    }
+                }
+            }
+        }
+        return new SearchResult(hits, false);
+    }
+
+    private static boolean containsAll(String text, List<String> words) {
+        for (String word : words) {
+            if (!text.contains(word)) {
+                return false;
+            }
+        }
+        return true;
     }
 
     private List<List<Item>> load(Book book) throws IOException {
@@ -174,15 +413,7 @@ public final class Bible {
                 } else if (tag == 'H') {
                     current.add(new Item(0, true, line.substring(1)));
                 } else if (tag == 'V') {
-                    int a = line.indexOf('\t');
-                    int b = line.indexOf('\t', a + 1);
-                    if (a < 0 || b < 0) {
-                        throw new IOException("Malformed verse in " + book.id + ": " + line);
-                    }
-                    current.add(new Item(
-                            Integer.parseInt(line.substring(1, a)),
-                            line.charAt(a + 1) == 'p',
-                            line.substring(b + 1).replace("\\n", "\n")));
+                    current.add(parseVerse(book, line));
                 }
             }
         }
@@ -191,6 +422,23 @@ public final class Bible {
                     + " chapters, expected " + book.chapterCount);
         }
         return chapters;
+    }
+
+    /** Parses a verse record: {@code V<number>\t<p|->\t<text>}. */
+    private static Item parseVerse(Book book, String line) throws IOException {
+        int a = line.indexOf('\t');
+        int b = line.indexOf('\t', a + 1);
+        if (a < 0 || b < 0) {
+            throw new IOException("Malformed verse in " + book.id + ": " + line);
+        }
+        try {
+            return new Item(
+                    Integer.parseInt(line.substring(1, a)),
+                    line.charAt(a + 1) == 'p',
+                    line.substring(b + 1).replace("\\n", "\n"));
+        } catch (NumberFormatException e) {
+            throw new IOException("Malformed verse in " + book.id + ": " + line, e);
+        }
     }
 
     private BufferedReader reader(String file) throws IOException {

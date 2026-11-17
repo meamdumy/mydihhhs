@@ -1,0 +1,4 @@
+<resources>
+    <item name="action_copy" type="id" />
+    <item name="action_share" type="id" />
+</resources>

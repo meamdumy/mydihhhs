@@ -1,6 +1,8 @@
 package com.biblereader.app;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.text.SpannableStringBuilder;
 import android.text.Spanned;
@@ -15,6 +17,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.core.graphics.ColorUtils;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.color.MaterialColors;
@@ -22,24 +25,64 @@ import com.google.android.material.color.MaterialColors;
 /** The scrolling contents of one chapter: its title, headings and verses. */
 final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
 
+    interface Listener {
+        void onVerseLongPressed(View anchor, Bible.Chapter chapter, Bible.Item verse);
+    }
+
     private static final int TYPE_TITLE = 0;
     private static final int TYPE_HEADING = 1;
     private static final int TYPE_VERSE = 2;
+    /** Opacity, out of 255, of the tint behind a highlighted verse. */
+    private static final int HIGHLIGHT_ALPHA = 46;
 
+    private final Listener listener;
     private Bible.Chapter chapter;
     private float textSizeSp;
+    private int highlightedVerse;
 
-    void setChapter(Bible.Chapter chapter, float textSizeSp) {
+    VerseAdapter(Listener listener) {
+        this.listener = listener;
+    }
+
+    /** Shows a chapter, or nothing if null. Row 0 is the title; items follow. */
+    @SuppressLint("NotifyDataSetChanged") // The whole chapter is replaced.
+    void setChapter(Bible.Chapter chapter, float textSizeSp, int highlightedVerse) {
         this.chapter = chapter;
         this.textSizeSp = textSizeSp;
+        this.highlightedVerse = highlightedVerse;
         notifyDataSetChanged();
     }
 
     void setTextSize(float textSizeSp) {
         if (this.textSizeSp != textSizeSp) {
             this.textSizeSp = textSizeSp;
-            notifyDataSetChanged();
+            notifyItemRangeChanged(0, getItemCount());
         }
+    }
+
+    /** Tints the given verse, or none if 0. */
+    void setHighlightedVerse(int verse) {
+        if (highlightedVerse == verse) {
+            return;
+        }
+        int before = rowOfVerse(highlightedVerse);
+        highlightedVerse = verse;
+        int after = rowOfVerse(verse);
+        if (before >= 0) {
+            notifyItemChanged(before);
+        }
+        if (after >= 0) {
+            notifyItemChanged(after);
+        }
+    }
+
+    /** Adapter row showing the given verse, or -1. */
+    int rowOfVerse(int verse) {
+        if (chapter == null || verse <= 0) {
+            return -1;
+        }
+        int index = chapter.indexOfVerse(verse);
+        return index < 0 ? -1 : index + 1;
     }
 
     @Override
@@ -78,25 +121,37 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
                 text.setText(chapter.items.get(position - 1).text);
                 break;
             default:
-                Bible.Item item = chapter.items.get(position - 1);
+                Bible.Chapter shown = chapter;
+                Bible.Item item = shown.items.get(position - 1);
+                int accent = MaterialColors.getColor(context,
+                        androidx.appcompat.R.attr.colorPrimary, 0xFF7A4B1E);
                 text.setTextSize(TypedValue.COMPLEX_UNIT_SP, textSizeSp);
-                text.setText(verseText(context, item));
-                int top = item.startsParagraph && position > 1
+                text.setText(verseText(item, accent));
+                int gap = item.startsParagraph && position > 1
                         ? context.getResources().getDimensionPixelSize(R.dimen.paragraph_gap)
                         : 0;
-                text.setPadding(text.getPaddingLeft(), top,
-                        text.getPaddingRight(), text.getPaddingBottom());
+                ViewGroup.MarginLayoutParams params =
+                        (ViewGroup.MarginLayoutParams) text.getLayoutParams();
+                if (params.topMargin != gap) {
+                    params.topMargin = gap;
+                    text.setLayoutParams(params);
+                }
+                text.setBackgroundColor(item.verse == highlightedVerse
+                        ? ColorUtils.setAlphaComponent(accent, HIGHLIGHT_ALPHA)
+                        : Color.TRANSPARENT);
+                text.setOnLongClickListener(v -> {
+                    listener.onVerseLongPressed(v, shown, item);
+                    return true;
+                });
                 break;
         }
     }
 
     /** The verse number as a small raised label, followed by the verse text. */
-    private static CharSequence verseText(Context context, Bible.Item item) {
+    private static CharSequence verseText(Bible.Item item, int accent) {
         String number = String.valueOf(item.verse);
         SpannableStringBuilder out = new SpannableStringBuilder(number);
         int flags = Spanned.SPAN_EXCLUSIVE_EXCLUSIVE;
-        int accent = MaterialColors.getColor(context,
-                androidx.appcompat.R.attr.colorPrimary, 0xFF7A4B1E);
         out.setSpan(new SuperscriptSpan(), 0, number.length(), flags);
         out.setSpan(new RelativeSizeSpan(0.65f), 0, number.length(), flags);
         out.setSpan(new StyleSpan(Typeface.BOLD), 0, number.length(), flags);

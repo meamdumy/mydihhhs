@@ -1,0 +1,4 @@
+<resources>
+    <!-- Wider margins keep lines of text a comfortable length on tablets. -->
+    <dimen name="page_margin">72dp</dimen>
+</resources>

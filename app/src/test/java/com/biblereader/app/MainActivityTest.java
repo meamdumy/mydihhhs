@@ -1,23 +1,34 @@
 package com.biblereader.app;
 
+import static com.biblereader.app.TestSupport.findText;
+import static com.biblereader.app.TestSupport.idle;
+import static com.biblereader.app.TestSupport.showAllRows;
+import static com.biblereader.app.TestSupport.waitFor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 import static org.robolectric.Shadows.shadowOf;
 
+import android.app.Activity;
 import android.app.Dialog;
-import android.os.Looper;
+import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.view.View;
 import android.widget.TextView;
 
+import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ActivityScenario;
 import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.appbar.MaterialToolbar;
+import com.google.android.material.slider.Slider;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -25,50 +36,47 @@ import org.robolectric.RobolectricTestRunner;
 import org.robolectric.annotation.Config;
 import org.robolectric.shadows.ShadowDialog;
 
-/** Drives the reader screen: paging, the book menu and the saved position. */
+/** Drives the reader screen: paging, the book menu, search results and settings. */
 @RunWith(RobolectricTestRunner.class)
-@Config(sdk = 34)
+@Config(sdk = 36)
 public class MainActivityTest {
-
-    private static void idle() {
-        shadowOf(Looper.getMainLooper()).idle();
-    }
 
     private static String title(MainActivity activity) {
         MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
         return String.valueOf(toolbar.getTitle());
     }
 
-    /** Finds the first descendant TextView showing exactly the given text. */
-    private static TextView findText(View root, String text) {
-        if (root instanceof TextView && text.contentEquals(((TextView) root).getText())) {
-            return (TextView) root;
-        }
-        if (root instanceof android.view.ViewGroup) {
-            android.view.ViewGroup group = (android.view.ViewGroup) root;
-            for (int i = 0; i < group.getChildCount(); i++) {
-                TextView found = findText(group.getChildAt(i), text);
-                if (found != null) {
-                    return found;
-                }
+    /** The page showing the current chapter, once its text has loaded. */
+    private static ChapterPagerAdapter.Page currentPage(MainActivity activity) {
+        ViewPager2 pager = activity.findViewById(R.id.pager);
+        RecyclerView pages = (RecyclerView) pager.getChildAt(0);
+        ChapterPagerAdapter.Page[] found = new ChapterPagerAdapter.Page[1];
+        waitFor("the chapter to load", () -> {
+            RecyclerView.ViewHolder holder =
+                    pages.findViewHolderForAdapterPosition(pager.getCurrentItem());
+            if (holder instanceof ChapterPagerAdapter.Page
+                    && ((ChapterPagerAdapter.Page) holder).chapter != null) {
+                found[0] = (ChapterPagerAdapter.Page) holder;
+                return true;
             }
-        }
-        return null;
+            return false;
+        });
+        idle();
+        return found[0];
     }
 
     @Test
     public void opensAtGenesisAndShowsItsVerses() {
         try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
             scenario.onActivity(activity -> {
-                idle();
                 assertEquals("Genesis 1", title(activity));
                 ViewPager2 pager = activity.findViewById(R.id.pager);
                 assertEquals(1189, pager.getAdapter().getItemCount());
-                RecyclerView verses = pager.findViewById(R.id.verses);
-                assertNotNull(verses);
+                ChapterPagerAdapter.Page page = currentPage(activity);
                 // Title row plus the 31 verses of Genesis 1.
-                assertEquals(32, verses.getAdapter().getItemCount());
-                TextView first = (TextView) verses.getLayoutManager().findViewByPosition(1);
+                assertEquals(32, page.verses.getItemCount());
+                assertEquals(View.VISIBLE, page.list.getVisibility());
+                TextView first = (TextView) page.layout.findViewByPosition(1);
                 assertTrue(first.getText().toString(),
                         first.getText().toString().contains("In the beginning"));
             });
@@ -89,6 +97,8 @@ public class MainActivityTest {
                 pager.setCurrentItem(50, false);
                 idle();
                 assertEquals("Exodus 1", title(activity));
+                // Exodus was not in memory; it loads in the background.
+                assertEquals("Exodus 1", currentPage(activity).chapter.title());
             });
         }
     }
@@ -102,12 +112,7 @@ public class MainActivityTest {
                 RecyclerView books = activity.findViewById(R.id.books);
                 // 66 books plus the two testament titles.
                 assertEquals(68, books.getAdapter().getItemCount());
-
-                // Show the whole list so any book can be tapped.
-                books.measure(View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY),
-                        View.MeasureSpec.makeMeasureSpec(20000, View.MeasureSpec.EXACTLY));
-                books.layout(0, 0, 600, 20000);
-                idle();
+                showAllRows(books);
 
                 TextView john = findText(books, "John");
                 assertNotNull(john);
@@ -119,10 +124,7 @@ public class MainActivityTest {
                 assertTrue(dialog.isShowing());
                 RecyclerView grid = dialog.findViewById(R.id.chapter_grid);
                 assertEquals(21, grid.getAdapter().getItemCount());
-                grid.measure(View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY),
-                        View.MeasureSpec.makeMeasureSpec(4000, View.MeasureSpec.EXACTLY));
-                grid.layout(0, 0, 600, 4000);
-                idle();
+                showAllRows(grid);
                 TextView three = findText(grid, "3");
                 assertNotNull(three);
                 three.performClick();
@@ -131,6 +133,7 @@ public class MainActivityTest {
                 assertFalse(dialog.isShowing());
                 assertEquals("John 3", title(activity));
                 assertFalse(drawer.isDrawerOpen(GravityCompat.START));
+                assertEquals(36, currentPage(activity).chapter.items.size());
             });
         }
     }
@@ -141,10 +144,7 @@ public class MainActivityTest {
             scenario.onActivity(activity -> {
                 idle();
                 RecyclerView books = activity.findViewById(R.id.books);
-                books.measure(View.MeasureSpec.makeMeasureSpec(600, View.MeasureSpec.EXACTLY),
-                        View.MeasureSpec.makeMeasureSpec(20000, View.MeasureSpec.EXACTLY));
-                books.layout(0, 0, 600, 20000);
-                idle();
+                showAllRows(books);
                 findText(books, "Jude").performClick();
                 idle();
                 assertEquals("Jude", title(activity));
@@ -159,15 +159,121 @@ public class MainActivityTest {
                 ViewPager2 pager = activity.findViewById(R.id.pager);
                 pager.setCurrentItem(500, false);
                 idle();
+                assertEquals("Psalm 23", title(activity));
             });
-            String expected = "Psalms 23";
-            scenario.onActivity(activity -> assertEquals(expected, title(activity)));
             scenario.recreate();
             scenario.onActivity(activity -> {
                 idle();
-                assertEquals(expected, title(activity));
+                assertEquals("Psalm 23", title(activity));
                 ViewPager2 pager = activity.findViewById(R.id.pager);
                 assertEquals(500, pager.getCurrentItem());
+                assertEquals("Psalm 23", currentPage(activity).chapter.title());
+            });
+        }
+    }
+
+    @Test
+    public void searchResultOpensAndHighlightsTheVerse() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                idle();
+                MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
+                toolbar.getMenu().performIdentifierAction(R.id.action_search, 0);
+                idle();
+                Intent started = shadowOf(activity).getNextStartedActivityForResult().intent;
+                assertEquals(SearchActivity.class.getName(),
+                        started.getComponent().getClassName());
+
+                // John 3 is the 1000th chapter; choose verse 16 of it.
+                int john3 = 0;
+                while (!"John 3".equals(titleAt(activity, john3))) {
+                    john3++;
+                }
+                shadowOf(activity).receiveResult(started, Activity.RESULT_OK, new Intent()
+                        .putExtra(SearchActivity.EXTRA_CHAPTER_INDEX, john3)
+                        .putExtra(SearchActivity.EXTRA_VERSE, 16));
+                idle();
+
+                assertEquals("John 3", title(activity));
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                int row = page.verses.rowOfVerse(16);
+                assertEquals(16, row);
+                showAllRows(page.list);
+                TextView verse16 = (TextView) page.layout.findViewByPosition(row);
+                assertTrue(verse16.getText().toString().contains("For God so loved the world"));
+                assertTrue(Color.alpha(((ColorDrawable) verse16.getBackground()).getColor()) > 0);
+                TextView verse15 = (TextView) page.layout.findViewByPosition(row - 1);
+                assertEquals(0, Color.alpha(((ColorDrawable) verse15.getBackground()).getColor()));
+            });
+        }
+    }
+
+    private static String titleAt(MainActivity activity, int chapterIndex) {
+        try {
+            return BibleProvider.get(activity).titleAt(chapterIndex);
+        } catch (java.io.IOException e) {
+            throw new AssertionError(e);
+        }
+    }
+
+    @Test
+    public void textSizeSliderResizesTheVerses() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                float scale = activity.getResources().getDisplayMetrics().scaledDensity;
+                TextView verse = (TextView) page.layout.findViewByPosition(1);
+                assertEquals(18f, verse.getTextSize() / scale, 0.01f);
+
+                MaterialToolbar toolbar = activity.findViewById(R.id.toolbar);
+                toolbar.getMenu().performIdentifierAction(R.id.action_text_size, 0);
+                idle();
+                Slider slider = ShadowDialog.getLatestDialog().findViewById(R.id.text_size_slider);
+                slider.setValue(26f);
+                idle();
+
+                verse = (TextView) page.layout.findViewByPosition(1);
+                assertEquals(26f, verse.getTextSize() / scale, 0.01f);
+            });
+            // The size is remembered.
+            scenario.recreate();
+            scenario.onActivity(activity -> {
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                float scale = activity.getResources().getDisplayMetrics().scaledDensity;
+                TextView verse = (TextView) page.layout.findViewByPosition(1);
+                assertEquals(26f, verse.getTextSize() / scale, 0.01f);
+            });
+        }
+    }
+
+    @Test
+    public void contentStaysClearOfTheSystemBars() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                View root = activity.findViewById(R.id.drawer);
+                WindowInsetsCompat insets = new WindowInsetsCompat.Builder()
+                        .setInsets(WindowInsetsCompat.Type.systemBars(), Insets.of(0, 90, 0, 60))
+                        .build();
+                ViewCompat.dispatchApplyWindowInsets(root, insets);
+                idle();
+                View content = activity.findViewById(R.id.content);
+                assertEquals(90, content.getPaddingTop());
+                assertEquals(60, content.getPaddingBottom());
+                View menu = activity.findViewById(R.id.book_menu);
+                assertEquals(90, menu.getPaddingTop());
+                assertEquals(60, menu.getPaddingBottom());
+            });
+        }
+    }
+
+    @Test
+    public void longPressingAVerseIsHandled() {
+        try (ActivityScenario<MainActivity> scenario = ActivityScenario.launch(MainActivity.class)) {
+            scenario.onActivity(activity -> {
+                ChapterPagerAdapter.Page page = currentPage(activity);
+                assertTrue(page.layout.findViewByPosition(1).performLongClick());
+                // The chapter title offers nothing to copy.
+                assertFalse(page.layout.findViewByPosition(0).performLongClick());
             });
         }
     }

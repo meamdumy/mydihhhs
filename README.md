@@ -6,9 +6,15 @@ An offline Bible reader.
 - Swipe left and right between chapters, including across book boundaries.
 - Open the side menu (top-left button) to jump to any of the 66 books, then pick a chapter.
 - Tap the title or the grid button to pick another chapter in the current book.
-- Change the text size from the overflow menu. The app follows the system light or dark theme and reopens where you stopped reading.
+- Search for words, or type a reference such as `John 3:16` or `ps 23` to go straight there.
+- Long-press a verse to copy or share it.
+- Change the text size from the overflow menu.
 
-A ready-to-install build is in `dist/Bible.apk`.
+The app follows the system light or dark theme, reopens where you stopped
+reading, needs no permissions and works without a connection. It runs on
+Android 6.0 and later.
+
+A ready-to-install build is in `dist/Bible.apk` and attached to each release.
 
 ## Text
 
@@ -20,10 +26,21 @@ to use can be shipped by producing the same files.
 
 ## Building
 
-Requires JDK 17 or newer and the Android SDK (platform 35).
+Requires JDK 17 or newer and the Android SDK (platform 37).
 
     ./gradlew assembleRelease     # app/build/outputs/apk/release/app-release.apk
-    ./gradlew testReleaseUnitTest
+    ./gradlew testDebugUnitTest lintRelease
 
-The release build is signed with the Android debug key so it can be installed
-directly. Sign it with your own keystore before publishing it anywhere.
+Without further setup the release build is signed with the Android debug key,
+which is enough to install it directly. To sign with your own key, create
+`keystore.properties` in the project root (it is ignored by git):
+
+    storeFile=/path/to/your.jks
+    storePassword=...
+    keyAlias=...
+    keyPassword=...
+
+## Releasing
+
+Copy the tested build to `dist/Bible.apk`, commit, and push a tag such as
+`v1.0.0`. The release workflow publishes a GitHub release with that APK.

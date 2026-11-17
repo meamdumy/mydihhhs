@@ -1,6 +1,10 @@
 package com.biblereader.app;
 
+import android.content.ClipData;
+import android.content.ClipboardManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -8,11 +12,16 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -22,8 +31,11 @@ import androidx.viewpager2.widget.ViewPager2;
 
 import com.google.android.material.appbar.MaterialToolbar;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.android.material.slider.Slider;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * The reader. Verses scroll vertically, chapters swipe horizontally, and the
@@ -33,36 +45,48 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String PREFS = "reader";
     private static final String KEY_CHAPTER = "chapter";
-    private static final String KEY_ITEM = "item";
+    private static final String KEY_ROW = "item";
     private static final String KEY_TEXT_SIZE = "textSize";
 
     private static final float DEFAULT_TEXT_SP = 18f;
     private static final float MIN_TEXT_SP = 12f;
     private static final float MAX_TEXT_SP = 34f;
-    private static final float TEXT_STEP_SP = 2f;
+
+    private final ExecutorService loader = Executors.newSingleThreadExecutor();
 
     private Bible bible;
     private SharedPreferences prefs;
     private DrawerLayout drawer;
-    private MaterialToolbar toolbar;
     private ViewPager2 pager;
     private ChapterPagerAdapter pagerAdapter;
     private RecyclerView bookList;
     private BookListAdapter bookAdapter;
     private float textSizeSp;
 
+    private final ActivityResultLauncher<Intent> search = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(), result -> {
+                Intent data = result.getData();
+                if (result.getResultCode() == RESULT_OK && data != null && bible != null) {
+                    showVerse(data.getIntExtra(SearchActivity.EXTRA_CHAPTER_INDEX, 0),
+                            data.getIntExtra(SearchActivity.EXTRA_VERSE, 0));
+                }
+            });
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        EdgeToEdge.enable(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         drawer = findViewById(R.id.drawer);
-        toolbar = findViewById(R.id.toolbar);
+        MaterialToolbar toolbar = findViewById(R.id.toolbar);
         pager = findViewById(R.id.pager);
         bookList = findViewById(R.id.books);
         setSupportActionBar(toolbar);
+        SystemBars.pad(findViewById(R.id.content), false);
+        SystemBars.pad(findViewById(R.id.book_menu), false);
 
         try {
-            bible = new Bible(getAssets()::open);
+            bible = BibleProvider.get(this);
         } catch (IOException e) {
             new MaterialAlertDialogBuilder(this)
                     .setMessage(R.string.bible_load_failed)
@@ -77,8 +101,8 @@ public class MainActivity extends AppCompatActivity {
         int chapter = Math.max(0,
                 Math.min(prefs.getInt(KEY_CHAPTER, 0), bible.chapterCount() - 1));
 
-        pagerAdapter = new ChapterPagerAdapter(bible, textSizeSp);
-        pagerAdapter.restoreScroll(chapter, prefs.getInt(KEY_ITEM, 0));
+        pagerAdapter = new ChapterPagerAdapter(bible, loader, textSizeSp, this::showVerseMenu);
+        pagerAdapter.scrollToRow(chapter, prefs.getInt(KEY_ROW, 0));
         pager.setAdapter(pagerAdapter);
         // Keep the neighbouring chapters laid out so swipes start instantly.
         pager.setOffscreenPageLimit(1);
@@ -129,13 +153,20 @@ public class MainActivity extends AppCompatActivity {
         int chapter = pager.getCurrentItem();
         RecyclerView pages = (RecyclerView) pager.getChildAt(0);
         RecyclerView.ViewHolder page = pages.findViewHolderForAdapterPosition(chapter);
-        int item = page instanceof ChapterPagerAdapter.Page
-                ? ((ChapterPagerAdapter.Page) page).firstVisibleItem() : 0;
+        int row = page instanceof ChapterPagerAdapter.Page
+                ? ((ChapterPagerAdapter.Page) page).firstVisibleRow() : 0;
         prefs.edit()
                 .putInt(KEY_CHAPTER, chapter)
-                .putInt(KEY_ITEM, item)
+                .putInt(KEY_ROW, row)
                 .putFloat(KEY_TEXT_SIZE, textSizeSp)
                 .apply();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        pager.setAdapter(null);
+        loader.shutdown();
     }
 
     @Override
@@ -150,12 +181,14 @@ public class MainActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         int id = item.getItemId();
-        if (id == R.id.action_chapters) {
+        if (id == R.id.action_search) {
+            search.launch(new Intent(this, SearchActivity.class));
+        } else if (id == R.id.action_chapters) {
             pickChapter(bible.bookAt(pager.getCurrentItem()));
-        } else if (id == R.id.action_text_larger) {
-            setTextSize(textSizeSp + TEXT_STEP_SP);
-        } else if (id == R.id.action_text_smaller) {
-            setTextSize(textSizeSp - TEXT_STEP_SP);
+        } else if (id == R.id.action_text_size) {
+            pickTextSize();
+        } else if (id == R.id.action_about) {
+            showAbout();
         } else {
             return super.onOptionsItemSelected(item);
         }
@@ -164,10 +197,26 @@ public class MainActivity extends AppCompatActivity {
 
     /** Jumps to a chapter by book and 1-based chapter number. */
     void goTo(Bible.Book book, int chapterNumber) {
-        int index = bible.indexOf(book, chapterNumber);
+        goTo(bible.indexOf(book, chapterNumber));
+    }
+
+    private void goTo(int chapterIndex) {
         // Animate only between neighbours; a long jump would scroll through
         // every chapter in between.
-        pager.setCurrentItem(index, Math.abs(index - pager.getCurrentItem()) == 1);
+        pager.setCurrentItem(chapterIndex, Math.abs(chapterIndex - pager.getCurrentItem()) == 1);
+    }
+
+    /** Jumps to a chapter and, if a verse is given, scrolls to and highlights it. */
+    private void showVerse(int chapterIndex, int verse) {
+        if (chapterIndex < 0 || chapterIndex >= bible.chapterCount()) {
+            return;
+        }
+        pager.setCurrentItem(chapterIndex, false);
+        if (verse > 0) {
+            pagerAdapter.showVerse(chapterIndex, verse);
+        } else {
+            pagerAdapter.scrollToRow(chapterIndex, 0);
+        }
     }
 
     private void showPosition(int chapterIndex) {
@@ -240,6 +289,56 @@ public class MainActivity extends AppCompatActivity {
             grid.scrollToPosition(currentNumber - 1);
         }
         dialog.show();
+    }
+
+    /** Offers to copy or share the verse that was long-pressed. */
+    private void showVerseMenu(View anchor, Bible.Chapter chapter, Bible.Item verse) {
+        String text = getString(R.string.verse_share_format,
+                verse.text, chapter.book.verseTitle(chapter.number, verse.verse));
+        PopupMenu menu = new PopupMenu(this, anchor);
+        menu.getMenu().add(Menu.NONE, R.id.action_copy, 0, R.string.copy_verse);
+        menu.getMenu().add(Menu.NONE, R.id.action_share, 1, R.string.share_verse);
+        menu.setOnMenuItemClickListener(item -> {
+            if (item.getItemId() == R.id.action_copy) {
+                ClipboardManager clipboard = getSystemService(ClipboardManager.class);
+                clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name), text));
+                // Android 13 and later confirm a copy themselves.
+                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
+                    Toast.makeText(this, R.string.verse_copied, Toast.LENGTH_SHORT).show();
+                }
+            } else {
+                Intent send = new Intent(Intent.ACTION_SEND)
+                        .setType("text/plain")
+                        .putExtra(Intent.EXTRA_TEXT, text);
+                startActivity(Intent.createChooser(send, getString(R.string.share_verse)));
+            }
+            return true;
+        });
+        menu.show();
+    }
+
+    /** Shows a slider that resizes the text as it moves. */
+    private void pickTextSize() {
+        View view = getLayoutInflater().inflate(R.layout.dialog_text_size, null);
+        Slider slider = view.findViewById(R.id.text_size_slider);
+        slider.setValueFrom(MIN_TEXT_SP);
+        slider.setValueTo(MAX_TEXT_SP);
+        slider.setStepSize(1f);
+        slider.setValue(Math.round(textSizeSp));
+        slider.addOnChangeListener((s, value, fromUser) -> setTextSize(value));
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(R.string.text_size)
+                .setView(view)
+                .setPositiveButton(R.string.done, null)
+                .show();
+    }
+
+    private void showAbout() {
+        new MaterialAlertDialogBuilder(this)
+                .setTitle(getString(R.string.about_title, BuildConfig.VERSION_NAME))
+                .setMessage(R.string.about_message)
+                .setPositiveButton(android.R.string.ok, null)
+                .show();
     }
 
     private void setTextSize(float sizeSp) {
