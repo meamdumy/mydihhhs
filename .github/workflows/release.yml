@@ -14,6 +14,15 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+      - name: Check the bundled APK is this version
+        run: |
+          aapt2="$(ls "$ANDROID_HOME"/build-tools/*/aapt2 | sort -V | tail -1)"
+          version="$("$aapt2" dump badging dist/Bible.apk \
+            | sed -n "s/.*versionName='\([^']*\)'.*/\1/p" | head -1)"
+          if [ "v${version}" != "${GITHUB_REF_NAME}" ]; then
+            echo "dist/Bible.apk is version ${version}, but the tag is ${GITHUB_REF_NAME}." >&2
+            exit 1
+          fi
       - name: Publish the APK
         env:
           GH_TOKEN: ${{ github.token }}

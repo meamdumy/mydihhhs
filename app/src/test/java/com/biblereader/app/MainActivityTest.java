@@ -22,6 +22,7 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.test.core.app.ActivityScenario;
@@ -127,6 +128,7 @@ public class MainActivityTest {
                 showAllRows(grid);
                 TextView three = findText(grid, "3");
                 assertNotNull(three);
+                assertEquals("Chapter 3", String.valueOf(three.getContentDescription()));
                 three.performClick();
                 idle();
 
@@ -272,6 +274,17 @@ public class MainActivityTest {
             scenario.onActivity(activity -> {
                 ChapterPagerAdapter.Page page = currentPage(activity);
                 assertTrue(page.layout.findViewByPosition(1).performLongClick());
+                // A screen reader announces what holding the verse does.
+                AccessibilityNodeInfoCompat info = AccessibilityNodeInfoCompat.obtain();
+                ViewCompat.onInitializeAccessibilityNodeInfo(page.layout.findViewByPosition(1), info);
+                String label = null;
+                for (AccessibilityNodeInfoCompat.AccessibilityActionCompat action
+                        : info.getActionList()) {
+                    if (action.getId() == AccessibilityNodeInfoCompat.ACTION_LONG_CLICK) {
+                        label = String.valueOf(action.getLabel());
+                    }
+                }
+                assertEquals("Copy or share", label);
                 // The chapter title offers nothing to copy.
                 assertFalse(page.layout.findViewByPosition(0).performLongClick());
             });

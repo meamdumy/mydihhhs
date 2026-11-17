@@ -19,6 +19,8 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.core.graphics.ColorUtils;
+import androidx.core.view.ViewCompat;
+import androidx.core.view.accessibility.AccessibilityNodeInfoCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.android.material.color.MaterialColors;
@@ -144,6 +146,10 @@ final class VerseAdapter extends RecyclerView.Adapter<VerseAdapter.Holder> {
                     listener.onVerseLongPressed(v, shown, item);
                     return true;
                 });
+                // Tells screen reader users what holding a verse does.
+                ViewCompat.replaceAccessibilityAction(text,
+                        AccessibilityNodeInfoCompat.AccessibilityActionCompat.ACTION_LONG_CLICK,
+                        context.getString(R.string.verse_actions), null);
                 break;
         }
     }

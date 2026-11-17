@@ -7,8 +7,14 @@ An offline Bible reader.
 - Open the side menu (top-left button) to jump to any of the 66 books, then pick a chapter.
 - Tap the title or the grid button to pick another chapter in the current book.
 - Search for words, or type a reference such as `John 3:16` or `ps 23` to go straight there.
+  Put a phrase in double quotes to find those exact words.
 - Long-press a verse to copy or share it.
+- After a jump, Back returns to where you were reading.
 - Change the text size from the overflow menu.
+
+| Reading | Book menu | Search |
+| --- | --- | --- |
+| ![A chapter open for reading](docs/screenshots/reader.png) | ![The list of books](docs/screenshots/books.png) | ![Search results](docs/screenshots/search.png) |
 
 The app follows the system light or dark theme, reopens where you stopped
 reading, needs no permissions and works without a connection. It runs on
@@ -40,7 +46,14 @@ which is enough to install it directly. To sign with your own key, create
     keyAlias=...
     keyPassword=...
 
+Android only installs an update over an app signed with the same key. Debug
+keys differ from one machine to the next, so a build made elsewhere will not
+install over `dist/Bible.apk` unless the app is uninstalled first or both are
+signed with your own key.
+
 ## Releasing
 
-Copy the tested build to `dist/Bible.apk`, commit, and push a tag such as
-`v1.0.0`. The release workflow publishes a GitHub release with that APK.
+Set `versionName` in `app/build.gradle`, copy the tested build to
+`dist/Bible.apk`, commit, and push a matching tag such as `v1.0.0`. The
+release workflow checks that the APK is that version and publishes a GitHub
+release with it attached.

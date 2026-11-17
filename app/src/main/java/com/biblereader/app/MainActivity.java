@@ -176,9 +176,15 @@ public class MainActivity extends AppCompatActivity {
         if (bible == null) {
             return;
         }
+        int chapter = pager.getCurrentItem();
+        int row = currentRow();
+        if (row < 0) {
+            // Still loading: keep the row saved for this chapter, if it was this one.
+            row = chapter == prefs.getInt(KEY_CHAPTER, -1) ? prefs.getInt(KEY_ROW, 0) : 0;
+        }
         prefs.edit()
-                .putInt(KEY_CHAPTER, pager.getCurrentItem())
-                .putInt(KEY_ROW, currentRow())
+                .putInt(KEY_CHAPTER, chapter)
+                .putInt(KEY_ROW, row)
                 .putFloat(KEY_TEXT_SIZE, textSizeSp)
                 .apply();
     }
@@ -247,12 +253,12 @@ public class MainActivity extends AppCompatActivity {
         pager.setCurrentItem(chapterIndex, Math.abs(chapterIndex - pager.getCurrentItem()) == 1);
     }
 
-    /** Row at the top of the chapter on screen. */
+    /** Row at the top of the chapter on screen, or -1 while it is still loading. */
     private int currentRow() {
         RecyclerView pages = (RecyclerView) pager.getChildAt(0);
         RecyclerView.ViewHolder page = pages.findViewHolderForAdapterPosition(pager.getCurrentItem());
         return page instanceof ChapterPagerAdapter.Page
-                ? ((ChapterPagerAdapter.Page) page).firstVisibleRow() : 0;
+                ? ((ChapterPagerAdapter.Page) page).firstVisibleRow() : -1;
     }
 
     /** Lets the Back button return here after a jump to another chapter. */
@@ -260,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
         if (chapterIndex == pager.getCurrentItem()) {
             return;
         }
-        history.addFirst(new int[] {pager.getCurrentItem(), currentRow()});
+        history.addFirst(new int[] {pager.getCurrentItem(), Math.max(0, currentRow())});
         if (history.size() > MAX_HISTORY) {
             history.removeLast();
         }
@@ -345,6 +351,7 @@ public class MainActivity extends AppCompatActivity {
                 int number = position + 1;
                 TextView cell = (TextView) holder.itemView;
                 cell.setText(String.valueOf(number));
+                cell.setContentDescription(getString(R.string.chapter_number, number));
                 cell.setSelected(number == currentNumber);
                 cell.setOnClickListener(v -> {
                     dialog.dismiss();

@@ -6,6 +6,7 @@ import static com.biblereader.app.TestSupport.showAllRows;
 import static com.biblereader.app.TestSupport.waitFor;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import android.app.Activity;
@@ -79,6 +80,38 @@ public class SearchActivityTest {
             ActivityResult result = scenario.getResult();
             assertEquals(Activity.RESULT_OK, result.getResultCode());
             assertEquals(16, result.getResultData().getIntExtra(SearchActivity.EXTRA_VERSE, -1));
+        }
+    }
+
+    @Test
+    public void pointsAReferenceAtAVerseThatExists() {
+        try (ActivityScenario<SearchActivity> scenario =
+                ActivityScenario.launch(SearchActivity.class)) {
+            scenario.onActivity(activity -> {
+                type(activity, "john 3:99");
+                waitFor("the reference row", () -> results(activity).getAdapter().getItemCount() == 1);
+                showAllRows(results(activity));
+                assertNotNull(findText(results(activity), "Go to John 3:36"));
+            });
+        }
+    }
+
+    @Test
+    public void doesNotMistakeAnOrdinaryWordForABook() {
+        try (ActivityScenario<SearchActivity> scenario =
+                ActivityScenario.launch(SearchActivity.class)) {
+            scenario.onActivity(activity -> {
+                type(activity, "judge");
+                waitFor("search results", () -> results(activity).getAdapter().getItemCount() > 1);
+                showAllRows(results(activity));
+                assertNull(findText(results(activity), "Go to Judges 1"));
+                // The book's full name is still a reference.
+                type(activity, "judges");
+                waitFor("the reference row", () -> {
+                    showAllRows(results(activity));
+                    return findText(results(activity), "Go to Judges 1") != null;
+                });
+            });
         }
     }
 

@@ -215,9 +215,12 @@ final class ChapterPagerAdapter extends RecyclerView.Adapter<ChapterPagerAdapter
             error.setVisibility(View.VISIBLE);
         }
 
-        /** Row at the top of the screen, for saving the reading position. */
+        /**
+         * Row at the top of the screen, for saving the reading position, or
+         * -1 if the chapter has not been loaded and laid out yet.
+         */
         int firstVisibleRow() {
-            return chapter == null ? 0 : Math.max(0, layout.findFirstVisibleItemPosition());
+            return chapter == null ? -1 : layout.findFirstVisibleItemPosition();
         }
     }
 }

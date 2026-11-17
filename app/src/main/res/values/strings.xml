@@ -12,6 +12,10 @@
     <string name="about">About</string>
     <string name="about_title">Bible %1$s</string>
     <string name="about_message">The text is the World English Bible, a modern English translation in the public domain.\n\nEverything is stored on this device; the app works offline and collects no data.</string>
+    <string name="verse_actions">Copy or share</string>
+    <!-- 1: chapter number -->
+    <string name="chapter_number">Chapter %1$d</string>
+    <string name="loading">Loading</string>
     <string name="copy_verse">Copy</string>
     <string name="share_verse">Share</string>
     <string name="verse_copied">Verse copied</string>

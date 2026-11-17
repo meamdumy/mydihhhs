@@ -142,7 +142,10 @@ public class BibleTest {
         assertReference("1cor 13:4", "1 Corinthians 13:4");
         assertReference("ps 23", "Psalm 23");
         assertReference("Psalm 119:105", "Psalms 119:105");
-        assertReference("gen", "Genesis 1");
+        assertReference("genesis", "Genesis 1");
+        assertReference("gen 1", "Genesis 1");
+        assertReference("is 53", "Isaiah 53");
+        assertReference("psalm", "Psalm 1");
         assertReference("Song of Solomon 2", "Song of Solomon 2");
         assertReference("song of songs 2:1", "Song of Solomon 2:1");
         assertReference("jude 5", "Jude 5");
@@ -156,10 +159,30 @@ public class BibleTest {
     }
 
     @Test
+    public void resolvesReferencesToVersesThatExist() throws IOException {
+        Bible.Reference exact = bible.parseReference("John 3:16");
+        assertSame(exact, bible.resolve(exact));
+        Bible.Reference chapter = bible.parseReference("John 3");
+        assertSame(chapter, bible.resolve(chapter));
+        // Past the end of the chapter: the last verse.
+        assertEquals("John 3:36", bible.resolve(bible.parseReference("John 3:99")).title());
+        // Verses this translation moves to footnotes: the verse before.
+        assertEquals("Acts 8:36", bible.resolve(bible.parseReference("Acts 8:37")).title());
+        assertEquals("Luke 17:35", bible.resolve(bible.parseReference("Luke 17:36")).title());
+    }
+
+    @Test
     public void rejectsTextThatIsNotAReference() {
         assertNull(bible.parseReference("love one another"));
         assertNull(bible.parseReference("john 99"));
         assertNull(bible.parseReference("j 3"));
+        // On their own these are ordinary words, not Genesis, Isaiah, Hebrews,
+        // Song of Solomon or Judges.
+        assertNull(bible.parseReference("gen"));
+        assertNull(bible.parseReference("is"));
+        assertNull(bible.parseReference("he"));
+        assertNull(bible.parseReference("son"));
+        assertNull(bible.parseReference("judge"));
         assertNull(bible.parseReference("3:16"));
         assertNull(bible.parseReference(""));
     }

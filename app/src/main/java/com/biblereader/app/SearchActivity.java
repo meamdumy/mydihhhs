@@ -129,9 +129,18 @@ public class SearchActivity extends AppCompatActivity {
             status.setText(R.string.search_hint_long);
             return;
         }
-        Bible.Reference reference = bible.parseReference(query);
+        Bible.Reference typed = bible.parseReference(query);
         Bible.Query parsed = Bible.Query.parse(query);
         worker.execute(() -> {
+            Bible.Reference resolved = typed;
+            try {
+                if (typed != null) {
+                    resolved = bible.resolve(typed);
+                }
+            } catch (IOException e) {
+                // Offer the reference as typed; opening it reports any problem.
+            }
+            Bible.Reference reference = resolved;
             Bible.SearchResult found;
             try {
                 found = bible.search(parsed, MAX_RESULTS, () -> latestSearch.get() != id);

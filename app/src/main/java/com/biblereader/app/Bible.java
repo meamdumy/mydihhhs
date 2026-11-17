@@ -394,13 +394,16 @@ public final class Bible {
     /**
      * Reads a reference such as "John 3:16", "1 cor 13", "ps 23" or "Jude 5".
      * Returns null if the text is not a reference to a chapter that exists.
+     * A book on its own must be named in full, so that ordinary words such as
+     * "is" or "judge" are not taken for Isaiah or Judges; followed by a
+     * chapter number, the start of the name is enough.
      */
     public Reference parseReference(String text) {
         Matcher m = REFERENCE.matcher(text.toLowerCase(Locale.ROOT));
         if (!m.matches()) {
             return null;
         }
-        Book book = findBook(m.group(1));
+        Book book = findBook(m.group(1), m.group(2) != null);
         if (book == null) {
             return null;
         }
@@ -422,8 +425,8 @@ public final class Bible {
         return new Reference(book, chapter, verse);
     }
 
-    /** Finds a book by its name, an abbreviation, or the start of its name. */
-    private Book findBook(String name) {
+    /** Finds a book by its name, an abbreviation or, if allowed, the start of its name. */
+    private Book findBook(String name, boolean allowPrefix) {
         String key = name.replaceAll("[ .]", "");
         if (key.isEmpty()) {
             return null;
@@ -437,11 +440,28 @@ public final class Bible {
             if (book.id.equals(key)) {
                 return book;
             }
-            if (prefixMatch == null && key.length() >= 2 && book.id.startsWith(key)) {
+            if (allowPrefix && prefixMatch == null && key.length() >= 2
+                    && book.id.startsWith(key)) {
                 prefixMatch = book;
             }
         }
         return prefixMatch;
+    }
+
+    /**
+     * Points a reference at a verse the text actually has: a verse past the
+     * end of its chapter becomes the last one, and a verse this translation
+     * omits becomes the one before it. Reads the book from storage if needed.
+     */
+    public Reference resolve(Reference reference) throws IOException {
+        if (reference.verse == 0) {
+            return reference;
+        }
+        Chapter chapter = chapterAt(indexOf(reference.book, reference.chapter));
+        int index = chapter.indexOfVerse(reference.verse);
+        int verse = index < 0 ? 0 : chapter.items.get(index).verse;
+        return verse == reference.verse
+                ? reference : new Reference(reference.book, reference.chapter, verse);
     }
 
     /**
