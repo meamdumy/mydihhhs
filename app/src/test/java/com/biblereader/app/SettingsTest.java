@@ -3,7 +3,9 @@ package com.biblereader.app;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.robolectric.Shadows.shadowOf;
 
+import android.app.UiModeManager;
 import android.content.Context;
 
 import androidx.appcompat.app.AppCompatDelegate;
@@ -64,13 +66,19 @@ public class SettingsTest {
 
     @Test
     public void appliesTheChosenTheme() {
+        UiModeManager system = context.getSystemService(UiModeManager.class);
         Settings.setTheme(context, Settings.THEME_DARK);
         assertEquals(AppCompatDelegate.MODE_NIGHT_YES, AppCompatDelegate.getDefaultNightMode());
+        // The system is told too, so that its launch screen matches.
+        assertEquals(UiModeManager.MODE_NIGHT_YES, shadowOf(system).getApplicationNightMode());
         Settings.setTheme(context, Settings.THEME_LIGHT);
         assertEquals(AppCompatDelegate.MODE_NIGHT_NO, AppCompatDelegate.getDefaultNightMode());
+        assertEquals(UiModeManager.MODE_NIGHT_NO, shadowOf(system).getApplicationNightMode());
         Settings.setTheme(context, Settings.THEME_SYSTEM);
         assertEquals(AppCompatDelegate.MODE_NIGHT_FOLLOW_SYSTEM,
                 AppCompatDelegate.getDefaultNightMode());
+        // The automatic mode clears the app's override: follow the device.
+        assertEquals(UiModeManager.MODE_NIGHT_AUTO, shadowOf(system).getApplicationNightMode());
         // A value this version does not know falls back to following the device.
         Settings.setTheme(context, 7);
         assertEquals(Settings.THEME_SYSTEM, Settings.theme(context));

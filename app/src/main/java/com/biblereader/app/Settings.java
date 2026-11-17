@@ -1,7 +1,9 @@
 package com.biblereader.app;
 
+import android.app.UiModeManager;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import androidx.appcompat.app.AppCompatDelegate;
 
@@ -68,6 +70,24 @@ final class Settings {
     static void setTheme(Context context, int theme) {
         prefs(context).edit().putInt(KEY_THEME, theme).apply();
         applyTheme(context);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            // Also tell the system, which remembers it, so that the launch
+            // screen it draws before the app starts is in the same theme.
+            // The automatic mode clears the override: follow the device.
+            int mode;
+            switch (theme(context)) {
+                case THEME_LIGHT:
+                    mode = UiModeManager.MODE_NIGHT_NO;
+                    break;
+                case THEME_DARK:
+                    mode = UiModeManager.MODE_NIGHT_YES;
+                    break;
+                default:
+                    mode = UiModeManager.MODE_NIGHT_AUTO;
+                    break;
+            }
+            context.getSystemService(UiModeManager.class).setApplicationNightMode(mode);
+        }
     }
 
     /** Applies the saved theme. Open screens rebuild themselves if it changed. */

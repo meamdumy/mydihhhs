@@ -85,17 +85,25 @@ public class BookmarksActivity extends AppCompatActivity {
     /** Lists the bookmarks at once, then fills in each verse's text as it is read. */
     private void load() {
         List<Row> listed = new ArrayList<>();
+        List<Row> unread = new ArrayList<>();
         for (Bookmarks.Entry entry : bookmarks.all()) {
             Bible.Book book = bible.bookById(entry.bookId);
-            if (book != null && entry.chapter <= book.chapterCount) {
-                listed.add(new Row(entry, book));
+            if (book == null || entry.chapter > book.chapterCount) {
+                // Left over from a different text; there is nothing to open.
+                continue;
             }
-            // Anything else is left over from a different text and cannot be opened.
+            Row row = new Row(entry, book);
+            // Text already on show, as when a removal is undone, is kept.
+            row.text = rows.textOf(entry);
+            listed.add(row);
+            if (row.text.isEmpty()) {
+                unread.add(row);
+            }
         }
         rows.show(listed);
         showEmptyMessageIfNeeded();
         worker.execute(() -> {
-            for (Row row : listed) {
+            for (Row row : unread) {
                 String text;
                 try {
                     text = bible.verseText(row.book, row.entry.chapter, row.entry.verse);
@@ -105,7 +113,11 @@ public class BookmarksActivity extends AppCompatActivity {
                 }
                 if (text != null) {
                     String read = text;
-                    main.post(() -> rows.showText(row, read));
+                    main.post(() -> {
+                        if (!isDestroyed()) {
+                            rows.showText(row, read);
+                        }
+                    });
                 }
             }
         });
@@ -152,6 +164,16 @@ public class BookmarksActivity extends AppCompatActivity {
             shown.clear();
             shown.addAll(loaded);
             notifyDataSetChanged();
+        }
+
+        /** The text on show for a bookmark, or nothing if it is not listed or not yet read. */
+        String textOf(Bookmarks.Entry entry) {
+            for (Row row : shown) {
+                if (row.entry.is(entry.bookId, entry.chapter, entry.verse)) {
+                    return row.text;
+                }
+            }
+            return "";
         }
 
         /** Fills in a row's text, unless the row has since been replaced or removed. */

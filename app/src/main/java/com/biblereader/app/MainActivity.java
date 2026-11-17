@@ -1,30 +1,21 @@
 package com.biblereader.app;
 
 import android.app.Dialog;
-import android.content.ClipData;
-import android.content.ClipboardManager;
 import android.content.Intent;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.activity.EdgeToEdge;
 import androidx.activity.OnBackPressedCallback;
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.PopupMenu;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.viewpager2.widget.ViewPager2;
@@ -341,46 +332,7 @@ public class MainActivity extends AppCompatActivity {
         int currentIndex = pager.getCurrentItem();
         int currentNumber = bible.bookAt(currentIndex) == book
                 ? currentIndex - book.firstChapter + 1 : 0;
-
-        RecyclerView grid = (RecyclerView) getLayoutInflater()
-                .inflate(R.layout.dialog_chapters, null);
-        grid.setLayoutManager(new GridLayoutManager(this, 5));
-        AlertDialog dialog = new MaterialAlertDialogBuilder(this)
-                .setTitle(book.name)
-                .setView(grid)
-                .setNegativeButton(android.R.string.cancel, null)
-                .create();
-        grid.setAdapter(new RecyclerView.Adapter<RecyclerView.ViewHolder>() {
-            @NonNull
-            @Override
-            public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int type) {
-                View cell = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.item_chapter_number, parent, false);
-                return new RecyclerView.ViewHolder(cell) { };
-            }
-
-            @Override
-            public void onBindViewHolder(@NonNull RecyclerView.ViewHolder holder, int position) {
-                int number = position + 1;
-                TextView cell = (TextView) holder.itemView;
-                cell.setText(String.valueOf(number));
-                cell.setContentDescription(getString(R.string.chapter_number, number));
-                cell.setSelected(number == currentNumber);
-                cell.setOnClickListener(v -> {
-                    dialog.dismiss();
-                    goTo(book, number);
-                });
-            }
-
-            @Override
-            public int getItemCount() {
-                return book.chapterCount;
-            }
-        });
-        if (currentNumber > 0) {
-            grid.scrollToPosition(currentNumber - 1);
-        }
-        show(dialog);
+        show(ChapterPicker.create(this, book, currentNumber, number -> goTo(book, number)));
     }
 
     /** Shows a dialog, replacing any already open. */
@@ -394,37 +346,12 @@ public class MainActivity extends AppCompatActivity {
 
     /** Offers to bookmark, copy or share the verse that was long-pressed. */
     private void showVerseMenu(View anchor, Bible.Chapter chapter, Bible.Item verse) {
-        String text = getString(R.string.verse_share_format,
-                verse.text, chapter.book.verseTitle(chapter.number, verse.verse));
-        boolean bookmarked = bookmarks.contains(chapter.book.id, chapter.number, verse.verse);
-        PopupMenu menu = new PopupMenu(this, anchor);
-        menu.getMenu().add(Menu.NONE, R.id.action_bookmark, 0,
-                bookmarked ? R.string.remove_bookmark : R.string.add_bookmark);
-        menu.getMenu().add(Menu.NONE, R.id.action_copy, 1, R.string.copy_verse);
-        menu.getMenu().add(Menu.NONE, R.id.action_share, 2, R.string.share_verse);
-        menu.setOnMenuItemClickListener(item -> {
-            if (item.getItemId() == R.id.action_bookmark) {
-                toggleBookmark(chapter, verse);
-            } else if (item.getItemId() == R.id.action_copy) {
-                ClipboardManager clipboard = getSystemService(ClipboardManager.class);
-                clipboard.setPrimaryClip(ClipData.newPlainText(getString(R.string.app_name), text));
-                // Android 13 and later confirm a copy themselves.
-                if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) {
-                    Toast.makeText(this, R.string.verse_copied, Toast.LENGTH_SHORT).show();
-                }
-            } else {
-                Intent send = new Intent(Intent.ACTION_SEND)
-                        .setType("text/plain")
-                        .putExtra(Intent.EXTRA_TEXT, text);
-                startActivity(Intent.createChooser(send, getString(R.string.share_verse)));
-            }
-            return true;
-        });
         if (openPopup != null) {
             openPopup.dismiss();
         }
-        openPopup = menu;
-        menu.show();
+        openPopup = VerseMenu.show(anchor, chapter, verse,
+                bookmarks.contains(chapter.book.id, chapter.number, verse.verse),
+                () -> toggleBookmark(chapter, verse));
     }
 
     /** Adds a bookmark on the verse, or removes the one already there. */
