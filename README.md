@@ -54,6 +54,7 @@ signed with your own key.
 ## Releasing
 
 Set `versionName` in `app/build.gradle`, copy the tested build to
-`dist/Bible.apk`, commit, and push a matching tag such as `v1.0.0`. The
-release workflow checks that the APK is that version and publishes a GitHub
-release with it attached.
+`dist/Bible.apk` and commit. Then either push a matching tag such as `v1.0.0`,
+or run the Release workflow from the Actions tab and give it that tag. The
+workflow checks that the APK is that version, creates the tag if needed, and
+publishes a GitHub release with the APK attached.
